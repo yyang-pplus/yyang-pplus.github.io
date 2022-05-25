@@ -1,0 +1,9 @@
+<ul>
+{% for post in site.tags.the-second-system-effect reversed %}
+  <li>
+    <a href="{{ post.url }}" {% if page.url == post.url %}style="color: red;"{% endif %}>
+      {{ post.title }}
+    </a>
+  </li>
+{% endfor %}
+</ul>
