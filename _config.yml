@@ -6,7 +6,8 @@
 # feature for the data you need to update frequently.
 #
 # For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# 'bundle exec jekyll serve'. If you change this file, please restart the server
+# process.
 #
 # If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
@@ -22,10 +23,10 @@ title: YY++.io
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   A blog about C++ programming, more or less.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: ""  # the subpath of your site, e.g. /blog
+url: ""  # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
-github_username:  yyang-pplus
+github_username: yyang-pplus
 
 # Build settings
 theme: jekyll-theme-leap-day
