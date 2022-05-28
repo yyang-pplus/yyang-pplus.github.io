@@ -9,4 +9,4 @@ I am a little bit lazy, so I only make a post if I think it will be needed, eith
 
 Enjoy.
 
-[AMAZON ASSOCIATES DISCLOSURE](disclosures): As an Amazon Associate I may get commissions for qualifying purchases made through links on my website. <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
+[AMAZON ASSOCIATES DISCLOSURE](/disclosures): As an Amazon Associate I may get commissions for qualifying purchases made through links on my website. <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->

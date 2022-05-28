@@ -38,13 +38,13 @@ The term second system we used in the context of the second-system effect emphas
 
 # The Second ≠ 2.0
 
-This is a variation of essentially the same issue we talked about in the previous section.
+This is a variation of essentially the same issue we talked about in the [previous section](#the-second-system-vs-the-second-generation).
 
 The version 2.0 of a system is not necessarily means the designer's second system, not even necessarily means the second generation of the same system. For example, the "more modern description" of the second-system effect in [Hack, HHVM and avoiding the Second-system effect](http://bytepawn.com/hack-hhvm-second-system-effect.html).
 
 For example, as of Feb 21, 2018, the version number of the Facebook App for iOS reached 160.0. Do you really think that is the 160th generation of the system? I doubt. My point is that the version number is kind of arbitrary, it is almost impossible to tell about the design of a system only from its version number for anyone without inside knowledge.
 
-Even when version 2.0 does means the same thing as the second generation, it is still hard to tell, as we have discussed in the previous section, if it is the designer's second system.
+Even when version 2.0 does means the same thing as the second generation, it is still hard to tell, as we have discussed in the [previous section](#the-second-system-vs-the-second-generation), if it is the designer's second system.
 
 
 # The Third-System Syndrome

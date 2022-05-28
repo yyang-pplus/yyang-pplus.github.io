@@ -18,7 +18,7 @@ tags:
   - "the-second-system-effect"
 ---
 
-The second-system effect is a well-known buzz word in the world of software engineering. As many years after it was first described by Frederick Brooks in his classic [The Mythical Man-Month](#the-reference), people are still talking about it. As we can see from my previous posts, the definition of the second-system effect is rather stricter than people think. Then one question raises naturally. Is it even practical to identify from real world software projects? Even further, is it a real thing?
+The second-system effect is a well-known buzz word in the world of software engineering. As many years after it was first described by Frederick Brooks in his classic [The Mythical Man-Month](#the-reference), people are still talking about it. As we can see from my previous posts, the definition of the second-system effect is rather stricter than people think. Then one question raises naturally. Is it even practical to identify this effect from real world software projects? Even further, is it a real thing?
 
 Let's find out. Shall we?
 
@@ -36,7 +36,7 @@ As my personal experience, my first project was totally a failure. I was working
 
 # The Obvious Solution
 
-Again, my point is a "spare and clean" design doesn't mean the success of the project, it even doesn't means everything for a design itself. By everything I mean all the things that characterize a good design. If it is, then there exists an obvious solution to the second-system effect. Before I talk about my solution, let's first review Dr. Brooks' solution, mentioned in his article[<sup>\[1\]</sup>](#the-reference).
+Again, my point is that a "spare and clean" design doesn't mean the success of the project, it even doesn't means everything for a design itself. By everything I mean all the things that characterize a good design. If it is, then there exists an obvious solution to the second-system effect. Before I talk about my solution, let's first review Dr. Brooks' solution, mentioned in his article[<sup>\[1\]</sup>](#the-reference).
 
 > How does the project manger avoid the second-system effect? By insisting on a senior architect who has at least two system under his belt.
 
@@ -79,7 +79,7 @@ Besides, do you really know the other members of your team? Especially, do you r
 
 # The Illusion
 
-It is interesting that a similar phenomenon of the second-system effect also exist in other disciplines. As this mentioned in [How Not to Be Wrong<sup>\[3\]</sup>](#the-reference):
+It is interesting that a similar phenomenon of the second-system effect also exist in other disciplines. As it mentioned in [How Not to Be Wrong<sup>\[3\]</sup>](#the-reference):
 
 > Why is the second novel by a breakout debut writer, or the second album by an explosively popular band, so seldom as good as the first?
 
