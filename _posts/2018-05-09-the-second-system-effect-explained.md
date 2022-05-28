@@ -79,7 +79,7 @@ Another place where people usually misunderstand is that they think the second d
 
 ### The Influence of Time
 
-A lot of effects, in the world, are subject to the influence of time, and the second-system effect is one of them. This is not clear stated in the article but I think it is implied. For example, one engineer designed a search engine, then left the domain to work on operating system designs, but 20 years later, he got a chance to work on search engine again. Would the second search engine design considered to be the second system of the first one? I doubt.
+A lot of effects, in the world, are subject to the influence of time, and the second-system effect is certainly one of them. This is not clear stated in the article but I think it is implied. For example, one engineer designed a search engine, then left the domain to work on operating system designs, but 20 years later, he got a chance to work on search engine again. Would the second search engine design considered to be the second system of the first one? I doubt.
 
 While, if another architect worked on a social media website, then temporally worked on a database, then back to work on a second social media website again. That would probably be considered as the case of the second system.
 
@@ -89,7 +89,7 @@ The point is that the influence of the first work will fade after time. So, at t
 
 The effect of the second-system is the tendency to over-design and to refine obsolete techniques. Similar to "spare and clean" doesn't mean the success of the first system, "over-design and refinement of obsolete techniques" doesn't necessarily mean the failure of the second system.
 
-Over-design, or over-engineering, happens a lot. I think most C++ programmers has asked them questions like: Should we make the destructor virtual in order to make the future maintainers' job easier?  Should we use 64 bits integer for this counter to be extra safe or a 32 bits integer is good enough? The absolute right answer certainly depends on the situation. But to my experience, more often, they just doesn't really matter. No one cares or even notices you choose 64 bits over 32 bits, unless it shows up as a red flag on the performance measurement. Again, my point is that over-engineering happens a lot, and sometimes it just doesn't matter.
+Over-design, or over-engineering, happens a lot. I think most C++ programmers has asked themselves questions like: Should we make the destructor virtual in order to make the future maintainers' job easier?  Should we use 64 bits integer for this counter to be extra safe or a 32 bits integer is good enough? The absolute right answer certainly depends on the situation. But to my experience, more often, they just doesn't really matter. No one cares or even notices you choose 64 bits over 32 bits, unless it shows up as a red flag on the performance measurement. Again, my point is that over-engineering happens a lot, and sometimes it just doesn't matter.
 
 The same argument also applies to the refinement of obsolete techniques. Sure, that may take some time to do it. But if you do have plenty time and have nothing better to do, refine some obsolete techniques could still be fun and harmless.
 
