@@ -89,13 +89,15 @@ dn: olcDatabase={2}bdb,cn=config
 changetype: modify
 replace: olcRootDN
 olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+-
+delete: olcRootPW
 EOF
 modifying entry "olcDatabase={2}bdb,cn=config"
 ```
 
-Line 2 `dn: olcDatabase={2}bdb,cn=config` is the DN of the normal DIT you want the ldapi commands to have access to, and it may vary from server to server. Please refer to the last command in the [Environment section](#environment) for an example of how to get the normal DIT DN on your machine.
+`dn: olcDatabase={2}bdb,cn=config` is the DN of the normal DIT you want the ldapi commands to have access to, and it may vary from server to server. Please refer to the last command in the [Environment section](#environment) for an example of how to get the normal DIT DN on your machine.
 
-Line 5 `olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers.
+`olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers. Also **olcRootPW** has to be deleted as well, because it can only be set when root DN is under suffix.
 
 This solution works, because the **olcRootDN** directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the olcRootDN is always allowed full rights (i.e. auth, search, compare, read and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
 
@@ -126,9 +128,9 @@ Also note how the **dc** attribute was added automatically to the entry by the L
 
 # Conclusion
 
-Well, you may ask: why does anyone bother to do something like this?
+Well, you may ask: why does anyone bother to do something like this? Because it is quite convenient. In this way, you don't need the rootDN and its password anymore. I think having one less thing to remember is always good.
 
-Because it is quite convenient. In this way, you don't need the rootDN and its password anymore. I think having one less thing to remember is always good. Also, in the case where simple authentication is required, like by some LDAP-enabled applications, you can just assign a value to the **olcRootPW** directive, which will turn on simple authentication as well.
+The only catch is that simple authentication for root DN will no longer works, so this configuration is not a good fit for LDAP-enabled applications that require root DN simple authentication.
 
 
 # References

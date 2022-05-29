@@ -1,10 +1,11 @@
 #include "defines.h"
+#include "ldap_connection.h"
+
 
 int main(int, char **) {
-    LdapConnection ldap = {URI};
+    const auto ld = CreateLdapHandle(URI);
 
-    //ldap.BerSetOption(LBER_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);
-    ldap.LdapSetOption(LDAP_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);
+    CallLdap(ldap_set_option, ld.get(), LDAP_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);
 
-    ldap.Search(BASE, SCOPE);
+    SimpleSearch(*ld, BASE, SCOPE);
 }

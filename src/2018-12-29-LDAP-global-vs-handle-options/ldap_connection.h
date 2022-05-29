@@ -1,50 +1,53 @@
 #pragma once
 
+#include <exception>
 #include <iostream>
 #include <memory>
 
 #include <ldap.h>
 
 
-#define Call_LDAP_Func(ldap_func, ...)                                                \
-    {                                                                                 \
-        const auto iStatus = ldap_func(__VA_ARGS__);                                  \
-        if (iStatus != LDAP_SUCCESS) {                                                \
-            std::cerr << "Error: LDAP function " << #ldap_func                        \
-                      << "() call failed: " << ldap_err2string(iStatus) << std::endl; \
-        }                                                                             \
+class LdapException : public std::exception {
+public:
+    explicit LdapException(const int s) noexcept : m_status(s) {}
+
+    [[nodiscard]] const char *what() const noexcept override {
+        return ldap_err2string(m_status);
     }
 
-inline void ldap_unbind_with_log(LDAP *ld) {
-    Call_LDAP_Func(ldap_unbind_ext_s, ld, nullptr, nullptr);
+private:
+    int m_status = 0;
+};
+
+template<typename Function, typename... Args>
+inline constexpr void CallLdap(const Function func, Args &&...args) {
+    if (const auto status = func(std::forward<Args>(args)...); status != LDAP_SUCCESS) {
+        throw LdapException {status};
+    }
 }
 
-inline auto ldap_init_with_log(const std::string &uri) {
+inline void LdapUnbind(LDAP *ld) noexcept {
+    CallLdap(ldap_unbind_ext_s, ld, nullptr, nullptr);
+}
+
+[[nodiscard]] inline auto CreateLdapHandle(const std::string &uri) noexcept {
     LDAP *ld = nullptr;
-    Call_LDAP_Func(ldap_initialize, &ld, uri.c_str());
-    return ld;
+    CallLdap(ldap_initialize, &ld, uri.c_str());
+    return std::unique_ptr<LDAP, decltype(&LdapUnbind)> {ld, &LdapUnbind};
 }
 
-class LdapConnection {
-    std::unique_ptr<LDAP, decltype(&ldap_unbind_with_log)> mLdap;
+void SimpleSearch(LDAP &ld, const std::string &base, const ber_int_t &scope) noexcept {
+    const char *filter = nullptr;
+    char **attributes = nullptr;
+    LDAPMessage *pMessage = nullptr;
 
-public:
-    LdapConnection(const std::string &uri) :
-        mLdap(ldap_init_with_log(uri), &ldap_unbind_with_log) {}
-
-    void Search(const std::string &base,
-                const ber_int_t &scope,
-                const std::string &filter = "",
-                char **attributes = nullptr) const {
-        LDAPMessage *pMessage;
-
-        Call_LDAP_Func(
+    try {
+        CallLdap(
             ldap_search_ext_s,
-            mLdap.get(),
+            &ld,
             base.c_str(),
             scope,
-            //NULL may be specified to indicate the library should send the filter (objectClass=*)
-            (filter.empty() ? nullptr : filter.c_str()),
+            filter, //NULL may be specified to indicate the library should send the filter (objectClass=*)
             attributes,
             /*attrsonly=*/0,
             nullptr,
@@ -52,14 +55,9 @@ public:
             nullptr,
             0,
             &pMessage);
-
-        ldap_msgfree(pMessage);
+    } catch (const LdapException &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    void LdapSetOption(const int option, const void *invalue) const {
-        Call_LDAP_Func(ldap_set_option, mLdap.get(), option, invalue);
-    }
-    int BerSetOption(const int option, const void *invalue) const {
-        return ber_set_option(mLdap.get(), option, invalue);
-    }
-};
+    ldap_msgfree(pMessage);
+}
