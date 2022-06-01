@@ -8,5 +8,7 @@
 
 {{ post.excerpt }}
 
+[Read more...]({{ post.url }})
+
 ---
 {% endfor %}
