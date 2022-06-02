@@ -1,5 +1,5 @@
-#include "defines.h"
-#include "ldap_connection.h"
+#include "defines.hpp"
+#include "ldap_utils.hpp"
 
 
 int main(int, char **) {

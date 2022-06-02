@@ -77,7 +77,7 @@ constexpr int DEBUG_LEVEL = LDAP_DEBUG_ANY;
 ldap_set_option(nullptr, LDAP_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);
 ```
 
-Again, here we copied the debug level enums from **\<ldap_log.h\>** in order to use it in our own code, and we passed **nullptr** as the first argument to **ldap_set_option()** to indicate that we want to set global options.
+Again, here we copied the debug level enums from **\<ldap_log.h\>** in order to use it in our own code, and we passed **nullptr** as the first argument of **ldap_set_option()** to indicate that we want to set global options.
 
 
 # Example
