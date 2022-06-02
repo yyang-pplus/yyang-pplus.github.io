@@ -14,10 +14,24 @@ endif ()
 
 set(OPENLDAP_LIBRARIES ldap lber)
 
-add_executable(test_global_option test_global_option.cpp)
-target_link_libraries(test_global_option PRIVATE ${OPENLDAP_LIBRARIES})
-target_compile_options(test_global_option PUBLIC ${COMPILER_WARNING_OPTIONS})
+add_executable(${PROJECT_NAME}_set_global_debug_level defines.hpp ldap_utils.hpp
+                                                      set_global_debug_level.cpp)
+add_executable(${PROJECT_NAME}::set_global_debug_level ALIAS
+               ${PROJECT_NAME}_set_global_debug_level)
+target_link_libraries(${PROJECT_NAME}_set_global_debug_level
+                      PRIVATE ${OPENLDAP_LIBRARIES})
+target_compile_options(${PROJECT_NAME}_set_global_debug_level
+                       PRIVATE ${COMPILER_WARNING_OPTIONS})
+set_target_properties(${PROJECT_NAME}_set_global_debug_level
+                      PROPERTIES OUTPUT_NAME set_global_debug_level)
 
-add_executable(test_handle_option test_handle_option.cpp)
-target_link_libraries(test_handle_option PRIVATE ${OPENLDAP_LIBRARIES})
-target_compile_options(test_handle_option PUBLIC ${COMPILER_WARNING_OPTIONS})
+add_executable(${PROJECT_NAME}_set_handle_debug_level defines.hpp ldap_utils.hpp
+                                                      set_handle_debug_level.cpp)
+add_executable(${PROJECT_NAME}::set_handle_debug_level ALIAS
+               ${PROJECT_NAME}_set_handle_debug_level)
+target_link_libraries(${PROJECT_NAME}_set_handle_debug_level
+                      PRIVATE ${OPENLDAP_LIBRARIES})
+target_compile_options(${PROJECT_NAME}_set_handle_debug_level
+                       PRIVATE ${COMPILER_WARNING_OPTIONS})
+set_target_properties(${PROJECT_NAME}_set_handle_debug_level
+                      PROPERTIES OUTPUT_NAME set_handle_debug_level)
