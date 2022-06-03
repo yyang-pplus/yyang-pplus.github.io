@@ -5,7 +5,7 @@ project(
     VERSION 0.0.1
     LANGUAGES C CXX)
 
-config_cxx_compiler_and_linker()
+config_cxx_compiler_and_linker(17)
 
 set(COMPILER_WARNING_OPTIONS -Wall -Wextra -pedantic-errors)
 if (WARNINGS_AS_ERRORS)
@@ -14,24 +14,14 @@ endif ()
 
 set(OPENLDAP_LIBRARIES ldap lber)
 
-add_executable(${PROJECT_NAME}_set_global_debug_level defines.hpp ldap_utils.hpp
-                                                      set_global_debug_level.cpp)
-add_executable(${PROJECT_NAME}::set_global_debug_level ALIAS
-               ${PROJECT_NAME}_set_global_debug_level)
-target_link_libraries(${PROJECT_NAME}_set_global_debug_level
-                      PRIVATE ${OPENLDAP_LIBRARIES})
-target_compile_options(${PROJECT_NAME}_set_global_debug_level
-                       PRIVATE ${COMPILER_WARNING_OPTIONS})
-set_target_properties(${PROJECT_NAME}_set_global_debug_level
-                      PROPERTIES OUTPUT_NAME set_global_debug_level)
+# add_executable_helper
+function (add_executable_helper name)
+    add_executable(${PROJECT_NAME}_${name} ${name}.cpp defines.hpp ldap_utils.hpp)
+    add_executable(${PROJECT_NAME}::${name} ALIAS ${PROJECT_NAME}_${name})
+    target_link_libraries(${PROJECT_NAME}_${name} PRIVATE ${OPENLDAP_LIBRARIES})
+    target_compile_options(${PROJECT_NAME}_${name} PRIVATE ${COMPILER_WARNING_OPTIONS})
+    set_target_properties(${PROJECT_NAME}_${name} PROPERTIES OUTPUT_NAME ${name})
+endfunction ()
 
-add_executable(${PROJECT_NAME}_set_handle_debug_level defines.hpp ldap_utils.hpp
-                                                      set_handle_debug_level.cpp)
-add_executable(${PROJECT_NAME}::set_handle_debug_level ALIAS
-               ${PROJECT_NAME}_set_handle_debug_level)
-target_link_libraries(${PROJECT_NAME}_set_handle_debug_level
-                      PRIVATE ${OPENLDAP_LIBRARIES})
-target_compile_options(${PROJECT_NAME}_set_handle_debug_level
-                       PRIVATE ${COMPILER_WARNING_OPTIONS})
-set_target_properties(${PROJECT_NAME}_set_handle_debug_level
-                      PROPERTIES OUTPUT_NAME set_handle_debug_level)
+add_executable_helper(set_global_debug_level)
+add_executable_helper(set_handle_debug_level)
