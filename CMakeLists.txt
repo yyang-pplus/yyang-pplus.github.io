@@ -30,7 +30,7 @@ endif ()
 
 # ######################################################################################
 # Sub-Projects
-add_subdirectory(src)
+add_subdirectory(_includes)
 
 if (WANT_TESTS)
     add_subdirectory(scripts)
