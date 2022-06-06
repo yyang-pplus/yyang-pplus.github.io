@@ -82,7 +82,7 @@ Again, here we copied the debug level enums from **\<ldap_log.h\>** in order to 
 
 # Example
 
-For a slightly more completed example, one may take a look at [the source code companions this post on Github]({{site.github.repository_url}}/tree/master/src/2018-12-29-LDAP-global-vs-handle-options).
+For a slightly more completed example, one may take a look at [the source code companions this post on Github]({{site.github.repository_url}}/tree/master/_includes/src/2018-12-29-LDAP-global-vs-handle-options).
 
 
 # Conclusion

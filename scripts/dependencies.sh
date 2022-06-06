@@ -18,7 +18,7 @@ sudo apt update
 sudo apt --yes install shunit2
 
 QuietRun pushd "$PROJECT_ROOT_DIR"
-CHILD_DEPENDENCY_SCRIPTS=($(git ls-files -- 'src/*/dependencies.sh'))
+CHILD_DEPENDENCY_SCRIPTS=($(git ls-files -- '_includes/src/*/dependencies.sh'))
 
 for a_script in "${CHILD_DEPENDENCY_SCRIPTS[@]}"; do
     ./$a_script

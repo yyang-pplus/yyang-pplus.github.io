@@ -60,6 +60,6 @@ exclude:
   - vendor/
   - build/
   - cmake/
+  - CMakeLists.txt
   - README.md
   - scripts/
-  - src/
