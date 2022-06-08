@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
 project(
     ctest-never-ends
     VERSION 0.0.1
@@ -8,7 +6,8 @@ project(
 find_package(Python3 COMPONENTS Interpreter)
 
 if (Python3_FOUND)
-    set(SHOW_ISSUE true)
+    # set(SHOW_ISSUE true)
+
     if (${SHOW_ISSUE})
         add_test(NAME ${PROJECT_NAME}.real_db.setup
                  COMMAND Python3::Interpreter

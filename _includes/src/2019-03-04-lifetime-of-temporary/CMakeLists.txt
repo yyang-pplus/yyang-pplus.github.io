@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.16)
-
 project(
     lifetime-of-temporary
     VERSION 0.0.1

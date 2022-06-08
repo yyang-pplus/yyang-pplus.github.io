@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.16)
-
 project(
     LDAP-global-vs-handle
     VERSION 0.0.1
