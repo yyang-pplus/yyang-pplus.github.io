@@ -217,7 +217,7 @@ Base::~Base()
 int main()
 ```
 
-Notice, the **Base** destructor get called before printing the name of **main()**, and well before "**delete w**".
+Notice, the **Base** destructor get called before printing the name of **main()**, and well before `delete w;`.
 
 
 # A Special Case
