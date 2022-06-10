@@ -51,8 +51,12 @@ defaults:
 # their entries' file path in the `include:` list.
 #
 exclude:
-  - .sass-cache/
+  - .bundle/
+  - .git/
+  - .github/
   - .jekyll-cache/
+  - .mypy_cache/
+  - .sass-cache/
   - gemfiles/
   - Gemfile
   - Gemfile.lock
