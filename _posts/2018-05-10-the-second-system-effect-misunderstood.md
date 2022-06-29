@@ -75,4 +75,4 @@ Probably, you have gained a better understanding of the buzz word by now. Howeve
 
 # The Reference
 
-1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com)
+1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com) by Frederick Brooks.

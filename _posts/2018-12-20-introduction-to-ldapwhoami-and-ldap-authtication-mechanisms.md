@@ -105,9 +105,9 @@ In this article we barely scratched the surface of the LDAP authentication mecha
 
 # References
 
-1. [How To Manage and Use LDAP Servers with OpenLDAP Utilities](https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities)
-1. [How To Configure OpenLDAP and Perform Administrative LDAP Tasks](https://www.digitalocean.com/community/tutorials/how-to-configure-openldap-and-perform-administrative-ldap-tasks)
-1. [Understanding the LDAP Protocol, Data Hierarchy, and Entry Components](https://www.digitalocean.com/community/tutorials/understanding-the-ldap-protocol-data-hierarchy-and-entry-components)
-1. [Understanding and Deploying LDAP Directory Services (#ad)](https://www.amazon.com)
+1. [How To Manage and Use LDAP Servers with OpenLDAP Utilities](https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities) by Justin Ellingwood.
+1. [How To Configure OpenLDAP and Perform Administrative LDAP Tasks](https://www.digitalocean.com/community/tutorials/how-to-configure-openldap-and-perform-administrative-ldap-tasks) by Justin Ellingwood.
+1. [Understanding the LDAP Protocol, Data Hierarchy, and Entry Components](https://www.digitalocean.com/community/tutorials/understanding-the-ldap-protocol-data-hierarchy-and-entry-components) by Justin Ellingwood.
+1. [Understanding and Deploying LDAP Directory Services (#ad)](https://www.amazon.com) by Gordon S. Good and Mark Smith.
 1. [OpenLDAP 2.4 Administrator's Guide: The slapd Configuration File](https://www.openldap.org/doc/admin24/slapdconfig.html)
 1. [OpenLDAP 2.4 Administrator's Guide: Access Control](https://www.openldap.org/doc/admin24/access-control.html)

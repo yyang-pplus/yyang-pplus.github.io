@@ -247,7 +247,7 @@ In general, the lifetime of a temporary cannot be further extended by "passing i
 
 # References
 
-1. [GotW #88: A Candidate For the “Most Important const”](https://herbsutter.com/2008/01/01/gotw-88-a-candidate-for-the-most-important-const/)
+1. [GotW #88: A Candidate For the “Most Important const”](https://herbsutter.com/2008/01/01/gotw-88-a-candidate-for-the-most-important-const/) by Herb Sutter.
 1. [Reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization)
-1. [The cost of std::initializer\_list](https://akrzemi1.wordpress.com/2016/07/07/the-cost-of-stdinitializer_list/)
+1. [The cost of std::initializer\_list](https://akrzemi1.wordpress.com/2016/07/07/the-cost-of-stdinitializer_list/) by Andrzej Krzemieński.
 1. [Stack Overflow: Aggregate reference member and temporary lifetime](https://stackoverflow.com/questions/35313292/aggregate-reference-member-and-temporary-lifetime)

@@ -109,5 +109,5 @@ That's it. Simple, right? Unfortunately, this is not really the end of the story
 
 # The Reference
 
-1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com)
-1. [Tao Te Ching (#ad)](https://www.amazon.com)
+1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com) by Frederick Brooks.
+1. [Tao Te Ching (#ad)](https://www.amazon.com) by Laozi.
