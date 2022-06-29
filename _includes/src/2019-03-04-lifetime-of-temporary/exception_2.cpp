@@ -1,3 +1,5 @@
+// exception_2.cpp
+
 #include "derived.hpp"
 
 struct DerivedWrapper {

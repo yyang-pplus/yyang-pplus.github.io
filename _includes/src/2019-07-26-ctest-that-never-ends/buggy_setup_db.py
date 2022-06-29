@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# buggy_setup_db.py
+
 import subprocess
 import os
 
