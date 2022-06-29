@@ -93,4 +93,4 @@ I'm surprised that how a seemingly simple task like this (setting debug level) t
 # References
 
 1. [ldap_set_option(3) - Linux man page](https://linux.die.net/man/3/ldap_set_option)
-1. [LDAP: Programming Directory-Enabled Apps (1st Edition) by Mark Smith (#ad)](https://www.amazon.com)
+1. [LDAP: Programming Directory-Enabled Apps (1st Edition) (#ad)](https://www.amazon.com) by Mark Smith.

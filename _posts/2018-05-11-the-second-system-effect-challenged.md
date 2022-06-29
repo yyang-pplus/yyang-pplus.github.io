@@ -92,6 +92,6 @@ After all, is it possible that the second-system effect is a phenomenon that jus
 
 # The Reference
 
-1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com)
-1. [Why Software Projects Fail and How to Make Them Succeed](https://www.projectsmart.co.uk/why-software-projects-fail.php)
-1. [How Not to Be Wrong: The Power of Mathematical Thinking (#ad)](https://www.amazon.com)
+1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com) by Frederick Brooks.
+1. [Why Software Projects Fail and How to Make Them Succeed](https://www.projectsmart.co.uk/why-software-projects-fail.php) by Duncan Haughey.
+1. [How Not to Be Wrong: The Power of Mathematical Thinking (#ad)](https://www.amazon.com) by Jordan Ellenberg.

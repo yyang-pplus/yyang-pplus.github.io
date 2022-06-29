@@ -126,9 +126,10 @@ And the rest half only requires you to change a few parameters of the **subproce
 {% include src/2019-07-26-ctest-that-never-ends/setup_test_db.py %}
 ```
 
-Based on [The Python Standard Library Documentation of the subprocess module](https://docs.python.org/2/library/subprocess.html#subprocess.Popen), what that means is:
+Based on [The Python Standard Library Documentation of the subprocess module](https://docs.python.org/3/library/subprocess.html#subprocess.Popen), what that means is:
 
-> PIPE indicates that a new pipe to the child should be created. With the default settings of None, no redirection will occur; the child’s file handles will be inherited from the parent.
+> PIPE indicates that a new pipe to the child should be created.
+> With the default settings of None, no redirection will occur; the child’s file handles will be inherited from the parent.
 
 And that's it. The problem solved.
 
@@ -143,4 +144,4 @@ The important take-away from this post is the strategy we used to debug the prob
 # References
 
 1. [ctest hangs when a test segfaults](https://gitlab.kitware.com/cmake/cmake/issues/16502)
-1. [Understanding your problem is half the solution (actually the most important half)](https://www.henricodolfing.com/2018/05/understanding-your-problem-is-half.html)
+1. [Understanding your problem is half the solution (actually the most important half)](https://www.henricodolfing.com/2018/05/understanding-your-problem-is-half.html) by Henrico Dolfing.
