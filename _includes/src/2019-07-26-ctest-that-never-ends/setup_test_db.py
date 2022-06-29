@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# setup_test_db.py
+
 import subprocess
 
 DBFARM_PATH = "/tmp/dbfarm"

@@ -56,7 +56,8 @@ One advantage of accessing files through file streams is the automatic managemen
 | in \>\> x  | Read from an **in**put stream into **x** according to **x**'s type |
 | out \<\< x | Insert **x** into the **out**put stream according to **x**'s type  |
 
-The I/O operators mechanism is the key improvement over C's IO mechanism, as it is type sensitive, inherently type-safe, and extensible.[<sup>\[2\]</sup>](#references)<br>
+The I/O operators mechanism is the key improvement over C's IO mechanism, as it is type sensitive, inherently type-safe, and extensible.[<sup>\[2\]</sup>](#references)
+
 As you will see shortly, the formatted I/O operators are simpler to use and less error-prone than the unformatted ones. So it is recommended that you should prefer formatted operators if possible.[<sup>\[2\]</sup>](#references)
 
 ## FS: Unformatted Input
@@ -78,7 +79,8 @@ As you will see shortly, the formatted I/O operators are simpler to use and less
 
 ## FS: Buffering
 
-By default, **fstream** is buffered. You can flush the output buffer explicitly by calling **flush()**, or by using the output manipulator **std::endl**, which inserts a newline character into the output sequence as well.<br>
+By default, **fstream** is buffered. You can flush the output buffer explicitly by calling **flush()**, or by using the output manipulator **std::endl**, which inserts a newline character into the output sequence as well.
+
 An output stream is automatically flushed when it is destroyed, when a **tie()**d **istream** needs input, and when the implementation find it advantageous.[<sup>\[2\]</sup>](#references) For example, on most Unix system, the output buffer is automatically flushed when writing a newline character into an output stream that is a terminal.[<sup>\[3\]</sup>](#references)
 
 To turn off buffering for a file stream completely, one can do so by using the output manipulator **std::unitbuf**. This flag is set for **std::cerr** by default. Another way to make a file stream unbuffered is calling the `out.rdbuf()->pubsetbuf(nullptr, 0)` of **filebuf** class directly, which is the public version of **setbuf()**. Just note that it has to be called before any I/O has taken place in order for it to take effect.[<sup>\[3\]</sup>](#references)
@@ -119,7 +121,8 @@ Also note, the arguments to **std::scanf()** must be pointers. For example, `sca
 | c = std::ungetc(c, fp)                         | Put the **c**haracter back into the input buffer; Only one character of pushback is guaranteed per file                                       |
 | n = std::fread(buffer, object_size, count, fp) | Read up to **count** objects into the array **buffer** from the given input stream                                                            |
 
-Similar to **std::fputc()** and **std::putc()**, in C++, calling **std::fgetc()** and **std::getc()** always have the same effect.<br>
+Similar to **std::fputc()** and **std::putc()**, in C++, calling **std::fgetc()** and **std::getc()** always have the same effect.
+
 Never use **std::fgets()** or its rough equivalent `std::scanf("%s", s)`! For years, they were the favorites of virus writers: By providing an input that overflows the input buffer, a program can be corrupted and a computer potentially taken over by an attacker.[<sup>\[2\]</sup>](#references)
 
 ## FP: Unformatted Output
@@ -171,7 +174,8 @@ This one is simple, as there is no formatted I/O operations among the low level 
 
 ## FD: Buffering
 
-Unlike the C standard library and C++ standard library, there is no buffer at the application level when using the POSIX APIs to access files directly. You have to create and maintain your own buffers if needed. However, there usually are buffer cache at the kernel level.<br>
+Unlike the C standard library and C++ standard library, there is no buffer at the application level when using the POSIX APIs to access files directly. You have to create and maintain your own buffers if needed. However, there usually are buffer cache at the kernel level.
+
 Also note, a successful **close()** does not guarantee that the data has been successfully saved to disk, as the kernel uses the buffer cache to defer writes. Typically, filesystems do not flush buffers when a file is closed. If you need to be sure that the data is physically stored on the underlying disk, use **fsync()**.  (It will depend on the disk hardware at this point.)[<sup>\[7\]</sup>](#references)
 
 
