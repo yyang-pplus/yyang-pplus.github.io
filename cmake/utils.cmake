@@ -10,3 +10,15 @@ macro (CONFIG_CXX_COMPILER_AND_LINKER std)
         set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
     endif ()
 endmacro ()
+
+# cmake-lint: disable=C0307
+
+# add_single_executable
+function (add_single_executable main_name)
+    add_executable(${PROJECT_NAME}_${main_name} ${main_name}.cpp ${ARGN})
+    add_executable(${PROJECT_NAME}::${main_name} ALIAS ${PROJECT_NAME}_${main_name})
+    target_compile_options(${PROJECT_NAME}_${main_name}
+                           PRIVATE ${COMPILER_WARNING_OPTIONS})
+    set_target_properties(${PROJECT_NAME}_${main_name} PROPERTIES OUTPUT_NAME
+                                                                  ${main_name})
+endfunction ()
