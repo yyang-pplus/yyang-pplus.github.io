@@ -31,7 +31,7 @@ class basic_streambuf;
 Found in **\<streambuf\>**, the template class **basic_streambuf\<\>** defines the interface for stream buffers. A stream buffer is an abstract layer between an I/O stream and the final data source or destination. Different **streambuf** subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2\]</sup>](#references) The buffer used to write characters is also called put area, while the buffer for input is also called get area. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
 
 
-# No Buffer Output Stream Buffer
+# Unbuffered Output Stream Buffer
 
 Streambuf buffer management is fairly sophisticated. So, let's start with a simple one, which has no buffer to manage.
 
@@ -69,7 +69,7 @@ As you can see, the key to implement an output stream buffer is in overriding th
 Also, note that **overflow()** returns unspecified value not equal to traits_type::eof() on success, traits_type::eof() on failure. The base class version of the function returns traits_type::eof().[<sup>\[3\]</sup>](#references)
 
 
-# No Buffer Output Stream Buffer Improved
+# Unbuffered Output Stream Buffer Improved
 
 Although, our simple output stream buffer **HexOutBuf** works perfectly fine, it is not quite flexible. As it can only write to the standard output channel. Here is how we can improve it.
 
@@ -77,7 +77,7 @@ Although, our simple output stream buffer **HexOutBuf** works perfectly fine, it
 {% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf_improved.hpp %}
 ```
 
-The main improvement over the [previous](#no-buffer-output-stream-buffer) version is the added constructors and destructor. One of the constructor takes a file descriptor **fd**, and assume that file descriptor is owned by someone else. The other constructor takes a few arguments which are used to **open()** a new file descriptor. The destructor simply **close()** the current associated file descriptor if it is owned by the stream buffer. This version of **HexOutBuf** serves as an good example of showing that a stream buffer can either own its associated underlying I/O channel, or not.
+The main improvement over the [previous](#unbuffered-output-stream-buffer) version is the added constructors and destructor. One of the constructor takes a file descriptor **fd**, and assume that file descriptor is owned by someone else. The other constructor takes a few arguments which are used to **open()** a new file descriptor. The destructor simply **close()** the current associated file descriptor if it is owned by the stream buffer. This version of **HexOutBuf** serves as an good example of showing that a stream buffer can either own its associated underlying I/O channel, or not.
 
 Also, since copy and move semantics are not the main topic of this post, I will not discuss them further here. The related functionalities are provided in the above example just for completeness.
 
@@ -159,7 +159,7 @@ Although, not implemented in our **HexOutBuf**, the virtual functions **seekoff(
 
 # Conclusion
 
-In today's post, I have shown you a few examples of user-defined output stream buffers, from a simple unbuffered one to a slightly more completed buffered one. The key to implement an output stream buffer is in understanding when and how to override the corresponding virtual functions to manipulate the put area, if any, appropriately.
+In today's post, I have shown you a few examples of user-defined output stream buffers, from a simple unbuffered one to a slightly more completed buffered one. The key to implement an output stream buffer is in understanding when and how to override the corresponding virtual functions to manipulate the put area, if any, appropriately. [The complete code for this article can be found on my Github]({{site.github.repository_url}}/tree/master/_includes/src/2020-06-10-user-defined-output-stream-buffers).
 
 Unfortunately, output stream buffers are only half of the story. Guess what's the other half? Yes, the input stream buffers. For various reasons, the input stream buffers are a bit more involved than the output stream buffers. But, do not worry. I will have you covered, in [my next post]({{page.next.url}}).
 
