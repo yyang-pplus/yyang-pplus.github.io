@@ -66,7 +66,7 @@ $ ./hex_out_stream_nobuf
 
 As you can see, the key to implement an output stream buffer is in overriding the **overflow()** virtual function. **overflow(c)** is responsible for sending the characters currently in the buffer, if any, plus the given character **c** to their real destination. It gets called when there is no room left in the associated put area. In our case, the default constructor assigns no space to the put area, thus **overflow()** is called for each character as soon as it is received.
 
-Also, note that **overflow()** returns unspecified value not equal to traits_type::eof() on success, traits_type::eof() on failure. The base class version of the function returns traits_type::eof().[<sup>\[3\]</sup>](#references)
+Also, note that **overflow()** returns unspecified value not equal to **traits_type::eof()** on success, **traits_type::eof()** on failure. The base class version of the function returns **traits_type::eof()**.[<sup>\[3\]</sup>](#references)
 
 
 # Unbuffered Output Stream Buffer Improved
@@ -118,7 +118,7 @@ That is pretty much all you need to know about the unbuffered output stream buff
 
 The put area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1\]</sup>](#references)
 
-1. **pbase()**: ("**p**ut **base**") points at the beggining of the output buffer.
+1. **pbase()**: ("**p**ut **base**") points at the beginning of the output buffer.
 1. **pptr()**: ("**p**ut **p**oin**t**e**r**") points at the position that is the next candidate for writing.
 1. **epptr()**: ("**e**nd **p**ut **p**oin**t**e**r**") points to one past the end of the buffer.
 
