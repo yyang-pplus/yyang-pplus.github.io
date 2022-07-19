@@ -4,6 +4,7 @@
 
 #include <unistd.h>
 
+#include <array>
 #include <streambuf>
 
 #include "str_utils.hpp"
@@ -32,7 +33,7 @@ protected:
     auto flushBuffer() noexcept {
         const auto n = pptr() - pbase();
         for (int i = n * WIDTH - WIDTH; i >= 0; i -= WIDTH) {
-            const auto hex_str = ToHex(pbase()[i / 2], WIDTH);
+            const auto hex_str = ToHex(pbase()[i / WIDTH], WIDTH);
             std::copy(hex_str.cbegin(), hex_str.cend(), pbase() + i);
         }
 
