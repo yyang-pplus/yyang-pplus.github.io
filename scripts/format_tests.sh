@@ -26,15 +26,19 @@ testInSrcFilenameMatchRealFilename() {
         extension="${filename##*.}"
 
         if [ "$extension" = "cpp" ] || [ "$extension" = "hpp" ]; then
-            first_line=$(head -1 "$src_file")
+            name_line=$(head -1 "$src_file")
             comment_char='//'
+            num_name_line=$(git grep -E "^${comment_char}.+pp$" "$src_file" | wc -l)
         else
-            first_line=$(sed '3q;d' "$src_file")
+            name_line=$(sed '3q;d' "$src_file")
             comment_char='#'
+            num_name_line=$(git grep -E "^${comment_char}.+\.${extension}$" "$src_file" | wc -l)
         fi
 
-        if [[ $first_line == $comment_char* ]] && [[ $first_line == *$extension ]]; then
-            assertEquals "$first_line" "$comment_char $filename"
+        assertTrue "$src_file contains multiple filename line($num_name_line)." "[ 2 -gt $num_name_line ]"
+
+        if [ $num_name_line -eq 1 ]; then
+            assertEquals "$name_line" "$comment_char $filename"
         fi
     done
 
