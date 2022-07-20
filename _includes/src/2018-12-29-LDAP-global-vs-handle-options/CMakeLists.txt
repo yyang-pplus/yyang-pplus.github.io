@@ -16,6 +16,8 @@ set(OPENLDAP_LIBRARIES ldap lber)
 function (add_executable_helper name)
     add_single_executable(${name} defines.hpp ldap_utils.hpp)
     target_link_libraries(${PROJECT_NAME}_${name} PRIVATE ${OPENLDAP_LIBRARIES})
+
+    add_runnable_test(${name})
 endfunction ()
 
 add_executable_helper(set_global_debug_level)

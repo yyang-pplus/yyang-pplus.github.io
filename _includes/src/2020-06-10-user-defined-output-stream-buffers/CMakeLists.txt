@@ -19,3 +19,9 @@ add_single_executable(hex_out_stream_nobuf_improved_fd
                       hex_out_stream_nobuf_improved.hpp str_utils.hpp test_utils.hpp)
 add_single_executable(hex_out_stream_nobuf_improved_path
                       hex_out_stream_nobuf_improved.hpp str_utils.hpp test_utils.hpp)
+
+add_runnable_test(hex_out_stream)
+add_runnable_test(hex_out_stream_buffer)
+add_runnable_test(hex_out_stream_nobuf)
+add_runnable_test(hex_out_stream_nobuf_improved_fd)
+add_runnable_test(hex_out_stream_nobuf_improved_path)

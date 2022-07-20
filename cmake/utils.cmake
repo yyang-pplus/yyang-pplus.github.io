@@ -22,3 +22,11 @@ function (add_single_executable main_name)
     set_target_properties(${PROJECT_NAME}_${main_name} PROPERTIES OUTPUT_NAME
                                                                   ${main_name})
 endfunction ()
+
+# add_runnable_test
+function (add_runnable_test main_name)
+    if (WANT_TESTS)
+        add_test(NAME ${PROJECT_NAME}.${main_name}.runnable_test
+                 COMMAND ${PROJECT_NAME}::${main_name})
+    endif ()
+endfunction ()
