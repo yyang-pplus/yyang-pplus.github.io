@@ -51,6 +51,7 @@ defaults:
 # their entries' file path in the `include:` list.
 #
 exclude:
+  - 3rdParty/
   - .bundle/
   - .git/
   - .github/
