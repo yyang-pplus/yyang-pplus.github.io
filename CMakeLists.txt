@@ -29,6 +29,12 @@ if (WANT_TESTS)
 endif ()
 
 # ######################################################################################
+# Dependencies
+find_package(Threads REQUIRED)
+
+add_subdirectory(3rdParty)
+
+# ######################################################################################
 # Sub-Projects
 add_subdirectory(_includes)
 
