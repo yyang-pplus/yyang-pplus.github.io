@@ -1,2 +1,2 @@
-static inline void UnusedFunctionNoWarning() {
+[[maybe_unused]] static void UnusedFunctionNoWarning() {
 }
