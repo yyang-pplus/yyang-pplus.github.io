@@ -88,7 +88,31 @@ Additionally, if parameters are conditionally unused, declare them with the `[[m
 {% include src/2021-01-20-pds-compiler-warnings/conditional-unused-but-set-parameter-fixed.hpp %}
 ```
 
-## Suppress unused result
+## Suppress unused variable warnings
+
+Similar to the unused parameter warnings, `-Wunused-variable` may help you to detect issues those are related to unintentionally accessing the wrong variables. For example:
+
+```cpp
+{% include src/2021-01-20-pds-compiler-warnings/unused-variable.hpp %}
+```
+
+The first `i` is never used, as it is shadowed by the second `i`. But, sometimes, it is possible that some variables are intentionally not used in all build targets, like, the following use of `assert()`:
+
+```cpp
+{% include src/2021-01-20-pds-compiler-warnings/unused-variable-fixed.hpp %}
+```
+
+As you can see, `[[maybe_unused]]` can be used to suppress unused variable warnings as well.
+
+## Suppress unused function warnings
+
+Like the unused variable warnings, `-Wunused-function` could be helpful from time to time, and the `[[maybe_unused]]` attribute can also be useful here if you really want to suppress the unused function warnings for a specific set of functions.
+
+```cpp
+{% include src/2021-01-20-pds-compiler-warnings/unused-function-fixed.hpp %}
+```
+
+## Suppress unused result warnings
 
 `-Wunused-result` is given when you ignore the return value of a function that is declared with attribute `[[nodiscard]]`. The following function as an example:
 
@@ -104,31 +128,7 @@ The `[[nodiscard]]` here is trying to encourage the callers to remember to test 
 std::ignore = connect();
 ```
 
-## Suppress unused variable
-
-Similar to the unused parameter warnings, `-Wunused-variable` may help you to detect issues those are related to unintentionally accessing the wrong variables. For example:
-
-```cpp
-{% include src/2021-01-20-pds-compiler-warnings/unused-variable.hpp %}
-```
-
-The first `i` is never used, as it is shadowed by the second `i`. But, sometimes, it is possible that some variables are intentionally not used in all build targets, like, the following use of `assert()`:
-
-```cpp
-{% include src/2021-01-20-pds-compiler-warnings/unused-variable-fixed.hpp %}
-```
-
-As you can see, `std::ignore` can also be used to suppress unused variable warnings.
-
-## Suppress unused function
-
-Like the used valuable warnings, `-Wunused-function` could be useful from time to time, and the `inline` keyword can be useful if you really want to suppress the unused function warnings for a specific set of functions.
-
-```cpp
-{% include src/2021-01-20-pds-compiler-warnings/unused-function-fixed.hpp %}
-```
-
-## Suppress switch
+## Suppress switch warnings
 
 The `-Wswitch` warnings warn you about enumeration values that are not handled in a switch statement. This kind of warnings usually happens when you added a new enumeration value to an enumerated type, but forgot to add a corresponding case label to the switch statement. For example:
 
@@ -138,7 +138,7 @@ The `-Wswitch` warnings warn you about enumeration values that are not handled i
 
 Although, it is easy to suppress this warning with a `default` label, but it is not recommended, as that will also suppress any diagnostics which may detect genuine mistakes in the future. In general, it is better to just add the missing enumeration value case labels explicitly.
 
-## Suppress implicit fallthrough
+## Suppress implicit fallthrough warnings
 
 `-Wimplicit-fallthrough` warnings could be useful in case you forgot to add a `break` for one case label before reaching the next one. If you are sure that's intended, you can suppress this warning with `[[fallthrough]]`.
 
@@ -149,7 +149,7 @@ Although, it is easy to suppress this warning with a `default` label, but it is 
 
 # Conclusion
 
-In today's post, I have talked about the importance of enabling the right set of compiler warnings in order to reduce the number of defects in your code base. I have also showed a few commonly used techniques to suppress certain warnings when necessary. I hope you found this post useful, if so, you may also want to check out [the other articles which also belongs to this PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
+In today's post, I have talked about the importance of enabling the right set of compiler warnings in order to reduce the number of defects in your code base. I have also showed a few commonly used techniques to suppress certain warnings when necessary. I hope you found this post useful, if so, you may also want to check out [the other articles which also belongs to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 
 
 # References

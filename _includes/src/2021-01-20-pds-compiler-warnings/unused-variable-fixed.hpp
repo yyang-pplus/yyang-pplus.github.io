@@ -1,7 +1,6 @@
 #include <cassert>
 
 void UnusedVariableNoWarning() {
-    const auto x = sizeof(char);
+    [[maybe_unused]] const auto x = sizeof(char);
     assert(x);
-    std::ignore = x;
 }
