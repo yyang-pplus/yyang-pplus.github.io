@@ -58,6 +58,7 @@ exclude:
   - .jekyll-cache/
   - .mypy_cache/
   - .sass-cache/
+  - drafts/
   - gemfiles/
   - Gemfile
   - Gemfile.lock
