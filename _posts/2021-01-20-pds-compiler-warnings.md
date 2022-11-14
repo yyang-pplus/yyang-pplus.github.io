@@ -149,7 +149,7 @@ Although, it is easy to suppress this warning with a `default` label, but it is 
 
 # Conclusion
 
-In today's post, I have talked about the importance of enabling the right set of compiler warnings in order to reduce the number of defects in your code base. I have also showed a few commonly used techniques to suppress certain warnings when necessary. I hope you found this post useful, if so, you may also want to check out [the other articles which also belongs to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
+In today's post, I have talked about the importance of enabling the right set of compiler warnings in order to reduce the number of defects in your code base. I have also showed a few commonly used techniques to suppress certain warnings when necessary. I hope you found this post useful, if so, you may also want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 
 
 # References
