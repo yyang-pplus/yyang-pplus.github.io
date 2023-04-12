@@ -19,7 +19,7 @@ wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | sud
 
 sudo apt update
 
-VERSION="11.35.19"
+VERSION="11.37.13"
 
 temp_dir="/tmp/$(date +%s)"
 mkdir $temp_dir
