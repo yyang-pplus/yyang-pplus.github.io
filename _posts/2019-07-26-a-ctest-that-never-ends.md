@@ -33,16 +33,16 @@ I encountered this issue when I was working on a project which use **MonetDB** a
 Alright, without further ado, here is the buggy code:
 
 ```python
-{% include src/2019-07-26-ctest-that-never-ends/buggy_setup_db.py %}
+{% include src/2019-07-26-ctest-that-never-ends/buggy-setup-db.py %}
 ```
 
 This code simply creates and starts the MonetDB server that will be needed by the other tests. Of course, this is not a quite useful test, as it doesn't really test anything. However, this is intended so that I can show you the minimum code which can reproduce the bug. As already mentioned, this python script should work just fine by itself, so let's try it:
 
 ```bash
-./buggy_setup_db.py
+./buggy-setup-db.py
 ```
 
-**buggy_setup_db.py** is the name of the above mentioned test script. Running this command should return immediately after the MonetDB server gets started, which usually takes only a few seconds for an empty DB farm. If you'd like, you can also check the DB server is indeed running.
+**buggy-setup-db.py** is the name of the above mentioned test script. Running this command should return immediately after the MonetDB server gets started, which usually takes only a few seconds for an empty DB farm. If you'd like, you can also check the DB server is indeed running.
 
 ```bash
 $ pgrep monetdbd
@@ -59,7 +59,7 @@ Then, in the right build directory.
 
 ```bash
 $ ctest
-    Start 1: ctest-never-ends.real_db.setup
+    Start 1: ctest-never-ends.real-db.setup
 
 ```
 
@@ -99,13 +99,13 @@ As you can see, at this moment, **ctest** has no offspring processes. It basical
 Next, let's check the pipes, with the help of a little **bash** script.
 
 ```bash
-{% include src/2019-07-26-ctest-that-never-ends/ls_pipe.sh %}
+{% include src/2019-07-26-ctest-that-never-ends/ls-pipe.sh %}
 ```
 
 This one is slightly more complicated. Basically, this script can be used to find out the single pipe that is connecting the given two processes. In our case, we want to show the pipe that is between **ctest** and **monetdbd**. The output should be something similar to this:
 
 ```bash
-$ ./ls_pipe.sh ctest monetdbd
+$ ./ls-pipe.sh ctest monetdbd
 COMMAND   PID  USER   FD      TYPE             DEVICE SIZE/OFF    NODE NAME
 ctest    5806 yyang   11r     FIFO               0,13      0t0   52060 pipe
 monetdbd 5810 yyang    9w     FIFO               0,13      0t0   52060 pipe
@@ -123,7 +123,7 @@ As it says[<sup>\[2\]</sup>](#references):
 And the rest half only requires you to change a few parameters of the **subprocess.call()** function in python. Here is the good code:
 
 ```python
-{% include src/2019-07-26-ctest-that-never-ends/setup_test_db.py %}
+{% include src/2019-07-26-ctest-that-never-ends/setup-test-db.py %}
 ```
 
 Based on [The Python Standard Library Documentation of the subprocess module](https://docs.python.org/3/library/subprocess.html#subprocess.Popen), what that means is:

@@ -27,7 +27,7 @@ This post is largely inspired by a section of the similar title in [The C++ Stan
 As usual, let's start with an unbuffered one.
 
 ```cpp
-{% include src/2020-06-15-user-defined-input-stream-buffers/hex_in_stream_nobuf.hpp %}
+{% include src/2020-06-15-user-defined-input-stream-buffers/hex-in-stream-nobuf.hpp %}
 ```
 
 Basically, **HexInBuf** class is the opposite of the **HexOutBuf** class. It implements an input stream buffer which can be used to read in hex encoded string and convert it into a normal string. As you can see, comparing to the unbuffered version of **HexOutBuf**, the unbuffered input stream buffer has to override more virtual functions.
@@ -45,17 +45,17 @@ As with input stream buffer, characters can also be put back into the read buffe
 Here is an example of using this stream buffer:
 
 ```cpp
-{% include src/2020-06-15-user-defined-input-stream-buffers/test_utils.hpp %}
+{% include src/2020-06-15-user-defined-input-stream-buffers/test-utils.hpp %}
 ```
 
 ```cpp
-{% include src/2020-06-15-user-defined-input-stream-buffers/hex_in_stream_nobuf.cpp %}
+{% include src/2020-06-15-user-defined-input-stream-buffers/hex-in-stream-nobuf.cpp %}
 ```
 
 You may run it like this:
 
 ```bash
-$ ./hex_in_stream_nobuf <<< '303a09455e69'
+$ ./hex-in-stream-nobuf <<< '303a09455e69'
 0(48)0(48):(58) (9)E(69)E(69)^(94)i(105)
 ```
 
@@ -79,7 +79,7 @@ As already mentioned, **sgetc()** returns the value of **\*gptr()** if **gptr() 
 With all this information, now we can implement our single character buffered input stream buffer.
 
 ```cpp
-{% include src/2020-06-15-user-defined-input-stream-buffers/hex_in_stream_single_buf.hpp %}
+{% include src/2020-06-15-user-defined-input-stream-buffers/hex-in-stream-single-buf.hpp %}
 ```
 
 Well, that's basically it, we only need to override **underflow()**, the default implementation of **uflow()** just works for this one character buffer.
@@ -92,7 +92,7 @@ Also note, the putback functionality of this **HexInBuf** is not completed, as i
 Of course, a single character buffer may be easy to implement, but it is not quite efficient. Here is how we can extend the same pattern and implement a fully buffered user-defined input stream buffer.
 
 ```cpp
-{% include src/2020-06-15-user-defined-input-stream-buffers/hex_in_stream_buffer.hpp %}
+{% include src/2020-06-15-user-defined-input-stream-buffers/hex-in-stream-buffer.hpp %}
 ```
 
 For this version of **HexInBuf**, one extra thing we need to take care of is saving the old data for putback when refreshing the get area with new characters. Often, we need to move the last few characters of the current buffer to the beginning of the buffer and appends the newly read characters thereafter.[<sup>\[1\]</sup>](#references)

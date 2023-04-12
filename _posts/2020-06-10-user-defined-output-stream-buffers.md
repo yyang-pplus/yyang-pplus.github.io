@@ -36,7 +36,7 @@ Found in **\<streambuf\>**, the template class **basic_streambuf\<\>** defines t
 Streambuf buffer management is fairly sophisticated. So, let's start with a simple one, which has no buffer to manage.
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-nobuf.hpp %}
 ```
 
 Basically, **HexOutBuf** class is a stream buffer which converts each character to its two character hex representation before writing it to the standard output channel(**1**) using the POSIX API **write()**.
@@ -44,23 +44,23 @@ Basically, **HexOutBuf** class is a stream buffer which converts each character 
 **ToHex()** is the function converts the given character to its Base16 encoding, and it may be implemented like this:
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/str_utils.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/str-utils.hpp %}
 ```
 
 You can try this **HexOutBuf** with the following example program:
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/test_utils.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/test-utils.hpp %}
 ```
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf.cpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-nobuf.cpp %}
 ```
 
 The output may look like this:
 
 ```bash
-$ ./hex_out_stream_nobuf
+$ ./hex-out-stream-nobuf
 3132333400494a4b006162000a00
 ```
 
@@ -74,7 +74,7 @@ Also, note that **overflow()** returns unspecified value not equal to **traits_t
 Although, our simple output stream buffer **HexOutBuf** works perfectly fine, it is not quite flexible. As it can only write to the standard output channel. Here is how we can improve it.
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf_improved.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-nobuf-improved.hpp %}
 ```
 
 The main improvement over the [previous](#unbuffered-output-stream-buffer) version is the added constructors and destructor. One of the constructor takes a file descriptor **fd**, and assume that file descriptor is owned by someone else. The other constructor takes a few arguments which are used to **open()** a new file descriptor. The destructor simply **close()** the current associated file descriptor if it is owned by the stream buffer. This version of **HexOutBuf** serves as an good example of showing that a stream buffer can either own its associated underlying I/O channel, or not.
@@ -84,13 +84,13 @@ Also, since copy and move semantics are not the main topic of this post, I will 
 A sample owning program:
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf_improved_path.cpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-nobuf-improved-path.cpp %}
 ```
 
 A sample non-owning application:
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_nobuf_improved_fd.cpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-nobuf-improved-fd.cpp %}
 ```
 
 
@@ -99,7 +99,7 @@ A sample non-owning application:
 Although, not strictly required, it is convenient to also define a special stream class that mainly forwards the constructor arguments to the corresponding stream buffer. The following example demonstrates that.[<sup>\[1\]</sup>](#references)
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream.hpp %}
 ```
 
 Note, in the member initializer list, a **nullptr** has to be passed to the base class at first, because at this point, the stream buffer member has not been fully initialized. Later in the body of the constructor, we can associate the fully initialized stream buffer with the stream by calling the member function **rdbuf()**.
@@ -109,7 +109,7 @@ Note, in the member initializer list, a **nullptr** has to be passed to the base
 Using this output stream in the sample program:
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream.cpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream.cpp %}
 ```
 
 That is pretty much all you need to know about the unbuffered output stream buffer, except member function **sputc()** and **sputn()**. We will talk about them in the [next section](#buffered-output-stream-buffer), where we are going to look at a stream buffer that actually buffers.
@@ -145,7 +145,7 @@ Also note, there is no corresponding **xsputc()** virtual function, thus it is n
 With all this information, now we can implement our buffering stream buffer.
 
 ```cpp
-{% include src/2020-06-10-user-defined-output-stream-buffers/hex_out_stream_buffer.hpp %}
+{% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream-buffer.hpp %}
 ```
 
 Note the **-1** when calling **setp()** in the constructor, that is because, when **overflow()** gets called, it not only flushes the current content of the buffer, but also the given character. Thus, it is pretty convenient to leave at least one space for this character, so that, it can also be stored in the buffer and the whole buffer can then be written to the output channel with just one system call.

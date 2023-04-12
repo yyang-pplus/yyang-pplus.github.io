@@ -25,7 +25,7 @@ You probably already known that, in C++, every temporary object has a lifetime, 
 A piece of sample code is worth a thousand words. This post contains sample code to help you better understand the somewhat abstruse wording of the C++ standard. The full source is located on [my GitHub]({{site.github.repository_url}}/tree/master/_includes/src/2019-03-04-lifetime-of-temporary). You can compile it with CMake or directly with any c++ compilers of your choice. Following is the command I used to compile it with GCC.
 
 ```bash
-g++ a_temporary.cpp -o a_temporary -std=c++14 -g
+g++ a-temporary.cpp -o a-temporary -std=c++14 -g
 ```
 
 I have tested the sample code using **GCC 7.3.0** on **Ubuntu 18.04.1 LTS** with **C++11** and **C++14**. They all give the same result.
@@ -51,13 +51,13 @@ Before we get started, let us first look at the helper function, or macro, I use
 ```
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/a_temporary.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/a-temporary.cpp %}
 ```
 
 The output looks like this:
 
 ```bash
-$ ./a_temporary
+$ ./a-temporary
 Base::Base()
 Base::~Base()
 int main()
@@ -73,13 +73,13 @@ As you can see, it first constructs the temporary **Base** object. After that, t
 With the same **Base** struct, but this time we bind the temporary object to a const lvalue reference:
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/const_lvalue_reference.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/const-lvalue-reference.cpp %}
 ```
 
 Now the output becomes:
 
 ```bash
-$ ./const_lvalue_reference
+$ ./const-lvalue-reference
 Base::Base()
 int main()
 Base::~Base()
@@ -90,7 +90,7 @@ The difference is pretty clear, when you compare it with [the previous example](
 Of course, this lifetime extension of a temporary object, also works with rvalue reference.
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/rvalue_reference.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/rvalue-reference.cpp %}
 ```
 
 This example gives the same result as the const lvalue reference one.
@@ -129,7 +129,7 @@ There are some exceptions to this rule where the lifetime of a temporary object 
 > a temporary bound to a return value of a function in a return statement is not extended: it is destroyed immediately at the end of the return expression. Such function always returns a dangling reference.[<sup>\[2\]</sup>](#references)
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/exception_1.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/exception-1.cpp %}
 ```
 
 GCC will also warn you for this: `warning: returning reference to temporary [-Wreturn-local-addr]`.
@@ -137,7 +137,7 @@ GCC will also warn you for this: `warning: returning reference to temporary [-Wr
 Output of this example:
 
 ```bash
-$ ./exception_1
+$ ./exception-1
 const Base& FunctionException1()
 Base::Base()
 Base::~Base()
@@ -154,13 +154,13 @@ It also has a mark says "until C++14". But this doesn't mean this exception is g
 > A temporary expression bound to a reference member in a mem-initializer is ill-formed.
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/exception_2.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/exception-2.cpp %}
 ```
 
 The result should be:
 
 ```bash
-$ ./exception_2
+$ ./exception-2
 Base::Base()
 Derived::Derived()
 DerivedWrapper::DerivedWrapper()
@@ -178,13 +178,13 @@ Apparently, if the lifetime of the temporary **Derived** object were extended, i
 > a temporary bound to a reference parameter in a function call exists until the end of the full expression containing that function call: if the function returns a reference, which outlives the full expression, it becomes a dangling reference.[<sup>\[2\]</sup>](#references)
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/exception_3.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/exception-3.cpp %}
 ```
 
 Here, the output:
 
 ```bash
-$ ./exception_3
+$ ./exception-3
 Base::Base()
 const Base& FunctionException3(const Base&)
 Base::~Base()
@@ -201,17 +201,17 @@ The reference parameter does extend the lifetime of the temporary **Base** objec
 One example of this exception is:
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/base_wrapper.hpp %}
+{% include src/2019-03-04-lifetime-of-temporary/base-wrapper.hpp %}
 ```
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/exception_4.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/exception-4.cpp %}
 ```
 
 And, the output on my machine:
 
 ```bash
-$ ./exception_4
+$ ./exception-4
 Base::Base()
 Base::~Base()
 int main()
@@ -225,13 +225,13 @@ Notice, the **Base** destructor get called before printing the name of **main()*
 The following case may be considered quite special, or not, when you compare it with the [Exception 4](#exception-4).
 
 ```cpp
-{% include src/2019-03-04-lifetime-of-temporary/special_case.cpp %}
+{% include src/2019-03-04-lifetime-of-temporary/special-case.cpp %}
 ```
 
 The result shows:
 
 ```bash
-$ ./special_case
+$ ./special-case
 Base::Base()
 int main()
 Base::~Base()

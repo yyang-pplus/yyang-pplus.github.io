@@ -10,18 +10,18 @@ if (WARNINGS_AS_ERRORS)
     list(APPEND COMPILER_WARNING_OPTIONS -Werror)
 endif ()
 
-add_single_executable(hex_out_stream hex_out_stream.hpp str_utils.hpp test_utils.hpp)
-add_single_executable(hex_out_stream_buffer hex_out_stream_buffer.hpp str_utils.hpp
-                      test_utils.hpp)
-add_single_executable(hex_out_stream_nobuf hex_out_stream_nobuf.hpp str_utils.hpp
-                      test_utils.hpp)
-add_single_executable(hex_out_stream_nobuf_improved_fd
-                      hex_out_stream_nobuf_improved.hpp str_utils.hpp test_utils.hpp)
-add_single_executable(hex_out_stream_nobuf_improved_path
-                      hex_out_stream_nobuf_improved.hpp str_utils.hpp test_utils.hpp)
+add_single_executable(hex-out-stream hex-out-stream.hpp str-utils.hpp test-utils.hpp)
+add_single_executable(hex-out-stream-buffer hex-out-stream-buffer.hpp str-utils.hpp
+                      test-utils.hpp)
+add_single_executable(hex-out-stream-nobuf hex-out-stream-nobuf.hpp str-utils.hpp
+                      test-utils.hpp)
+add_single_executable(hex-out-stream-nobuf-improved-fd
+                      hex-out-stream-nobuf-improved.hpp str-utils.hpp test-utils.hpp)
+add_single_executable(hex-out-stream-nobuf-improved-path
+                      hex-out-stream-nobuf-improved.hpp str-utils.hpp test-utils.hpp)
 
-add_runnable_test(hex_out_stream)
-add_runnable_test(hex_out_stream_buffer)
-add_runnable_test(hex_out_stream_nobuf)
-add_runnable_test(hex_out_stream_nobuf_improved_fd)
-add_runnable_test(hex_out_stream_nobuf_improved_path)
+add_runnable_test(hex-out-stream)
+add_runnable_test(hex-out-stream-buffer)
+add_runnable_test(hex-out-stream-nobuf)
+add_runnable_test(hex-out-stream-nobuf-improved-fd)
+add_runnable_test(hex-out-stream-nobuf-improved-path)

@@ -21,11 +21,14 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release RelWithDebInf
 option(WARNINGS_AS_ERRORS "Treat all warnings as build errors." ON)
 
 option(WANT_TESTS "Build all of the project's own tests." ON)
+option(WANT_AUTO_TESTS "Automatically run tests that have been changed." ON)
 
 if (WANT_TESTS)
     enable_testing()
     include(CTest)
     mark_as_advanced(BUILD_TESTING)
+
+    include(GoogleTest)
 endif ()
 
 # ######################################################################################

@@ -6,4 +6,4 @@
 
 sudo apt update
 
-sudo apt --yes install libldap-2.4-2 libldap2-dev
+sudo apt --yes install libldap-dev
