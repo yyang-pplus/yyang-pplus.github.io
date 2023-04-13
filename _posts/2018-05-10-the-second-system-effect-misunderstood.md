@@ -49,7 +49,7 @@ Even when version 2.0 does means the same thing as the second generation, it is 
 
 # The Third-System Syndrome
 
-In the assay, The Second-System Effect, Dr. Brooks clearly said the second system is actually the designer's second work, not "the third or later ones", of the same class. But why people still think the effect could happen on the later ones. Such as mentioned in [Beware The Second System Effect](http://robertgreiner.com/2012/07/the-second-system-effect/):
+In the essay, The Second-System Effect, Dr. Brooks clearly said the second system is actually the designer's second work, not "the third or later ones", of the same class. But why people still think the effect could happen on the later ones. Such as mentioned in [Beware The Second System Effect](http://robertgreiner.com/2012/07/the-second-system-effect/):
 
 > Personally, I think the perils of The Second System Effect can exist well beyond your second project and this is something we always have to be on guard against.
 
@@ -57,7 +57,7 @@ There are a few possibilities that I can think of:
 
 One of them is, "your second project" may not be the same class of the first one. As I have already shown in my [previous post]({{page.previous.url}}), one of the precondition that leads to the second-system effect is that, the designer's second system have to be the same class of the first one. Otherwise, the confidence, familiarity and saved frills, from the first work, could hardly have any effect on the architect's later designs of a totally different domain. In this sense, it may be true that "the perils of The Second System Effect can exist well beyond your second project", if you keep changing the classes of your systems.
 
-Another possibility is, "your second project" of the same class, may not be following a spare and clean first work. What would happen to the second system that follows a first system that is not spare or clean? What if you still do not have much confidence when works on your second project? Is it possible that the danger of the second-system will be delayed to occur on one of the designer's later projects? Questions like this are left unanswered in Dr. Brooks' assay.
+Another possibility is, "your second project" of the same class, may not be following a spare and clean first work. What would happen to the second system that follows a first system that is not spare or clean? What if you still do not have much confidence when works on your second project? Is it possible that the danger of the second-system will be delayed to occur on one of the designer's later projects? Questions like this are left unanswered in Dr. Brooks' essay.
 
 One final possibility is, you are not the only architect that works on "your second project". One important aspect of the second-system effect is that it could happen to an individual architect as while as a team, if that is the second system of the most designers. In that case, "the perils of The Second System Effect can exist well beyond your second project", if that project happens to be the second system of the majority designers.
 

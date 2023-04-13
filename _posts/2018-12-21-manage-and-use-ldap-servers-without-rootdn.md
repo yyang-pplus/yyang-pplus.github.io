@@ -18,7 +18,7 @@ tags:
   - "security"
 ---
 
-Are you tired of typing password when running **LDAP** commands with **-W**, but feel nervous about using plain text password with **-w**? Are you looking for a way to run **LDAP** commands that is both passwordless and secure? Then this post is for you.
+Are you tired of typing password when running **LDAP** commands with `-W`, but feel nervous about using plain text password with `-w`? Are you looking for a way to run **LDAP** commands that is both passwordless and secure? Then this post is for you.
 
 
 # Introduction
@@ -37,7 +37,7 @@ As we have already discussed in [my previous post]({{page.previous.url}}), basic
 
 In general, people use the rootDN commands to maintain the content of LDAP databases in the **normal DIT**. And use the ldapi commands to manage the configuration of LDAP servers within the **administrative DIT**, which also known as the **cn=config DIT**.[<sup>\[1\]</sup>](#references) Those two kinds of commands exist because that's just how LDAP servers are configured by default.
 
-In this post, we are going to present a way to manage both the administrative DIT and the normal DIT using only the ldapi commands. To be more specific, we want to be able to run the following test command successfully:
+In this post, I am going to present a way to manage both the administrative DIT and the normal DIT using only the ldapi commands. To be more specific, we want to be able to run the following test command successfully:
 
 ```bash
 $ sudo ldapadd -H ldapi:// -Y EXTERNAL -Q <<EOF
@@ -97,9 +97,9 @@ modifying entry "olcDatabase={2}bdb,cn=config"
 
 `dn: olcDatabase={2}bdb,cn=config` is the DN of the normal DIT you want the ldapi commands to have access to, and it may vary from server to server. Please refer to the last command in the [Environment section](#environment) for an example of how to get the normal DIT DN on your machine.
 
-`olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers. Also **olcRootPW** has to be deleted as well, because it can only be set when root DN is under suffix.
+`olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers. Also `olcRootPW` has to be deleted as well, because it can only be set when root DN is under suffix.
 
-This solution works, because the **olcRootDN** directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the olcRootDN is always allowed full rights (i.e. auth, search, compare, read and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
+This solution works, because the `olcRootDN` directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the `olcRootDN` is always allowed full rights (i.e. auth, search, compare, read and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
 
 
 # Test
@@ -123,7 +123,7 @@ dc: yyang-pplus
 
 Easy. Right?
 
-Also note how the **dc** attribute was added automatically to the entry by the LDAP server.
+Also note how the `dc` attribute was added automatically to the entry by the LDAP server.
 
 
 # Conclusion

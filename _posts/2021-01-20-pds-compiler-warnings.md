@@ -56,7 +56,6 @@ if (WARNINGS_AS_ERRORS)
 endif ()
 
 target_compile_options(my_target PRIVATE ${COMPILER_WARNING_OPTIONS})
-
 ```
 
 Here, `WARNINGS_AS_ERRORS` is a build option to turn warnings into errors. `my_target` is the name of the CMake target whose warnings you want to enable, this target must have been created by a command such as `add_executable()` or `add_library()` and must not be an ALIAS target.[<sup>\[6\]</sup>](#references) `PRIVATE` limits those flags to this target only and prevents them from affecting projects linking to your target.
@@ -120,7 +119,7 @@ Like the unused variable warnings, `-Wunused-function` could be helpful from tim
 {% include src/2021-01-20-pds-compiler-warnings/unused-result.hpp %}
 ```
 
-The `[[nodiscard]]` here is trying to encourage the callers to remember to test the returned error code, as the `connect()` may fail. Usually, there is a good reason why the author of the function used `[[nodiscard]]` in the first place, so think twice before you discard such a result. If you still think it’s appropriate and your code reviewer agrees, use `std::ignore =` to turn off the warning which is simple, portable, and easy to grep.[<sup>\[7 ES.48\]</sup>](#references)
+The `[[nodiscard]]` here is trying to encourage the callers to remember to test the returned error code, as the `connect()` may fail. Usually, there is a good reason why the author of the function used `[[nodiscard]]` in the first place, so think twice before you discard such a result. If you still think it’s appropriate and your code reviewer agrees, use `std::ignore =` to turn off the warning. This way is simple, portable, and easy to grep.[<sup>\[7 ES.48\]</sup>](#references)
 
 ```cpp
 #include <tuple>
@@ -140,7 +139,7 @@ Although, it is easy to suppress this warning with a `default` label, but it is 
 
 ## Suppress implicit fallthrough warnings
 
-`-Wimplicit-fallthrough` warnings could be useful in case you forgot to add a `break` for one case label before reaching the next one. If you are sure that's intended, you can suppress this warning with `[[fallthrough]]`.
+`-Wimplicit-fallthrough` warnings could be useful in case you forgot to add a `break` for one case label before reaching the next one. If you are sure that is intended, you can suppress this warning with `[[fallthrough]]`.
 
 ```cpp
 {% include src/2021-01-20-pds-compiler-warnings/implicit-fallthrough-fixed.hpp %}

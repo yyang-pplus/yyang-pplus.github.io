@@ -4,8 +4,8 @@
 
 #include <ldap.h>
 
+#include "ldap-debug-enums.hpp"
 
-#define LDAP_DEBUG_ANY (-1)
 
 const std::string URI = "ldap://";
 const std::string BASE = "dc=yyang-pplus,dc=github,dc=io";

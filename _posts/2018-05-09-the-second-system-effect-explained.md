@@ -75,7 +75,7 @@ First, the word, second-system, we used in this context emphasizes in the experi
 
 ### The Second
 
-Another place where people usually misunderstand is that they think the second doesn't really mean the one after the first. However, In the assay, Dr. Brooks explicitly said the second-system is actually the designer's second work, not "the third or later ones". This means one designer can only experience the second-system effect at most once with one class of systems he/she works on. This also means one designer could experience the second-system effect more than once, during his/her career, if the class  of system he/she works on get changed.
+Another place where people usually misunderstand is that they think the second doesn't really mean the one after the first. However, In the essay, Dr. Brooks explicitly said the second-system is actually the designer's second work, not "the third or later ones". This means one designer can only experience the second-system effect at most once with one class of systems he/she works on. This also means one designer could experience the second-system effect more than once, during his/her career, if the class  of system he/she works on get changed.
 
 ### The Influence of Time
 
@@ -95,12 +95,12 @@ The same argument also applies to the refinement of obsolete techniques. Sure, t
 
 ## The Architects
 
-Another important aspect, which is not clear from the buzz word itself, of the second-system effect is that it could happen to an individual architect as while as a team, if that is the second system of the most designers. Note, the "most designers" here shouldn't be taken as the amount of the population, but rather it should be considered as the weight of the contribution to the project. This is mentioned by the Stretch example in the book. We will talk more about this [later]({{page.next.next.url}}).
+Another important aspect, which is not clear from the buzz word, the second-system effect, itself is that it could happen to an individual architect as while as a team, if that is the second system of the most designers. Note, the "most designers" here shouldn't be taken as the amount of the population, but rather it should be considered as the weight of the contribution to the project. This is mentioned by the Stretch example in the book. We will talk more about this [later]({{page.next.next.url}}).
 
 
 # The Epilogue
 
-In this post, we have tried to explain what the second-system effect is by pointing out the key concepts about it. I hope you now have a better understand about the well-known buzz word. Let's end this post by giving a slightly better definition of the term:
+In this post, I have tried to explain what the second-system effect is by pointing out the key concepts about it. I hope you now have a better understand about the well-known buzz word. Let's end this post by giving a slightly better definition of the term:
 
 **The second-system effect is the general tendency to over-design or to refine obsolete techniques when that system is the second system for most of the architect(s), whose first works of the same class are spare and clean.**
 

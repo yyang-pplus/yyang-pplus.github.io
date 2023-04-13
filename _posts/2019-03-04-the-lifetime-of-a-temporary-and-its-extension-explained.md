@@ -39,7 +39,7 @@ Before we get started, let us first look at the helper function, or macro, I use
 {% include src/2019-03-04-lifetime-of-temporary/trace.hpp %}
 ```
 
-**TRACE\_FUNCTION\_CALL()** macro is just a convenient way to show the name of the current function.
+`TRACE_FUNCTION_CALL()` macro is just a convenient way to show the name of the current function.
 
 
 # Lifetime of a Temporary
@@ -63,14 +63,14 @@ Base::~Base()
 int main()
 ```
 
-As you can see, it first constructs the temporary **Base** object. After that, the temporary object is destructed immediately, before reaching the line that prints out the name of the **main()** function.
+As you can see, it first constructs the temporary `Base` object. After that, the temporary object is destructed immediately, before reaching the line that prints out the name of the `main()` function.
 
 
 # Extend the Lifetime of a Temporary
 
 > Whenever a reference is bound to a temporary or to a subobject thereof, the lifetime of the temporary is extended to match the lifetime of the reference.[<sup>\[2\]</sup>](#references)
 
-With the same **Base** struct, but this time we bind the temporary object to a const lvalue reference:
+With the same `Base` struct, but this time we bind the temporary object to a const lvalue reference:
 
 ```cpp
 {% include src/2019-03-04-lifetime-of-temporary/const-lvalue-reference.cpp %}
@@ -85,7 +85,7 @@ int main()
 Base::~Base()
 ```
 
-The difference is pretty clear, when you compare it with [the previous example](#lifetime-of-a-temporary). This time, after binding to a const lvalue reference, the temporary object is destructed after printing the name of **main()**.
+The difference is pretty clear, when you compare it with [the previous example](#lifetime-of-a-temporary). This time, after binding to a const lvalue reference, the temporary object is destructed after printing the name of `main()`.
 
 Of course, this lifetime extension of a temporary object, also works with rvalue reference.
 
@@ -116,7 +116,7 @@ Derived::~Derived()
 Base::~Base()
 ```
 
-It has to be pointed out that neither struct **Base** or **Derived** has a virtual desctructor. And when the lifetime of the temporary Derived object, which binds to a **Base** reference, ends, the right destructor **Derived::~Derived()** gets called.
+It has to be pointed out that neither struct `Base` or `Derived` has a virtual desctructor. And when the lifetime of the temporary `Derived` object, which binds to a `Base` reference, ends, the right destructor `Derived::~Derived()` gets called.
 
 
 # Exceptions
@@ -132,7 +132,11 @@ There are some exceptions to this rule where the lifetime of a temporary object 
 {% include src/2019-03-04-lifetime-of-temporary/exception-1.cpp %}
 ```
 
-GCC will also warn you for this: `warning: returning reference to temporary [-Wreturn-local-addr]`.
+GCC will also warn you for this:
+
+```bash
+warning: returning reference to temporary [-Wreturn-local-addr]
+```
 
 Output of this example:
 
@@ -170,7 +174,11 @@ int main()
 DerivedWrapper::~DerivedWrapper()
 ```
 
-Apparently, if the lifetime of the temporary **Derived** object were extended, its destructor should be called after **DerivedWrapper::~DerivedWrapper()** get called. GCC doesn't warn you by default. But you can see the warning message if you compile the code with the **\-Wextra** flag to turn on extra warnings. The warning message may looks like: `warning: a temporary bound to ‘DerivedWrapper::d’ only persists until the constructor exits [-Wextra]`.
+Apparently, if the lifetime of the temporary `Derived` object were extended, its destructor should be called after `DerivedWrapper::~DerivedWrapper()` get called. GCC doesn't warn you by default. But you can see the warning message if you compile the code with the `-Wextra` flag to turn on extra warnings. The warning message may looks like:
+
+```bash
+warning: a temporary bound to ‘DerivedWrapper::d’ only persists until the constructor exits [-Wextra]
+```
 
 
 ## Exception 3
@@ -191,7 +199,7 @@ Base::~Base()
 int main()
 ```
 
-The reference parameter does extend the lifetime of the temporary **Base** object until the end of the function **FunctionException3()**, but not after the function returns. I don't think GCC has a warning for this exception, so if you know how to trigger the warning, please leave comments.
+The reference parameter does extend the lifetime of the temporary `Base` object until the end of the function `FunctionException3()`, but not after the function returns. I don't think GCC has a warning for this exception, so if you know how to trigger the warning, please leave comments.
 
 
 ## Exception 4
@@ -217,7 +225,7 @@ Base::~Base()
 int main()
 ```
 
-Notice, the **Base** destructor get called before printing the name of **main()**, and well before `delete w;`.
+Notice, the `Base` destructor get called before printing the name of `main()`, and well before `delete w;`.
 
 
 # A Special Case
@@ -242,7 +250,7 @@ Basically, this means that you **CAN** extend the lifetime of a temporary object
 
 # Summary
 
-In general, the lifetime of a temporary cannot be further extended by "passing it on": a second reference, initialized from the reference to which the temporary was bound, does not affect its lifetime.[<sup>\[2\]</sup>](#references) It is also worth to point out that binding a temporary array to an instance of **std::initializer_list** works much like binding a temporary object to a reference.[<sup>\[3\]</sup>](#references)
+In general, the lifetime of a temporary cannot be further extended by "passing it on": a second reference, initialized from the reference to which the temporary was bound, does not affect its lifetime.[<sup>\[2\]</sup>](#references) It is also worth to point out that binding a temporary array to an instance of `std::initializer_list` works much like binding a temporary object to a reference.[<sup>\[3\]</sup>](#references)
 
 
 # References
