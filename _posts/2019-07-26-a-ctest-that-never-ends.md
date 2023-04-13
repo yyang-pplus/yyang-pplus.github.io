@@ -63,7 +63,7 @@ $ ctest
 
 ```
 
-As you will see, CTest just hangs there until it gets killed or reaches the default timeout. No needs to mention, you can surely "resolve" this issue by setting the timeout to a small but not too small value so that the test can timeout faster. However, that is not an ideal solution, and is certainly not the solution we are proposing here in this article. So, let's find a better way.
+As you will see, CTest just hangs there until it gets killed or reaches the default timeout. No needs to mention, you can surely "resolve" this issue by setting the timeout to a small but not too small value so that the test can timeout faster. However, that is not an ideal solution, and is certainly not the solution I am proposing here in this article. So, let's find a better way.
 
 
 # CTest Basics
@@ -94,7 +94,7 @@ $ pstree -p $(pgrep ctest)
 ctest(11055)
 ```
 
-As you can see, at this moment, **ctest** has no offspring processes. It basically rules out the possibility that CTest is waiting for its child process to exit.
+As you can see, at this moment, `ctest` has no offspring processes. It basically rules out the possibility that CTest is waiting for its child process to exit.
 
 Next, let's check the pipes, with the help of a little **bash** script.
 
@@ -102,7 +102,7 @@ Next, let's check the pipes, with the help of a little **bash** script.
 {% include src/2019-07-26-ctest-that-never-ends/ls-pipe.sh %}
 ```
 
-This one is slightly more complicated. Basically, this script can be used to find out the single pipe that is connecting the given two processes. In our case, we want to show the pipe that is between **ctest** and **monetdbd**. The output should be something similar to this:
+This one is slightly more complicated. Basically, this script can be used to find out the single pipe that is connecting the given two processes. In our case, we want to show the pipe that is between `ctest` and `monetdbd`. The output should be something similar to this:
 
 ```bash
 $ ./ls-pipe.sh ctest monetdbd
@@ -111,7 +111,7 @@ ctest    5806 yyang   11r     FIFO               0,13      0t0   52060 pipe
 monetdbd 5810 yyang    9w     FIFO               0,13      0t0   52060 pipe
 ```
 
-As you can see, at this point, **monetdbd** still holds on to the pipe **52060** and can **w**rite to it, while **ctest** keeps trying to **r**ead from the same pipe, thus preventing CTest from terminating.
+As you can see, at this point, `monetdbd` still holds on to the pipe **52060** and can **w**rite to it, while `ctest` keeps trying to **r**ead from the same pipe, thus preventing CTest from terminating.
 
 
 # Solution
@@ -120,7 +120,7 @@ As it says[<sup>\[2\]</sup>](#references):
 
 > Understanding your problem is half the solution.
 
-And the rest half only requires you to change a few parameters of the **subprocess.call()** function in python. Here is the good code:
+And the rest half only requires you to change a few parameters of the `subprocess.call()` function in python. Here is the good code:
 
 ```python
 {% include src/2019-07-26-ctest-that-never-ends/setup-test-db.py %}
@@ -138,7 +138,7 @@ You can find the full example on [my GitHub]({{site.github.repository_url}}/tree
 
 # Conclusion
 
-The important take-away from this post is the strategy we used to debug the problem. Although we only present a solution for Python, it is likely that there are similar mechanisms in other programming languages, too, so the solution should be able to be extended to other domains easily.
+The important take-away from this post is the strategy we used to debug the problem. Although I only present a solution for Python, it is likely that there are similar mechanisms in other programming languages, too, so the solution should be able to be extended to other domains easily.
 
 
 # References

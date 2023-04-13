@@ -53,22 +53,22 @@ Unlike `static_assert`, `assert` has no standardized interface to add an additio
 {% include src/2021-02-10-pds-assertions/show-assertion.cpp %}
 ```
 
-Note in the previous example, there is an extra pair of parentheses in the second `assert` statement, which uses a comma operator. That is because `assert` is a function-like macro, commas anywhere in condition that are not protected by parentheses are interpreted as macro argument separators. Such commas are often found in template argument lists and list-initialization.[<sup>\[3\]</sup>](#references) Also, attention should be payed to the order of the operands in the comma expression, since the result of a build-in comma operator always has the same type and value as the second operand. In our case, the condition we want to assert for should always come after the message string.
+Note, in the previous example, there is an extra pair of parentheses in the second `assert` statement, which uses a comma operator. That is because `assert` is a function-like macro, commas anywhere in condition that are not protected by parentheses are interpreted as macro argument separators. Such commas are often found in template argument lists and list-initialization.[<sup>\[3\]</sup>](#references) Also, attention should be payed to the order of the operands in the comma expression, since the result of a build-in comma operator always has the same type and value as the second operand. In our case, the condition we want to assert for should always come after the message string.
 
-In general, compile-time checking should be preferred over run-time checking. Since, apparently, compile-time checking has no performance impact, and you certainly don't need to write error handlers for errors caught at compile time.[<sup>\[4\]</sup>](#references)
+In general, compile-time checking should be preferred over run-time checking. Since, apparently, compile-time checking has no performance impact, and you certainly don't need to write error handlers for errors caught at compile time.[<sup>\[4 P.5\]</sup>](#references)
 
 
 # When to Use Assertions
 
 Assertions are mainly used during development and testing to catch errors early on. Here are a few places where assertions could be useful.
 
-**Assertions can be used as a better form of comments to state your assumptions concerning a program's behavior,** where it is applicable. A common issue with comments is that comments are not updated as consistently as code. A wrong comment is worse than no comment, because it will lower one's confidence on the code itself, as it says, if the comment and the code disagree, both are likely to be wrong.[<sup>\[4\]</sup>](#references) On the other hand, assumptions expressed in assertions can rarely be wrong, once a program has been tested thoroughly. One of such examples may look like this:
+**Assertions can be used as a better form of comments to state your assumptions concerning a program's behavior,** where it is applicable. A common issue with comments is that comments are not updated as consistently as code. A wrong comment is worse than no comment, because it will lower one's confidence on the code itself, as it says, if the comment and the code disagree, both are likely to be wrong.[<sup>\[4 NL.2\]</sup>](#references) On the other hand, assumptions expressed in assertions can rarely be wrong, once a program has been tested thoroughly. One of such examples may look like this:
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assertion-as-comment.hpp %}
 ```
 
-As a variant to the previous situation, `assert(false)` **can be placed at any locations you assume will not be reached.**[<sup>\[4\]</sup>](#references) For example:
+As a variant to the previous situation, `assert(false)` **can be placed at any locations you assume will not be reached.**[<sup>\[1\]</sup>](#references) For example:
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assert-false.hpp %}
@@ -82,9 +82,9 @@ Furthermore, **Some preconditions, postconditions and invariants can be expresse
 {% include src/2021-02-10-pds-assertions/assertion-as-precondition.hpp %}
 ```
 
-Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. We don’t need to mention it for each member function.[<sup>\[4\]</sup>](#references)
+Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. We don’t need to mention it for each member function.[<sup>\[4 I.5\]</sup>](#references)
 
-As a special case of the previous situation, `static_assert` **can also be used to check a class matches a concept:**[<sup>\[4\]</sup>](#references)
+As a special case of the previous situation, `static_assert` **can also be used to check a class matches a concept:**[<sup>\[4 T.150\]</sup>](#references)
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assert-on-concept.hpp %}
@@ -115,13 +115,13 @@ If that is the case, how should we express precondtions while still having a pro
 {% include src/2021-02-10-pds-assertions/if-as-precondition.hpp %}
 ```
 
-However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **GSL**([Guidelines support library](https://github.com/Microsoft/GSL)) for expressing preconditions.
+However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4 I.6\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **GSL**([Guidelines support library](https://github.com/Microsoft/GSL)) for expressing preconditions.
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/expects-as-precondition.hpp %}
 ```
 
-Ideally, preconditions and postconditions should be part of the interface rather than part of the implementation, but we don’t yet have the language facilities to do that.[<sup>\[4\]</sup>](#references)
+Ideally, preconditions and postconditions should be part of the interface rather than part of the implementation, but we don’t yet have the language facilities to do that.[<sup>\[4 I.6\]</sup>](#references)
 
 ## Not Being Side Effects Free
 
@@ -137,12 +137,12 @@ Compiling the source code without run-time assertions can result in an appreciab
 
 ## May Have Wrong Semantics
 
-The fact that run-time assertions abort in debug mode and check noting in production runs, may not always be what you want. On one hand, in debug mode, an assertion failure could elevate a minor issue into a bug which might block any more testing activities for a relatively long time, if the failure is only caught in a binary that is delivered to the QE team. On the other hand, in release mode, allow the program to continue in a wrongful state, where it should have been aborted by an assertion, could result in many bugs of different symptoms been reported that are essentially the same issue.[<sup>\[5\]</sup>](#references) There are no really good solution to this problem, just like everything else, learning to use assertions at the right places takes a good sense of intuition, experience and practices.
+The fact that run-time assertions abort in debug mode and check noting in production runs, may not always be what you want. On one hand, in debug mode, an assertion failure could elevate a minor issue into a bug which might block any more testing activities for a relatively long time, if the failure is only caught in a binary that is delivered to the QE team. On the other hand, in release mode, allow the program to continue in a wrongful state, where it should have been aborted by an assertion, could result in many bugs of different symptoms been reported that are essentially the same issue.[<sup>\[5\]</sup>](#references) Thus, wasting everyone's time. There are no really good solutions to this problem, just like everything else, learning to use assertions at the right places takes a good sense of intuition, experience and practices.
 
 
 # Conclusion
 
-In today's post, we talked about assertions as a useful tool to help the programmer to identify and fix bugs early in the development process, it can improve code quality and maintainability if used wisely. In short, assertions are not meant to be a replacement of error handling during normal program execution, rather the major role of assertions is to identify bugs faster, thus making software development more effective.
+In today's post, we talked about assertions as a useful tool to help the programmer to identify and fix bugs early in the development process, it can improve code quality and maintainability if used wisely. In short, assertions are not meant to be a replacement of error handling during normal program execution, rather the major role of assertions is to identify bugs faster, thus making software development more effective. I hope you have found this post useful, if so, you may also want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 
 
 # References

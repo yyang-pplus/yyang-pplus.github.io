@@ -31,7 +31,7 @@ This is my final post of the second-system effect series. I'd highly recommend y
 
 As I have already mentioned briefly in [my previous post]({{page.previous.previous.url}}), "spare and clean" doesn't necessarily means success. Projects fail, and most of them do fail, for different reasons. For example, one project may fail because it runs out of time or budget, or both, regardless how "spare and clean" the design is.[<sup>\[2\]</sup>](#the-reference)
 
-As my personal experience, my first project was totally a failure. I was working on a complex system. It is true that I was desperate to show my capability, so I wanted my design to be perfect. I come up with one design, which I thought was "spare and clean", and went to the design review with it. The review went well. The reviewers said good things about my design and added a few comments for improvement. While addressing those comments after the meeting, I learned more about the system, and I caught the light of a totally different but better, at least I thought, design. I chose to abandon the original design and started to work on the new one. Then things start to repeat in this way: design review, improvement, new design, design review. And this pattern repeated a couple times until I settled with the final one. Of course, my final design is still "spare and clean", but guess what, I missed the original due day, and the whole projects had to be delayed.
+As my personal experience, my first project was totally a failure. I was working on a complex system. It is true that I was desperate to show my capability, so I wanted my design to be perfect. I come up with one design, which I thought was "spare and clean", and went to the design review with it. The review went well. The reviewers said good things about my design and added a few comments for improvement. While addressing those comments after the meeting, I learned more about the system, and I caught the light of a totally different but better, at least I thought, design. I chose to abandon the original design and started to work on the new one. Then things start to repeat in this way: design review, improvement, new design, design review again. And this pattern repeated a couple times until I settled with the final one. Of course, my final design is still "spare and clean", but guess what, I missed the original due day, and the whole projects had to be delayed.
 
 
 # The Obvious Solution
@@ -74,7 +74,7 @@ Even for the insiders, it is still hard to tell if the second-system effect real
 
 "Spare and clean" is subjective. As a programmer myself, I have to constantly suppress the eager to rewrite every single line of the codes that someone else wrote. Even if that someone may just be the three months younger version of me. My point is, something feels "spare and clean" for you, may not be felt the same way for the others. Something feels "spare and clean" for now, may not make you feel the same way several months later. And I think that is a good thing. Because that probably means you have grown up.
 
-Besides, do you really know the other members of your team? Especially, do you really know their previous design experience? Do you really know if the previous projects your teammates has worked one are the same class as your current one?
+Besides, do you really know the other members of your team? Especially, do you really know their previous design experience? Do you really know if the previous projects your teammates has worked on are the same class as your current one?
 
 
 # The Illusion
