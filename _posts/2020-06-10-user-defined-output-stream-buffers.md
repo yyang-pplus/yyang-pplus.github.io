@@ -21,7 +21,7 @@ You are probably already familiar with using `iostream` to perform I/O operation
 This post is largely inspired by a section of the similar title in [The C++ Standard Library](#references) by Nicolai Josuttis. Great book. Highly recommended.
 
 
-# Stream Buffer Basics
+# Stream buffer basics
 
 ```cpp
 template<class CharT, class Traits = std::char_traits<CharT>>
@@ -31,7 +31,7 @@ class basic_streambuf;
 Found in `<streambuf>`, the template class `basic_streambuf<>` defines the interface for stream buffers. A **stream buffer** is an abstract layer between an I/O stream and the final data source or destination. Different `streambuf` subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2\]</sup>](#references) The buffer used to write characters is also called **put area**, while the buffer for input is also called **get area**. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
 
 
-# Unbuffered Output Stream Buffer
+# Unbuffered output stream buffer
 
 Streambuf buffer management is fairly sophisticated. So, let's start with a simple one, which has no buffer to manage.
 
@@ -69,7 +69,7 @@ As you can see, the key to implement an output stream buffer is in overriding th
 Also, note that `overflow()` returns unspecified value not equal to `traits_type::eof()` on success, `traits_type::eof()` on failure. The base class version of the function returns `traits_type::eof()`.[<sup>\[3\]</sup>](#references)
 
 
-# Unbuffered Output Stream Buffer Improved
+# Unbuffered output stream buffer improved
 
 Although, our simple output stream buffer `HexOutBuf` works perfectly fine, it is not quite flexible. As it can only write to the standard output channel. Here is how we can improve it.
 
@@ -94,7 +94,7 @@ A sample application to show a stream buffer which does not own its I/O channel:
 ```
 
 
-# Output Stream
+# Output stream
 
 Although, not strictly required, it is convenient to also define a special stream class that mainly forwards the constructor arguments to the corresponding stream buffer. The following example demonstrates that.[<sup>\[1\]</sup>](#references)
 
@@ -114,7 +114,7 @@ This output stream may be used like:
 
 That is pretty much all you need to know about the unbuffered output stream buffer, except member function `sputc()` and `sputn()`. We will talk about them in the [next section](#buffered-output-stream-buffer), where we are going to look at a stream buffer that actually buffers.
 
-# Buffered Output Stream Buffer
+# Buffered output stream buffer
 
 The put area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1\]</sup>](#references)
 

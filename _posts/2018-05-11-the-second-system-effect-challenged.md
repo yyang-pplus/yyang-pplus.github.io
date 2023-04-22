@@ -27,14 +27,14 @@ This is my final post of the second-system effect series. I'd highly recommend y
 {% include second-system-effect-navigation.html %}
 
 
-# The Failed First Project
+# The failed first project
 
 As I have already mentioned briefly in [my previous post]({{page.previous.previous.url}}), "spare and clean" doesn't necessarily means success. Projects fail, and most of them do fail, for different reasons. For example, one project may fail because it runs out of time or budget, or both, regardless how "spare and clean" the design is.[<sup>\[2\]</sup>](#the-reference)
 
 As my personal experience, my first project was totally a failure. I was working on a complex system. It is true that I was desperate to show my capability, so I wanted my design to be perfect. I come up with one design, which I thought was "spare and clean", and went to the design review with it. The review went well. The reviewers said good things about my design and added a few comments for improvement. While addressing those comments after the meeting, I learned more about the system, and I caught the light of a totally different but better, at least I thought, design. I chose to abandon the original design and started to work on the new one. Then things start to repeat in this way: design review, improvement, new design, design review again. And this pattern repeated a couple times until I settled with the final one. Of course, my final design is still "spare and clean", but guess what, I missed the original due day, and the whole projects had to be delayed.
 
 
-# The Obvious Solution
+# The obvious solution
 
 Again, my point is that a "spare and clean" design doesn't mean the success of the project, it even doesn't means everything for a design itself. By everything I mean all the things that characterize a good design. If it is, then there exists an obvious solution to the second-system effect. Before I talk about my solution, let's first review Dr. Brooks' solution, mentioned in his article[<sup>\[1\]</sup>](#the-reference).
 
@@ -51,7 +51,7 @@ Will others start to follow my advise? I doubt. Why? Because, again, "spare and 
 By the way, I am actually with Dr. Brooks that project managers should insist on more senior architects on the team, not to avoid the second-system effect, but to guide the young designers to avoid obvious mistakes on their first system, like mine.
 
 
-# The Outsiders
+# The outsiders
 
 The second-system effect doesn't exist for the outsiders, who don't have internal knowledge about the system.
 
@@ -68,7 +68,7 @@ That looks reasonable, but something a little bit confusing follows almost immed
 Wait a second, if Stretch is already a second system, shouldn't Operating System/360 be their third system? Sure, there certainly are ways to explain it properly. However, my point is, the second systems exist for the outsiders only when the insiders said they are.
 
 
-# The Insiders
+# The insiders
 
 Even for the insiders, it is still hard to tell if the second-system effect really happened.
 
@@ -77,7 +77,7 @@ Even for the insiders, it is still hard to tell if the second-system effect real
 Besides, do you really know the other members of your team? Especially, do you really know their previous design experience? Do you really know if the previous projects your teammates has worked on are the same class as your current one?
 
 
-# The Illusion
+# The illusion
 
 It is interesting that a similar phenomenon of the second-system effect also exist in other disciplines. As it mentioned in [How Not to Be Wrong<sup>\[3\]</sup>](#the-reference):
 
@@ -90,7 +90,7 @@ And the answer follows immediately in the book[<sup>\[3\]</sup>](#the-reference)
 After all, is it possible that the second-system effect is a phenomenon that just happen randomly, in which the designer got lucky with his first work and not so lucky with the second one?
 
 
-# The Reference
+# The reference
 
 1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com) by Frederick Brooks.
 1. [Why Software Projects Fail and How to Make Them Succeed](https://www.projectsmart.co.uk/why-software-projects-fail.php) by Duncan Haughey.

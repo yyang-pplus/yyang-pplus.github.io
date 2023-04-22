@@ -18,7 +18,7 @@ tags:
   - "security"
 ---
 
-Are you tired of typing password when running **LDAP** commands with `-W`, but feel nervous about using plain text password with `-w`? Are you looking for a way to run **LDAP** commands that is both passwordless and secure? Then this post is for you.
+Are you tired of typing password when running LDAP commands with `-W`, but feel nervous about using plain text password with `-w`? Are you looking for a way to run LDAP commands that is both passwordless and secure? Then this post is for you.
 
 
 # Introduction

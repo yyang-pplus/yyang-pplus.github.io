@@ -18,7 +18,7 @@ tags:
   - "security"
 ---
 
-The **ldapwhoami** command can tell you how the LDAP server sees you after authentication.[<sup>\[1\]</sup>](#references) I found it is pretty helpful for understanding LDAP authentication mechanisms. In this post, I am going to present an introduction to **ldapwhoami** and discuss briefly about LDAP authentication mechanisms.
+The `ldapwhoami` command can tell you how the LDAP server sees you after authentication.[<sup>\[1\]</sup>](#references) I found it is pretty helpful for understanding LDAP authentication mechanisms. In this post, I am going to present an introduction to `ldapwhoami` and discuss briefly about LDAP authentication mechanisms.
 
 
 # Environment
@@ -57,14 +57,14 @@ anonymous
 
 This command shows it use anonymous authentication. The `-H ldap://` specifies an unencrypted LDAP query on localhost. The `-x` without any authentication information lets the server know you want an anonymous connection.[<sup>\[2\]</sup>](#references)
 
-Similarly, for simple authentication, **ldapwhoami** simply shows the exact entry you are binding to.
+Similarly, for simple authentication, `ldapwhoami` simply shows the exact entry you are binding to.
 
 ```bash
 $ ldapwhoami -H ldap:// -x -D cn=admin,dc=yyang-pplus,dc=github,dc=io -W
 dn:cn=admin,dc=yyang-pplus,dc=github,dc=io
 ```
 
-The `-D` option is used to specify the bind DN. Binding to an entry often gives you additional privileges that are not available through an anonymous bind. Binding to the rootDN always gives you full access to the entire **DIT (Data Information Trees)**, since rootDN is not subject to access control or administrative limit restrictions for operations within the database. As a consequence, it's useless (and results in a performance penalty) to explicitly list the rootDN among the clauses. Also, rootDN need not refer to an entry in the database or even in the directory, and it may refer to a SASL identity. [<sup>\[1\]</sup>](#references)[<sup>\[5\]</sup>](#references)[<sup>\[6\]</sup>](#references) For an example of what this really means, feel free to check my other LDAP post: [{{page.next.title}}]({{page.next.url}}).
+The `-D` option is used to specify the bind DN. Binding to an entry often gives you additional privileges that are not available through an anonymous bind. Binding to the rootDN always gives you full access to the entire **data information trees (DIT)**, since rootDN is not subject to access control or administrative limit restrictions for operations within the database. As a consequence, it's useless (and results in a performance penalty) to explicitly list the rootDN among the clauses. Also, rootDN need not refer to an entry in the database or even in the directory, and it may refer to a SASL identity. [<sup>\[1\]</sup>](#references)[<sup>\[5\]</sup>](#references)[<sup>\[6\]</sup>](#references) For an example of what this really means, feel free to check my other LDAP post: [{{page.next.title}}]({{page.next.url}}).
 
 For the SASL authentication methods, the output is a bit more interesting, it provides more information on how the authentication mechanism is being seen.[<sup>\[1\]</sup>](#references)
 
@@ -73,13 +73,13 @@ $ sudo ldapwhoami -H ldapi:// -Y EXTERNAL -Q
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-The `-Y` option is used to indicate that we want to use a SASL authentication method. The **EXTERNAL** mechanism indicates that authentication and security is handled by some other means associated with the connection. For instance, it can be used with SSL to provide encryption and authentication. Most commonly, you will see it used with the **ldapi://** interface with the root or sudo users. The **ldapi://** indicates LDAP over an **IPC**. It communicates over a Unix socket instead of using an exposed network port, thus the user initiating the request can be obtained, and used to authenticate for certain operations. Note the **authentication DN**, i.e. the output, of the above command: `dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is not an actual entry in our DIT, it is just how SASL authentication gets translated into a format that LDAP can understand.[<sup>\[1\]</sup>](#references)[<sup>\[2\]</sup>](#references)[<sup>\[3\]</sup>](#references)
+The `-Y` option is used to indicate that we want to use a SASL authentication method. The **EXTERNAL** mechanism indicates that authentication and security is handled by some other means associated with the connection. For instance, it can be used with SSL to provide encryption and authentication. Most commonly, you will see it used with the `ldapi://` interface with the root or sudo users. The `ldapi://` indicates LDAP over an **IPC**. It communicates over a Unix socket instead of using an exposed network port, thus the user initiating the request can be obtained, and used to authenticate for certain operations. Note the **authentication DN**, i.e. the output, of the above command: `dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is not an actual entry in our DIT, it is just how SASL authentication gets translated into a format that LDAP can understand.[<sup>\[1\]</sup>](#references)[<sup>\[2\]</sup>](#references)[<sup>\[3\]</sup>](#references)
 
 By the way, since the ldapi scheme requires a local connection, we never will have to specify a server name here. However, if you changed the socket-file location within the LDAP server configuration, you will need to specify the new socket location as part of the address.[<sup>\[1\]</sup>](#references)
 
 In general, people use the binding to rootDN commands to maintain the content of LDAP databases in the **normal DIT**. And use the sudo with ldapi commands to manage the configuration of LDAP servers within the **administrative DIT**, also known as the **cn=config DIT**.
 
-Seeing the authentication DN can be used to create mappings and access restrictions. Although a full discussion of access control is generally outside the scope of this article, I do want to show an example of how to query the **ACLs (Access control lists)** from LDAP servers.
+Seeing the authentication DN can be used to create mappings and access restrictions. Although a full discussion of access control is generally outside the scope of this article, I do want to show an example of how to query the **access control lists (ACLs)** from LDAP servers.
 
 ```bash
 $ sudo ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" "olcAccess=*" olcAccess -LLL -Q

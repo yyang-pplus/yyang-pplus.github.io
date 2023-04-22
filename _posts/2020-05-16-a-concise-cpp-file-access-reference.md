@@ -19,7 +19,7 @@ tags:
 
 You are probably already familiar with accessing files in C++ using `fstream`, but do you know there are at least two other common ways to access files? In this post, I am going to present all three ways of doing file I/O in C++. The goal is to create a concise reference which summarizes and compares all those methods, so that people can choose between them quickly and easily, if needed.
 
-# File Stream Classes
+# File stream classes
 
 Defined in header `<fstream>`, the C++ standard library provides mainly four class templates for accessing files as streams:[<sup>\[1\]</sup>](#references)
 
@@ -32,7 +32,7 @@ The class template `basic_ofstream<>` implements high-level output operations fo
 The class template `basic_fstream<>` implements high-level input/output operations for reading from and writing to a file.<br>
 The class template `basic_filebuf<>` is used by the other file stream classes to perform the actual I/O of characters.
 
-## FS: Open/Close
+## FS: open/close
 
 | fstream fs {}        | Construct a file stream object                                           |
 | fstream fs {f, mode} | Construct a file stream object and open the **f**ile with given **mode** |
@@ -41,7 +41,7 @@ The class template `basic_filebuf<>` is used by the other file stream classes to
 
 One advantage of accessing files through file streams is the automatic management of file resources using the RAII pattern.[<sup>\[4\]</sup>](#references)
 
-## FS: Formatted I/O
+## FS: formatted I/O
 
 | in \>\> x  | Read from an **in**put stream into **x** according to **x**'s type |
 | out \<\< x | Insert **x** into the **out**put stream according to **x**'s type  |
@@ -50,7 +50,7 @@ The I/O operators mechanism is the key improvement over C's IO mechanism, as it 
 
 As you will see shortly, the formatted I/O operators are simpler to use and less error-prone than the unformatted ones. So it is recommended that you should prefer formatted operators if possible.[<sup>\[2\]</sup>](#references)
 
-## FS: Unformatted Input
+## FS: unformatted input
 
 | std::getline(in, s)       | Read a line from an **in**put stream into a **s**tring; remove delimiter; do not modify gcount                      |
 | in.get()                  | Read one character or characters from **in**put stream; do not remove delimiter                                     |
@@ -62,12 +62,12 @@ As you will see shortly, the formatted I/O operators are simpler to use and less
 | in.unget()                | Unget the most recently extracted character back into **in**put stream                                              |
 | in.putback(c)             | Put the character **c** back into **in**put stream                                                                  |
 
-## FS: Unformatted Output
+## FS: unformatted output
 
 | out.put(c)  | Write the **c**haracter to the **out**put stream |
 | out.write() | Write the characters to the **out**put stream    |
 
-## FS: Buffering
+## FS: buffering
 
 By default, `fstream` is buffered. You can flush the output buffer explicitly by calling `flush()`, or by using the output manipulator `std::endl`, which inserts a newline character into the output sequence as well.
 
@@ -82,7 +82,7 @@ The standard library for the C language is with minor modifications incorporated
 
 Thus, In C++, the other portable way for file access is by using the C++ version of the C Standard Input and Output Library, which is mainly defined in header `<cstdio>`.
 
-## FP: Open/Close
+## FP: open/close
 
 | fp = std::fopen(name, mode) | Open the file by given **name** with **mode**                                                                                                              |
 | std::fclose(fp)             | Close the given file stream; any unwritten buffered data are flushed to the OS; automatically called for each open file when a program terminates normally |
@@ -90,7 +90,7 @@ Thus, In C++, the other portable way for file access is by using the C++ version
 `std::fopen()` returns a pointer to a `std::FILE` stream object, which contains information about the file.
 C standard (referenced by C++ standard) does not specify whether `std::FILE` is a complete object type. Thus, `std::FILE` may be semantically non-copyable.[<sup>\[5\]</sup>](#references)
 
-## FP: Formatted I/O
+## FP: formatted I/O
 
 | n = std::fprintf(fp, format, ...) | Write data to output stream according to **format**                  |
 | n = std::fscanf(fp, format, ...)  | Read data from input stream and interpret it according to **format** |
@@ -103,7 +103,7 @@ Using `std::fprintf()` is unsafe in the sense that type checking is not done.[<s
 
 Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf("%d", n)` is usually not what we want, rather it should be `scanf("%d", &n)` instead.[<sup>\[6\]</sup>](#references)
 
-## FP: Unformatted Input
+## FP: unformatted input
 
 | c = std::getc(fp)                              | Read the next **c**haracter from the given input stream                                                                                       |
 | s = std::fgets(s, n, fp)                       | Read a line from the given input stream into the character array pointed to by **s**; do not remove newline character; put a **0** at the end |
@@ -114,7 +114,7 @@ Similar to `std::fputc()` and `std::putc()`, in C++, calling `std::fgetc()` and 
 
 Never use `std::fgets()` or its rough equivalent `std::scanf("%s", s)`! For years, they were the favorites of virus writers: By providing an input that overflows the input buffer, a program can be corrupted and a computer potentially taken over by an attacker.[<sup>\[2\]</sup>](#references)
 
-## FP: Unformatted Output
+## FP: unformatted output
 
 | c = std::putc(c, fp)                            | Write a **c**haracter to the given output stream                                   |
 | std::fputs(s, fp)                               | Write the null-terminated **s**tring to the output stream                          |
@@ -122,7 +122,7 @@ Never use `std::fgets()` or its rough equivalent `std::scanf("%s", s)`! For year
 
 In C, `putc()` may be implemented as a macro, which is disallowed in C++, while `fputc()` is guaranteed to be a function. Therefore calls to `std::fputc()` and `std::putc()` always have the same effect in C++.[<sup>\[5\]</sup>](#references)
 
-## FP: Buffering
+## FP: buffering
 
 | std::fflush(fp) | Flush any unwritten data from the stream's buffer to the associated output device; If given `nullptr`, all open output streams are flushed |
 
@@ -135,13 +135,13 @@ Calling `std::setbuf(fp, nullptr)`, which passes a `nullptr` as the `buffer` arg
 The C11 version of the C standard library offers a whole alternate set of stdio input functions that take an extra argument to defend against overflow, such as, gets_s(s, n), fscanf_s() and so on.[<sup>\[2\]</sup>](#references) Since, those functions are not supported in C++ yet, I will just skip them.
 
 
-# POSIX File APIs
+# POSIX file APIs
 
 Another feasible way of accessing files in C++ is using the low level system APIs directly. POSIX is the most standard way of doing that on Unix and Unix-like systems.
 
 Most POSIX file I/O operations are defined in header `<unistd.h>`, except `open()` and `creat()` which are defined in `<fcntl.h>`.
 
-## FD: Open/Close
+## FD: open/close
 
 | fd = open(name, flags, perms=0) | Open the given file by **name** with **flags**                                                                                                                                  |
 | fd = creat(name, perms)         | Create a new file with the given **perm**ission bits or re-write an old one; equivalent to `open(name, O_CREAT|O_WRONLY|O_TRUNC, perms)`                                        |
@@ -149,19 +149,19 @@ Most POSIX file I/O operations are defined in header `<unistd.h>`, except `open(
 
 The return value of `open()` is a file descriptor, which is a reference to an open file description. The open file description records the file offset and the file status flags.[<sup>\[7\]</sup>](#references)
 
-## FD: Formatted I/O
+## FD: formatted I/O
 
 This one is simple, as there is no formatted I/O operations among the low level POSIX I/O functions.
 
-## FD: Unformatted Input
+## FD: unformatted input
 
 | n = read(fd, buffer, count) | Read up to **count** bytes from given file into the **buffer** |
 
-## FD: Unformatted Output
+## FD: unformatted output
 
 | n = write(fd, buffer, count) | Write up to **count** bytes from the **buffer** to file |
 
-## FD: Buffering
+## FD: buffering
 
 Unlike the C standard library and C++ standard library, there is no buffer at the application level when using the POSIX APIs to access files directly. You have to create and maintain your own buffers if needed. However, there usually are buffer cache at the kernel level.
 

@@ -21,7 +21,7 @@ tags:
 Oversubscribing physical resources on a VMs host is a common practice among administrators, who try to maximize the utilization of that host machine. Light oversubscription has only minor impact on the performance of applications running inside VMs, but if they push oversubscription too far, then the applications' performance will suffer along with the host. As one of the applications' engineer, it is important for you to understand what oversubscription is and when a performance issue is indeed caused by oversubscription.
 
 
-# General Oversubscription
+# General oversubscription
 
 When a VM is created, it is assigned a certain amount of resources, such as CPU, RAM, storage and so on. This can be misleading in that it feels like those allocated resources have been set aside and can only be used by that particular VM, which is not the case. In fact, the resources allocated to one VM are just upper limits, and the **hypervisor**, also known as a **virtual machine monitor** or **VMM**, is responsible for sharing and providing virtualized hardware resources to the VMs as they are requested. In additionally, the hypervisor uses different strategies to share different types of resources. I will talk more about that in the later sections.
 
@@ -32,21 +32,21 @@ Then, **how much is too much?** Well, the right answer depends on a number of fa
 Coming up with the right sizing in a virtualized environment is quite challenging. Detecting issues caused by oversubscription is even harder. For an application developer, the best scenario is of course no oversubscription at all, but it is often not the case, especially when the hardware are owned by your customers. The next best choice is to establish a well tested performance baseline in a virtualized environment that is not oversubscribed. This baseline mainly serves two purposes. First, this baseline can be used as a guide for administrators to allocate resources. Basically, administrators have to size individual VM to support the peak needs of your application. Second, this baseline, which is used as the benchmark to compare all future measurements, is critical for solving performance issues whether they are caused by oversubscription or not.
 
 
-# Memory Oversubscription
+# Memory oversubscription
 
 As already mentioned, the amount of memory allocated to a VM is just an upper limit. One VM starts with only the memory it requires for startup, and if it requires more memory, the hypervisor grants more to it up to the amount it has been allocated. If memory on the host is oversubscribed, the total amount of memory consumed by VMs may continue to grow, and the host may run out of RAM. When the **total free memory** on the host reaches a certain threshold, the hypervisor will start to use various techniques to reclaim memory from VMs. For VMware as an example, this threshold is usually referred to as **mem.minFree**. Basically, as the host memory shortage increases in severity, the memory reclamation has increasingly severe effects on the VM's performance. If the hypervisor is not able to recover enough memory, and the free memory keeps going down, the hypervisor will start **swapping**, which will noticeably degrade the overall performance of the host. Furthermore, as the last resort, the hypervisor will block the VMs from accessing memory that has been allocated but not yet consumed, which could potentially cause the applications or the guest OS to crash.[<sup>\[1\]</sup>](#references)
 
 On a host server, where the memory resource is oversubscribed, administrators need to keep a close eye on the **amount of free memory** of the host. It is recommended to always have at least 400% of the minimum free memory threshold, which is used to trigger memory reclamation, available on the host in order to avoid any issues caused by a memory shortage. In additionally, during certain stage of a memory shortage, memory oversubscription may also be noticeable inside the VMs by monitoring abnormally low **free memory**, high number of **paging** or **swapping** on the guest OS, when comparing to the baseline.[<sup>\[1\]</sup>](#references)
 
 
-# Storage Oversubscription
+# Storage oversubscription
 
 The situation with oversubscribing storage resources is pretty similar to that of memory. In that, when a VM is created, it is told that it has access to the entirety of the allocated spaces. In reality, however, the hypervisor has the ability to give the VM only the space that it is actually consuming. The hypervisor will continue to provide additional chunks of spaces to a VM if needed, until the total spaces reach the original allocated disk size. This technique is referred to as **thin provisioning**, which is the most common technique for overprovisioning storage resources.
 
 However, thin provisioning also comes with its own risk. If the host is not being monitored closely, that could result in the host runs out of space. Then, the VMs will not be able to access spaces they think they still have, which may lead to data losses or application crashes. Thus, administrators need to watch **the amount of free spaces** on the host carefully, if they choose to oversubscribe storage. On the other hand, when inside VMs, it is difficult to defect when storage oversubscription is causing problems, a better choice for application developers is having a mechanism to recover from such situations after the oversubscription issue has been resolved.
 
 
-# CPU Oversubscription
+# CPU oversubscription
 
 How CPU resources are shared between VMs is quite different from how memory and storage resources are shared. Basically, oversubscribing CPU will cause increased wait times rather than shortages. As you will see shortly, processing resources are arguably the most interesting type of resources to be oversubscribed. But before we dive into the details, to ease the discussion, we need to clarify a few concepts first:
 

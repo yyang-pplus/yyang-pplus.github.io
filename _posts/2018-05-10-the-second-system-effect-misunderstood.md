@@ -23,7 +23,7 @@ This is my second post of the second-system effect series. I'd highly recommend 
 {% include second-system-effect-navigation.html %}
 
 
-# The Second System vs The Second Generation
+# The second system vs the second generation
 
 A common misunderstanding about the second-system effect, is failed to distinguish the second system with the second generation of the same system.
 
@@ -36,7 +36,7 @@ This statement could only be true when the second system also means the second g
 The term second system we used in the context of the second-system effect emphasizes on the experience of "the creator(s)". It is true that "the creator(s)" of the second generation system doesn't have to also worked on the first generation, but they have to have experience with one system of the same class. Otherwise, the precondition, "an architect’s first work is apt to be spare and clean", that leads to the result of the second-system effect, won't stand.
 
 
-# The Second ≠ 2.0
+# The second ≠ 2.0
 
 This is a variation of essentially the same issue we talked about in the [previous section](#the-second-system-vs-the-second-generation).
 
@@ -47,7 +47,7 @@ For example, as of Feb 21, 2018, the version number of the Facebook App for iOS 
 Even when version 2.0 does means the same thing as the second generation, it is still hard to tell, as we have discussed in the [previous section](#the-second-system-vs-the-second-generation), if it is the designer's second system.
 
 
-# The Third-System Syndrome
+# The third-system syndrome
 
 In the essay, The Second-System Effect, Dr. Brooks clearly said the second system is actually the designer's second work, not "the third or later ones", of the same class. But why people still think the effect could happen on the later ones. Such as mentioned in [Beware The Second System Effect](http://robertgreiner.com/2012/07/the-second-system-effect/):
 
@@ -64,15 +64,15 @@ One final possibility is, you are not the only architect that works on "your sec
 So, in my opinion, thinking the second-system effect could happen on one's third or later projects, is at least misleading if not misunderstanding.
 
 
-# The Summary
+# The summary
 
 In this post, I have listed a few common misused, but important, aspects of the second-system effect.
 
-In short, **the second-system effect is emphasized on the experience of the majority of architects involved in the design of the second system, which follows a spare and clean first one(s) of the same class.**
+In short, **the second-system effect is emphasized on the experience of the majority of architects involved in the design of the second system, which follows a spare and clean first one of the same class.**
 
 Probably, you have gained a better understanding of the buzz word by now. However, don't be satisfied yet, I will challenge the concept of the second-system effect even more in [my next post]({{page.next.url}}). So, stay tuned.
 
 
-# The Reference
+# The reference
 
 1. [Mythical Man-Month: Essays on Software Engineering, Anniversary Edition (2nd Edition) (#ad)](https://www.amazon.com) by Frederick Brooks.

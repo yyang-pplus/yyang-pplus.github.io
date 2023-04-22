@@ -23,7 +23,7 @@ Recently, I have run into an issue with a python test script which is run by CTe
 
 **Update:** As it turns out, this issue seems to be a defect with **MonetDB v11.35.19**. And it has already been fixed in a later version. At least, it is no longer reproducible with **MonetDB v11.43.15** by the method described in this post.
 
-# A Little Background
+# A little background
 
 I encountered this issue when I was working on a project which use **MonetDB** as its data store. Long story short, my task was to write a suite of tests which all share the same instance of MonetDB server. The way I chose to accomplish this is to use **CTest's Test Fixtures**. The issue itself has nothing to do with test fixtures. The only thing you need to know is that fixtures are a suite of otherwise normal tests that run in particular order. In my case, I have a setup test which always runs the first to start the MonetDB instance that is needed by the other tests. As well, a cleanup test which always runs the last to stop the DB server. And it is the setup test where I noticed this CTest issue.
 
@@ -66,7 +66,7 @@ $ ctest
 As you will see, CTest just hangs there until it gets killed or reaches the default timeout. No needs to mention, you can surely "resolve" this issue by setting the timeout to a small but not too small value so that the test can timeout faster. However, that is not an ideal solution, and is certainly not the solution I am proposing here in this article. So, let's find a better way.
 
 
-# CTest Basics
+# CTest basics
 
 In order to find the root cause of this problem, we need to understand why CTest seems to be hanging; Or put it in another way, when does CTest terminate?
 
