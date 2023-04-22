@@ -20,7 +20,7 @@ tags:
 You probably already known that, in C++, every temporary object has a lifetime, which begins when it is created and ends when it is destroyed automatically. However, do you know you can extend temporary objects' lifetime with a reference? In this post, we are going to discuss the lifetime of temporary objects, how to extend their lifetime with a reference, and also the exceptions when that extension cannot be applied.
 
 
-# Sample Code
+# Sample code
 
 A piece of sample code is worth a thousand words. This post contains sample code to help you better understand the somewhat abstruse wording of the C++ standard. The full source is located on [my GitHub]({{site.github.repository_url}}/tree/master/_includes/src/2019-03-04-lifetime-of-temporary). You can compile it with CMake or directly with any c++ compilers of your choice. Following is the command I used to compile it with GCC.
 
@@ -31,7 +31,7 @@ g++ a-temporary.cpp -o a-temporary -std=c++14 -g
 I have tested the sample code using **GCC 7.3.0** on **Ubuntu 18.04.1 LTS** with **C++11** and **C++14**. They all give the same result.
 
 
-# Helper Function
+# Helper function
 
 Before we get started, let us first look at the helper function, or macro, I use to better present the outcomes.
 
@@ -42,7 +42,7 @@ Before we get started, let us first look at the helper function, or macro, I use
 `TRACE_FUNCTION_CALL()` macro is just a convenient way to show the name of the current function.
 
 
-# Lifetime of a Temporary
+# Lifetime of a temporary
 
 > Normally, a temporary object lasts only until the end of the full expression in which it appears.[<sup>\[1\]</sup>](#references)
 
@@ -66,7 +66,7 @@ int main()
 As you can see, it first constructs the temporary `Base` object. After that, the temporary object is destructed immediately, before reaching the line that prints out the name of the `main()` function.
 
 
-# Extend the Lifetime of a Temporary
+# Extend the lifetime of a temporary
 
 > Whenever a reference is bound to a temporary or to a subobject thereof, the lifetime of the temporary is extended to match the lifetime of the reference.[<sup>\[2\]</sup>](#references)
 
@@ -228,7 +228,7 @@ int main()
 Notice, the `Base` destructor get called before printing the name of `main()`, and well before `delete w;`.
 
 
-# A Special Case
+# A special case
 
 The following case may be considered quite special, or not, when you compare it with the [Exception 4](#exception-4).
 
@@ -245,7 +245,7 @@ int main()
 Base::~Base()
 ```
 
-Basically, this means that you **CAN** extend the lifetime of a temporary object by binding it to a reference that is a member of an object.
+Basically, this means that you **can** extend the lifetime of a temporary object by binding it to a reference that is a member of an object.
 
 
 # Summary

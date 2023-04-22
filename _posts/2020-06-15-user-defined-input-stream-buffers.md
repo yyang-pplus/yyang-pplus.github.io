@@ -22,7 +22,7 @@ Continue with [my preview post]({{page.previous.url}}), in today's article, I am
 This post is largely inspired by a section of the similar title in [The C++ Standard Library](#references) by Nicolai Josuttis. Great book. Highly recommended.
 
 
-# Unbuffered Input Stream Buffer
+# Unbuffered input stream buffer
 
 As usual, let's start with an unbuffered one.
 
@@ -60,7 +60,7 @@ $ ./hex-in-stream-nobuf <<< '303a09455e69'
 ```
 
 
-# Single Character Buffered Input Stream Buffer
+# Single character buffered input stream buffer
 
 Because of how an input stream buffer works, an unbuffered version may not be the simplest way to implement a user-defined input stream buffer, rather the simplest way would be an input stream buffer that only maintains a single character buffer. I will show you how. However, before we dive into the implementation details, we need to understand how the get area works with the operations.
 
@@ -87,7 +87,7 @@ Well, that's basically it, we only need to override `underflow()`, the default i
 Also note, the putback functionality of this `HexInBuf` is not completed, as it may fail at certain situations. Can you spot the issue?
 
 
-# Buffered Input Stream Buffer
+# Buffered input stream buffer
 
 Of course, a single character buffer may be easy to implement, but it is not quite efficient. Here is how we can extend the same pattern and implement a fully buffered user-defined input stream buffer.
 

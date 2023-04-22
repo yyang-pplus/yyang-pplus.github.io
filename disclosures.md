@@ -1,5 +1,5 @@
 ---
-title: "DISCLOSURES"
+title: "Disclosures"
 permalink: /disclosures/
 ---
 

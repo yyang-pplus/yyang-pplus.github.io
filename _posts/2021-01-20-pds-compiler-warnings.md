@@ -19,7 +19,7 @@ tags:
 Compiler warnings are messages produced by a compiler who is trying to warn you about potential issues in your code. Although, warnings don't interrupt the compilation process, they should not just be ignored, as warnings may provide valuable insight and advice to keep your programs away from certain bugs. Paying attention to compiler warnings and keeping a low number of warnings is a commonly used preemptive technique to prevent bugs in the earlier phase of software development life circle. As it is said, it is easier and cheaper to fix bugs in earlier stages rather than later ones.
 
 
-# Enable Warnings
+# Enable warnings
 
 Compiler warnings are important, but most useful warnings are not enabled by default. To turn on more warnings, you need to set compiler-specific flags. Here is a concise reference of some common warning flags:[<sup>\[1\]</sup>](#references)
 
@@ -30,7 +30,7 @@ Compiler warnings are important, but most useful warnings are not enabled by def
 
 For the complete list of all the warning flags, please consult your compiler's manuals.
 
-## Warnings in Moderation
+## Warnings in moderation
 
 To quote Oscar Wilde:
 > everything in moderation, including moderation.
@@ -40,7 +40,7 @@ This piece of advice applies to compiler warnings as well. Because, each warning
 **Which warnings should be enabled?** That certainly depends on your use cases. In general, start with `-Wall` and `-Wextra` is a good choice for most projects. Enable `-Wpedantic` if you are aiming for ISO C/C++ conformance. Then, gradually add individual warning that you found useful by combining the `-W` prefix with the warning name. For a list of other useful warning options, which are not included in `-Wall` or `-Wextra`, please refer to the reference material [\[5\]](#references).
 
 
-# Warnings as Errors
+# Warnings as errors
 
 One way to enforce a zero warning policy for your project is turning all the warnings into errors by using the `-Werror` flag. Which means you have to clear all warnings to make your program compile. But, be aware, this approach does introduce a new issue, as using `-Werror` also means that changing or updating your compiler is probably more difficult. In general, it is advised to make `-Werror` optional by wrapping it with a build option.
 
@@ -61,7 +61,7 @@ target_compile_options(my_target PRIVATE ${COMPILER_WARNING_OPTIONS})
 Here, `WARNINGS_AS_ERRORS` is a build option to turn warnings into errors. `my_target` is the name of the CMake target whose warnings you want to enable, this target must have been created by a command such as `add_executable()` or `add_library()` and must not be an ALIAS target.[<sup>\[6\]</sup>](#references) `PRIVATE` limits those flags to this target only and prevents them from affecting projects linking to your target.
 
 
-# Suppress Warnings
+# Suppress warnings
 
 Warnings are warnings for reasons, which is because they may produce false positive results. In such cases, you can either explicitly disable the offending diagnostic as a whole with its corresponding `-Wno-` option if it produces too much noise, or suppress each occurrence with certain techniques. However, before doing that, you should make sure those warnings are indeed not caused by incorrect code.
 

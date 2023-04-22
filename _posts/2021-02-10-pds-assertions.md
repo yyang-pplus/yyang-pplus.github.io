@@ -58,7 +58,7 @@ Note, in the previous example, there is an extra pair of parentheses in the seco
 In general, compile-time checking should be preferred over run-time checking. Since, apparently, compile-time checking has no performance impact, and you certainly don't need to write error handlers for errors caught at compile time.[<sup>\[4 P.5\]</sup>](#references)
 
 
-# When to Use Assertions
+# When to use assertions
 
 Assertions are mainly used during development and testing to catch errors early on. Here are a few places where assertions could be useful.
 
@@ -101,11 +101,11 @@ Without assertions, `Half` would crash with a segmentation fault, if given a nul
 Overall, the major benefit of assertions is to make debugging more effective, assuming the code path containing it is being properly tested.[<sup>\[5\]</sup>](#references) Moreover, assertions used in the right point can improve code quality and make it easier to maintain the code.
 
 
-# Problems with Assertions
+# Problems with assertions
 
 There is no doubt that assertions are a powerful tool, however, just like everything else, assertions have their own downsides as well. Here are some situations where they should generally be avoided.
 
-## Not an Error-handling Mechanism
+## Not an error-handling mechanism
 
 The purpose of an assertion is not to handle an error, but it is to make it possible for the programmer to find and fix the issue faster.[<sup>\[5\]</sup>](#references) Especially, assertions should not be used to handle user input.
 
@@ -115,7 +115,7 @@ If that is the case, how should we express precondtions while still having a pro
 {% include src/2021-02-10-pds-assertions/if-as-precondition.hpp %}
 ```
 
-However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4 I.6\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **GSL**([Guidelines support library](https://github.com/Microsoft/GSL)) for expressing preconditions.
+However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4 I.6\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **guidelines support library**([GSL](https://github.com/Microsoft/GSL)) for expressing preconditions.
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/expects-as-precondition.hpp %}
@@ -123,11 +123,11 @@ However, one potential problem with precondtions stated in if-statements is that
 
 Ideally, preconditions and postconditions should be part of the interface rather than part of the implementation, but we don’t yet have the language facilities to do that.[<sup>\[4 I.6\]</sup>](#references)
 
-## Not Being Side Effects Free
+## Not being side effects free
 
 As a rule, the expressions contained in run-time assertions should be free of side-effects.[<sup>\[1\]</sup>](#references) For reasons we will discuss shortly, assertions are generally disabled at run-time. Therefore, when the assertions with side-effects are stripped out the program's behavior changes in an unexpected way, which may introduce severe bugs that are only reproducible in certain build.[<sup>\[5\]</sup>](#references) Thus, it is not a good idea to write expressions in assertions that can affect any state of a program that is visible after the evaluation is complete. One exception to this rule is that assertions can modify state that is used only from within other assertions.[<sup>\[1\]</sup>](#references) However, side-effects do sometimes slip in, so the only reliable way to avoid these kind of issues is to test both builds, with and without assertions.[<sup>\[5\]</sup>](#references)
 
-## Can Impact Performance
+## Can impact performance
 
 As already discussed, assertions should not affect the logic of a program, but run-time assertions can and often do impact the program's performance. Here, the performance includes the time to execute and the space. Simple assertions are relatively inexpensive, but more stringent checks, especially in assertion heavy code can measurably slow code down, sometimes severely so. Assertions also take up space, and not necessarily just for the code itself. As `assert` macros often embed the assertion message string in the source code. This can add up if assertions make up a substantial percentage of the code. For these reasons, assertions should be used sparsely and should be avoided in performance critical code, to prevent serious performance issues during development. Additionally, run-time assertions are typically disable in release build to produce a program that is both smaller and faster, assuming the program has been thoroughly tested and bug-fixed.[<sup>\[5\]</sup>](#references)
 
@@ -135,7 +135,7 @@ As the definition of the macro `assert` depends on another macro, `NDEBUG`, in o
 
 Compiling the source code without run-time assertions can result in an appreciable difference in performance.[<sup>\[5\]</sup>](#references) On the other hand, compile-time assertions have no performance impact. Thus, it is usually unnecessary to disable them in production build.
 
-## May Have Wrong Semantics
+## May have wrong semantics
 
 The fact that run-time assertions abort in debug mode and check noting in production runs, may not always be what you want. On one hand, in debug mode, an assertion failure could elevate a minor issue into a bug which might block any more testing activities for a relatively long time, if the failure is only caught in a binary that is delivered to the QE team. On the other hand, in release mode, allow the program to continue in a wrongful state, where it should have been aborted by an assertion, could result in many bugs of different symptoms been reported that are essentially the same issue.[<sup>\[5\]</sup>](#references) Thus, wasting everyone's time. There are no really good solutions to this problem, just like everything else, learning to use assertions at the right places takes a good sense of intuition, experience and practices.
 
