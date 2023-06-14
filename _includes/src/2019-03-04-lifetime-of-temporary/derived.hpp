@@ -5,11 +5,11 @@
 #include "base.hpp"
 
 struct Derived : public Base {
-    Derived() noexcept {
+    Derived() {
         TRACE_FUNCTION_CALL();
     }
 
-    ~Derived() noexcept {
+    ~Derived() {
         TRACE_FUNCTION_CALL();
     }
 };

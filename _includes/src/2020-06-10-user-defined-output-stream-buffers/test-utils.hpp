@@ -4,7 +4,7 @@
 
 #include <ostream>
 
-inline auto &TestHelper(std::ostream &out) noexcept {
+inline auto &TestHelper(std::ostream &out) {
     out << "1234" << '\0';
     out << "IJK" << '\0';
     out << "ab" << '\0';

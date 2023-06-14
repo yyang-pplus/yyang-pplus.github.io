@@ -3,11 +3,11 @@
 #include "derived.hpp"
 
 struct DerivedWrapper {
-    DerivedWrapper() noexcept : d {} {
+    DerivedWrapper() : d {} {
         TRACE_FUNCTION_CALL();
     }
 
-    ~DerivedWrapper() noexcept {
+    ~DerivedWrapper() {
         TRACE_FUNCTION_CALL();
     }
 

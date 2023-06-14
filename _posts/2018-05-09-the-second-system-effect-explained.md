@@ -49,7 +49,7 @@ The term, second-system effect, itself suggests that it is an effect happens to 
 
 ### The spare and clean first work
 
-Just like the ancient Chinese proverb told us[<sup>\[2\]</sup>](#the-reference):
+Just as the ancient Chinese proverb told us[<sup>\[2\]</sup>](#the-reference):
 
 > A journey of a thousand miles begins with a single step.
 
@@ -59,7 +59,7 @@ When we talking about the second-system effect, we are not concerning about ever
 
 For one aspect, we are not concerning about whether the first work is succeeded or failed, as "spare and clean" doesn't necessarily means success. When "sooner or later the first system is finished", the design could be spare and clean, but the project itself may be considered failed as it missed the original due date.
 
-For another, the consequence of such first work is the "firm confidence", the "demonstrated mastery of that class of systems" and the saved goodies "to be used 'next time'". These merits, come with the "spare and clean" first work, are the factors which make the second-system effect happen. In other word, the second-system effect won't occur, without a "spare and clean" first work.
+For another, the consequence of such first work is the "firm confidence", the "demonstrated mastery of that class of systems", and the saved goodies "to be used 'next time'". These merits, come with the "spare and clean" first work, are the factors which make the second-system effect happen. In other word, the second-system effect won't occur, without a "spare and clean" first work.
 
 ### The class of systems
 

@@ -2,7 +2,7 @@
 
 #include "base.hpp"
 
-const Base &FunctionException3(const Base &b) noexcept {
+const Base &FunctionException3(const Base &b) {
     TRACE_FUNCTION_CALL();
     return b;
 }

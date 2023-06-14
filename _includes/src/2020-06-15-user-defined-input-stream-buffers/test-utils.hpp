@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-auto &TestHelper(std::istream &in) noexcept {
+auto &TestHelper(std::istream &in) {
     for (int i = 0; true; ++i) {
         const auto peek_c = in.peek();
         const char get_c = in.get();

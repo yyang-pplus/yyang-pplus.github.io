@@ -14,7 +14,7 @@ public:
     using int_type = std::streambuf::int_type;
     using traits_type = std::streambuf::traits_type;
 
-    HexInBuf(const int fd = STD_IN_FD) noexcept : m_fd(fd) {
+    HexInBuf(const int fd = STD_IN_FD) : m_fd(fd) {
         setg(m_buffer.begin(), m_buffer.begin(), m_buffer.begin());
     }
 

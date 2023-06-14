@@ -120,7 +120,7 @@ Never use `std::fgets()` or its rough equivalent `std::scanf("%s", s)`! For year
 | std::fputs(s, fp)                               | Write the null-terminated **s**tring to the output stream                          |
 | n = std::fwrite(buffer, object_size, count, fp) | Write up to **count** objects from the array **buffer** to the given output stream |
 
-In C, `putc()` may be implemented as a macro, which is disallowed in C++, while `fputc()` is guaranteed to be a function. Therefore calls to `std::fputc()` and `std::putc()` always have the same effect in C++.[<sup>\[5\]</sup>](#references)
+In C, `putc()` may be implemented as a macro, which is disallowed in C++, but `fputc()` is guaranteed to be a function. Therefore calls to `std::fputc()` and `std::putc()` always have the same effect in C++.[<sup>\[5\]</sup>](#references)
 
 ## FP: buffering
 
