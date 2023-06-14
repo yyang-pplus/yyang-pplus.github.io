@@ -5,11 +5,11 @@
 #include "trace.hpp"
 
 struct Base {
-    Base() noexcept {
+    Base() {
         TRACE_FUNCTION_CALL();
     }
 
-    ~Base() noexcept {
+    ~Base() {
         TRACE_FUNCTION_CALL();
     }
 };

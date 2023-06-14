@@ -40,7 +40,7 @@ Again, my point is that a "spare and clean" design doesn't mean the success of t
 
 > How does the project manger avoid the second-system effect? By insisting on a senior architect who has at least two system under his belt.
 
-Well, this seems like a nonstarter solution for a long run. But in fact, it may work for a team. Remember, the second-system are concerned about the experience of the majority designers. So, the project manager can still insist on a team that constitute mostly with senior architects, while still have a few pupils to gain experience.
+Well, this seems like a nonstarter solution for a long run. But in fact, it may work for a team. Remember, the second-system are concerned about the experience of the majority designers. So, the project manager can still insist on a team that constitute mostly with senior architects, and still have a few pupils to gain experience.
 
 Now we can talk about my solution. It's simple. The project manager should just always hire new architects who has no previous experience with similar systems, then fire them or put them on another system that they are not familiar with. Isn't this just what some companies are practicing?
 

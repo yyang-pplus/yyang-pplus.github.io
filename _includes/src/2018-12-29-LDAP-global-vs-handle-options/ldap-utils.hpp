@@ -9,7 +9,7 @@
 
 class LdapException : public std::exception {
 public:
-    explicit LdapException(const int s) noexcept : m_status(s) {
+    explicit LdapException(const int status) noexcept : m_status(status) {
     }
 
     [[nodiscard]] const char *what() const noexcept override {
@@ -21,7 +21,7 @@ private:
 };
 
 template<typename Function, typename... Args>
-inline constexpr void CallLdap(const Function func, Args &&...args) {
+inline void CallLdap(const Function func, Args &&...args) {
     if (const auto status = func(std::forward<Args>(args)...); status != LDAP_SUCCESS) {
         throw LdapException {status};
     }

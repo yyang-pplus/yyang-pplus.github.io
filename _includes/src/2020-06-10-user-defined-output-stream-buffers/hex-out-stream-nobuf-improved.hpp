@@ -15,20 +15,20 @@ public:
     using int_type = std::streambuf::int_type;
     using traits_type = std::streambuf::traits_type;
 
-    HexOutBuf(const int fd = INVALID_FD) noexcept : m_fd(fd), m_own(false) {
+    HexOutBuf(const int fd = INVALID_FD) : m_fd(fd), m_own(false) {
     }
 
-    HexOutBuf(const char *pathname, const int flags, const mode_t mode = 0) noexcept :
+    HexOutBuf(const char *pathname, const int flags, const mode_t mode = 0) :
         m_fd(open(pathname, flags, mode)), m_own(true) {
     }
 
     HexOutBuf(const HexOutBuf &) = delete;
     HexOutBuf &operator=(const HexOutBuf &) = delete;
 
-    HexOutBuf(HexOutBuf &&source) noexcept : m_fd(source.m_fd), m_own(source.m_own) {
+    HexOutBuf(HexOutBuf &&source) : m_fd(source.m_fd), m_own(source.m_own) {
         source.m_fd = INVALID_FD;
     }
-    HexOutBuf &operator=(HexOutBuf &&source) noexcept {
+    HexOutBuf &operator=(HexOutBuf &&source) {
         if (this != &source) {
             closeFile();
             std::swap(m_fd, source.m_fd);
@@ -38,11 +38,11 @@ public:
         return *this;
     }
 
-    virtual ~HexOutBuf() noexcept {
+    virtual ~HexOutBuf() {
         closeFile();
     }
 
-    [[nodiscard]] auto IsOpen() const noexcept {
+    auto IsOpen() const {
         return m_fd != INVALID_FD;
     }
 
@@ -50,7 +50,7 @@ protected:
     static constexpr int INVALID_FD = -1;
     static constexpr int WIDTH = sizeof(char_type) * 2;
 
-    void closeFile() noexcept {
+    void closeFile() {
         if (IsOpen() and m_own) {
             close(m_fd);
         }

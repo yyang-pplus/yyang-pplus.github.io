@@ -45,7 +45,7 @@ Where:
 
 * `condition` is an expression represents a condition that needs to be checked during the run time.
 
-When run-time assertion is enabled, if `condition` evaluates to `true`, the program continues normally. Otherwise, it displays implementation-specific diagnostic information on the standard error output and calls `std::abort`.[<sup>\[3\]</sup>](#references)
+When run-time assertion is enabled, if `condition` evaluates to `false`, it displays implementation-specific diagnostic information on the standard error output and calls `std::abort`. Otherwise, the program continues normally.[<sup>\[3\]</sup>](#references)
 
 Unlike `static_assert`, `assert` has no standardized interface to add an additional message to assert errors. A portable way to include one is to use a comma operator provided it has not been overloaded, or use `&&` with a string literal.[<sup>\[3\]</sup>](#references) For example:
 
@@ -76,7 +76,7 @@ As a variant to the previous situation, `assert(false)` **can be placed at any l
 
 Assertions used in this way not only improve the maintainability by acting as a better form of comments, but also guarantee the statements it makes about the effects of the code to be true.
 
-Furthermore, **Some preconditions, postconditions and invariants can be expressed as assertions.** The purpose of this kind of assertions is to check for programming errors, rather than to handle run-time errors that may occur during normal program execution. Like this:
+Furthermore, **Some preconditions, postconditions, and invariants can be expressed as assertions.** The purpose of this kind of assertions is to check for programming errors, rather than to handle run-time errors that may occur during normal program execution. Like this:
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assertion-as-precondition.hpp %}
@@ -129,7 +129,7 @@ As a rule, the expressions contained in run-time assertions should be free of si
 
 ## Can impact performance
 
-As already discussed, assertions should not affect the logic of a program, but run-time assertions can and often do impact the program's performance. Here, the performance includes the time to execute and the space. Simple assertions are relatively inexpensive, but more stringent checks, especially in assertion heavy code can measurably slow code down, sometimes severely so. Assertions also take up space, and not necessarily just for the code itself. As `assert` macros often embed the assertion message string in the source code. This can add up if assertions make up a substantial percentage of the code. For these reasons, assertions should be used sparsely and should be avoided in performance critical code, to prevent serious performance issues during development. Additionally, run-time assertions are typically disable in release build to produce a program that is both smaller and faster, assuming the program has been thoroughly tested and bug-fixed.[<sup>\[5\]</sup>](#references)
+As already discussed, assertions should not affect the logic of a program, but run-time assertions can and often do impact the program's performance. Here, the performance includes the time to execute and the space. Simple assertions are relatively inexpensive, but more stringent checks, especially in assertion heavy code can measurably slow code down, sometimes severely so. Assertions also take up space, and not necessarily just for the code itself. As `assert` macros often embed the assertion message string in the source code. This can add up if assertions make up a substantial percentage of the code. For these reasons, assertions should be used sparsely and should be avoided in performance critical code, in order to prevent serious performance issues during development. Additionally, run-time assertions are typically disable in release build to produce a program that is both smaller and faster, assuming the program has been thoroughly tested and bug-fixed.[<sup>\[5\]</sup>](#references)
 
 As the definition of the macro `assert` depends on another macro, `NDEBUG`, in order to disable run-time assertions, simply define `NDEBUG` as a macro name at the point in the source code where `<cassert>` or `<assert.h>` is included.[<sup>\[3\]</sup>](#references) As a matter of fact, in one source file, you can define and undefine `NDEBUG` multiple times, each time followed by `#include <cassert>`, to enable or disable the `assert` macro multiple times in the same source file.[<sup>\[6\]</sup>](#references)
 
@@ -142,7 +142,9 @@ The fact that run-time assertions abort in debug mode and check noting in produc
 
 # Conclusion
 
-In today's post, we talked about assertions as a useful tool to help the programmer to identify and fix bugs early in the development process, it can improve code quality and maintainability if used wisely. In short, assertions are not meant to be a replacement of error handling during normal program execution, rather the major role of assertions is to identify bugs faster, thus making software development more effective. I hope you have found this post useful, if so, you may also want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
+In today's post, we talked about assertions as a useful tool to help the programmer to identify and fix bugs early in the development process, it can improve code quality and maintainability if used wisely. In short, assertions are not meant to be a replacement of error handling during normal program execution, rather the major role of assertions is to identify bugs faster, thus making software development more effective.
+
+I hope you have found this post useful, if so, you may also want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 
 
 # References

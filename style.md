@@ -18,6 +18,7 @@ All the posts on this site shall use the following conventions:
 
 * Names of utilities, commands, and things normally found in code shall be written as `inline code`.
 * When showing input together with output, in order to differentiate input from output, a command prompt shall be included before input commands. In particular, The `$` symbol indicates a command should be run as regular users, while the `#` symbol means a command should be run as superusers. When showing input alone, the command prompt can be omitted.
+* Code examples shall be minimum and representative. Especially, unnecessary keywords (`inline`, `nodiscard`, `noexcept`, etc.) shall be avoided as much as possible.
 
 * Each quotation shall be followed by a number in square brackets written as superscription with a link to the numbered item of the references section at the end of the document. The page number or section number where the cited thing is discussed in the source document can also be specified in the square brackets, if applicable.
 

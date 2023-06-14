@@ -28,7 +28,7 @@ template<class CharT, class Traits = std::char_traits<CharT>>
 class basic_streambuf;
 ```
 
-Found in `<streambuf>`, the template class `basic_streambuf<>` defines the interface for stream buffers. A **stream buffer** is an abstract layer between an I/O stream and the final data source or destination. Different `streambuf` subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2\]</sup>](#references) The buffer used to write characters is also called **put area**, while the buffer for input is also called **get area**. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
+Found in `<streambuf>`, the template class `basic_streambuf<>` defines the interface for stream buffers. A **stream buffer** is an abstract layer between an I/O stream and the final data source or destination. Different `streambuf` subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2\]</sup>](#references) The buffer used to write characters is also called **put area**; the buffer for input is also called **get area**. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
 
 
 # Unbuffered output stream buffer

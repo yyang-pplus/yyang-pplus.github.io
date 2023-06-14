@@ -2,7 +2,7 @@
 #include "ldap-utils.hpp"
 
 
-int main(int, char **) {
+int main() {
     // DEBUG_LEVEL only works with Global.
     CallLdap(ldap_set_option, nullptr, LDAP_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);
 

@@ -33,7 +33,7 @@ sudo ldapadd -H ldapi:// -Y EXTERNAL -Q
 ldapadd -H ldap:// -x -D cn=admin,dc=yyang-pplus,dc=github,dc=io -W
 ```
 
-As we have already discussed in [my previous post]({{page.previous.url}}), basically, the first command uses the **SASL authentication** method through **ldapi** interface to bind as the superuser of the localhost, while the second command utilizes **simple authentication** with normal **ldap** scheme to bind as the so-called **rootDN** of the **DIT**. For ease of discussion, in the rest part of the post, let's name the first command as the **ldapi command**, and call the second command as the **rootDN command**.[<sup>\[1\]</sup>](#references)
+As we have already discussed in [my previous post]({{page.previous.url}}), basically, the first command uses the **SASL authentication** method through **ldapi** interface to bind as the superuser of the localhost; the second command uses **simple authentication** with normal **ldap** scheme to bind as the so-called **rootDN** of the **DIT**. For ease of discussion, in the rest part of the post, let's name the first command as the **ldapi command**, and call the second command as the **rootDN command**.[<sup>\[1\]</sup>](#references)
 
 In general, people use the rootDN commands to maintain the content of LDAP databases in the **normal DIT**. And use the ldapi commands to manage the configuration of LDAP servers within the **administrative DIT**, which also known as the **cn=config DIT**.[<sup>\[1\]</sup>](#references) Those two kinds of commands exist because that's just how LDAP servers are configured by default.
 
@@ -99,7 +99,7 @@ modifying entry "olcDatabase={2}bdb,cn=config"
 
 `olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers. Also `olcRootPW` has to be deleted as well, because it can only be set when root DN is under suffix.
 
-This solution works, because the `olcRootDN` directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the `olcRootDN` is always allowed full rights (i.e. auth, search, compare, read and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
+This solution works, because the `olcRootDN` directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the `olcRootDN` is always allowed full rights (i.e., auth, search, compare, read, and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
 
 
 # Test

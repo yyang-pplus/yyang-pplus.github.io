@@ -2,7 +2,7 @@
 #include "ldap-utils.hpp"
 
 
-int main(int, char **) {
+int main() {
     const auto ld = CreateLdapHandle(URI);
 
     CallLdap(ldap_set_option, ld.get(), LDAP_OPT_DEBUG_LEVEL, &DEBUG_LEVEL);

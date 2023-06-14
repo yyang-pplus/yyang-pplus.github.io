@@ -43,7 +43,7 @@ Seems clear, however, if you try to use one of the above mentioned enums, it wil
 {% include src/2018-12-29-LDAP-global-vs-handle-options/ldap-debug-enums.hpp %}
 ```
 
-Another quirky about setting LDAP debug level is that, apparently, it only works correctly if it is set to global options before opening any connections; In other words, it doesn't work if it is set to an individual LDAP handle which is gotten by calling `ldap_initialize()`.
+Another quirky about setting LDAP debug level is that, apparently, it only works correctly if it is set to global options before opening any connections; In other words, it doesn't work if it is set to an individual LDAP handle which is got by calling `ldap_initialize()`.
 
 
 # Solution

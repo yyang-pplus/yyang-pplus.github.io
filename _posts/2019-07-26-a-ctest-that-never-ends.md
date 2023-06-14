@@ -42,7 +42,7 @@ This code simply creates and starts the MonetDB server that will be needed by th
 ./buggy-setup-db.py
 ```
 
-**buggy-setup-db.py** is the name of the above mentioned test script. Running this command should return immediately after the MonetDB server gets started, which usually takes only a few seconds for an empty DB farm. If you'd like, you can also check the DB server is indeed running.
+**buggy-setup-db.py** is the name of the above mentioned test script. Running this command should return immediately after the MonetDB server gets started, which usually takes only a few seconds for an empty DB farm. If you'd like to, you can also check the DB server is indeed running.
 
 ```bash
 $ pgrep monetdbd
