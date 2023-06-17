@@ -3,7 +3,6 @@
 #pragma once
 
 #include <cassert>
-
 #include <chrono>
 
 using namespace std::chrono_literals;

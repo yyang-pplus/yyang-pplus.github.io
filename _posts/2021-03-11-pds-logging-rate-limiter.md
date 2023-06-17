@@ -26,7 +26,7 @@ As a developer, if you have been working on a fairly complex software, the chanc
 
 There is no doubt that logging is a useful tool, but, as experienced developers already known, too many log entries can do more harms than no logs at all. For one, logs clustered with irrelevant information can be difficult to browse. For another, logging can consume too much resources, such as, CPU, disk I/O or space, network bandwidth, and so forth, in a short period of time, thus affect the overall performance of the system significantly.
 
-Now we know what kind of problem we are facing. Let us talk about how we can resolve it.
+Now we know what kind of problem we are facing; let us talk about how we can resolve it.
 
 
 # Log severity levels
@@ -36,14 +36,14 @@ When doing logging for a program, it is more common to use a logging framework, 
 
 # Log category
 
-Beside log severity levels, some logging frameworks also support classify log entries into different categories. Log category can usually be used to turn off logging for an entire subsystem. If we image log levels as a way to classify log entries horizontally, then log category can be seen as a way to divide log entries vertically. One common situation with log level is that, when you try to lower the minimum severity level to allow more items to get logged, and, suddenly, the log is flooded with so much irrelevant information that makes it hard to browse. With log category, however, you can just enable logging of the concerned subsystems, thus limiting the amount of information gets recorded into the log. For this reason, log levels is often combined with log categories to make the best use of both.
+Beside log severity levels, some logging frameworks also support classify log entries into different categories. Log category can usually be used to turn off logging for an entire subsystem. If we image log levels as a way to classify log entries horizontally, then log categories can be seen as a way to divide log entries vertically. One common situation with log level is that, when you try to lower the minimum severity level to allow more items to get logged, and, suddenly, the log is flooded with so much irrelevant information that makes it hard to browse. With log category, however, you can just enable logging of the concerned subsystems, thus limiting the amount of information gets recorded into the log. For this reason, log levels is often combined with log categories to make the best use of both.
 
 
 # Rate limiters
 
 **Limiting log rate** refers to controlling the number of log entries that are generated over a given period of time. It acts more like a passive defensive mechanism, when compares to log levels and log categories. Also, unlike log levels or log categories, it is relatively rare for a logging framework to have build-in support for rate-limiting mechanisms. So we have to build a logging rate limiter ourselves.
 
-## Logging framework
+## The logging framework
 
 To keep things simple, we will not use any real logging frameworks available in the market, instead, we will use an imaginary logging library called `logpp`, which has the following interfaces:
 
@@ -57,7 +57,7 @@ The **token bucket** algorithm is based on an analogy of a fixed capacity bucket
 
 The typical implementation of token bucket algorithm takes two parameters:
 
-* **Bucket size** is the maximum number of tokens that the bucket can hold.
+* **Bucket size** is the maximum number of tokens the bucket can hold.
 * **Refill rate** is the rate at which the bucket gets refilled with tokens.
 
 Thus, a logger applies token bucket algorithm can produce messages with an average rate up to the refill rate, and have a burstiness determined by the bucket size.[<sup>\[1\]</sup>](#references)
@@ -76,9 +76,9 @@ The token bucket algorithm can be implemented in C++ like this:
 {% include src/2021-03-11-pds-logging-rate-limiter/token-bucket.hpp %}
 ```
 
-Note, the `Token` class only have private constructors, thus only its friend `TokenBucketLimiter` can create new tokens.
+Note, the `Token` class only has private constructors, thus only its friend `TokenBucketLimiter` can create new tokens.
 
-The logger that use token bucket algorithm may look like this:
+A logger that uses token bucket algorithm may look like this:
 
 ```cpp
 {% include src/2021-03-11-pds-logging-rate-limiter/token-bucket-logger.hpp %}
@@ -86,7 +86,7 @@ The logger that use token bucket algorithm may look like this:
 
 ## Leaky bucket
 
-The **leaky bucket** is an algorithm based on an analogy of a fixed capacity bucket, with holes that leaks water out of the bucket at a constant rate. Log messages are added into the bucket, which just like the way water is poured into the bucket. When the bucket is full, messages will overflow. Meanwhile, the bucket is inspected at a constant rate to see if it contains any log messages at that moment. If it does, one message is leaked from the bucket and passed through.[<sup>\[2\]</sup>](#references)
+The **leaky bucket** is an algorithm based on an analogy of a fixed capacity bucket, with holes that leaks water out of the bucket at a constant rate. Log messages are added into the bucket, which just like the way water is poured into a bucket. When the bucket is full, messages will overflow. Meanwhile, the bucket is inspected at a constant rate to see if it contains any log messages at that moment. If it does, one message is leaked from the bucket and passed through.[<sup>\[2\]</sup>](#references)
 
 There are two versions of the leaky bucket algorithm: the leaky bucket as a meter and the leaky bucket as a queue.
 
@@ -109,7 +109,7 @@ The leaky bucket as a queue can be seen as a special case of the version as a me
 
 The leaky bucket as a queue algorithm takes the following two parameters:
 
-* **Bucket size** is the maximum number of log entries those the bucket can hold.
+* **Bucket size** is the maximum number of log entries the bucket can hold.
 * **Leak rate** is the rate at which log entries get removed from the bucket for onward processing.
 
 Thus, a logger uses leaky bucket as a queue algorithm can produce messages with an average rate up to the leak rate.
@@ -131,16 +131,16 @@ The fix window counter algorithm works as follows:
 * The counter is set to zero when a new time window starts.
 * If the counter exceeds a threshold upon being incremented, the log message is dropped.
 
-I see the fix window counter algorithm as a special case of the leaky bucket as a meter algorithm; where the bucket size equals the number of log entries get leaked per time window. For this reason, the implementation of the fix window counter is omitted in this article.
+I see the fix window counter algorithm as a special case of the leaky bucket as a meter algorithm, where the bucket size equals to the number of log entries get leaked per time window. For this reason, the implementation of the fix window counter is omitted.
 
 ## Sliding window log
 
-The sliding window log algorithm involves tracking the time of logging requests with a log of timestamps. When a new request comes in, timestamps those are older than the start of the current time window are removed from the log. If the log size is less than the threshold, the new request passes through and a new timestamp is added to the log. Otherwise, the request is dropped.[<sup>\[4\]</sup>](#references)
+The sliding window log algorithm involves tracking the time of logging requests with a log of timestamps. When a new request comes in, timestamps those are older than the start of the current time window are removed from the timestamp log. After that, if the log size is less than the given threshold, the new request passes through and its timestamp is added to the log. Otherwise, the request is dropped.[<sup>\[4\]</sup>](#references)
 
 The sliding window log algorithm takes the following two parameters:
 
 * **Window size** is the size of the time window, beyond which timestamps are removed.
-* **Threshold** is the maximum number of timestamps those are allowed in the log.
+* **Threshold** is the maximum number of timestamps per time window.
 
 Thus, a logger uses sliding window log algorithm can produce messages with an average rate up to the threshold per window.
 
@@ -163,11 +163,11 @@ The sliding window counter algorithm is a variant of the fixed window counter al
 The sliding window counter algorithm takes the following two parameters:
 
 * **Window size** is the size of the fixed time window and the sliding window.
-* **Threshold** is the maximum number of log requests those are allowed within the sliding window.
+* **Threshold** is the maximum number of log requests within the sliding window.
 
 Thus, a logger uses sliding window counter algorithm can produce messages with an average rate approximately up to the threshold per window.
 
-The logger that use sliding window counter algorithm can be implemented like this:
+A logger that uses sliding window counter algorithm can be implemented like this:
 
 ```cpp
 {% include src/2021-03-11-pds-logging-rate-limiter/sliding-window-counter-logger.hpp %}
@@ -175,16 +175,18 @@ The logger that use sliding window counter algorithm can be implemented like thi
 
 ## A few more words
 
-In a perfect world, where software is tested completely and is bug-free, protective mechanisms like logging rate limiters should have no use. However, our reality is far from ideal, and a defect or a malicious use pattern can suddenly turn a benign logging command into a fountain of a disastrous message flood. Thus, it is usually a good idea to adopt logging rate limiters, especially for sophisticated long-running programs.
+In a perfect world, where software is tested completely and is bug-free, protective mechanisms, like logging rate limiters, should have no use. However, our reality is far from ideal, and a defect or a malicious use pattern can suddenly turn a benign logging command into a fountain of a disastrous message flood. Thus, it is usually a good idea to adopt logging rate limiters, especially for sophisticated long-running programs.
 
 On the other hand, a log rate limiter that is too restrictive can hinder debugging as well. Since, it is generally unpredictable which messages a limiter will drop, which can easily break the logging context that is critical for debugging. Thus, it is recommended to have at least one way to turn the limiter off.
 
 
 # Conclusion
 
-In today's post, we have talked about the common ways of reducing messages get logged, with an emphasize on how to integrate protective rate limiter algorithms with a logging framework. A logging rate limiter can help to prevent the logging system from resource starvation that are caused by a sudden burst of logging requests. It can be a critical part of a robust program.
+As usually the first thing to be checked when something goes wrong with a program, logging is a powerful tool for debugging. However, logging itself, sometimes, can become a source of problems.
 
-I hope you have found this post useful, if so, you may also want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
+In today's post, we have talked about the common ways of reducing messages get logged, with an emphasize on how to integrate protective rate limiter algorithms with a logging framework. A logging rate limiter can help to prevent the logging system from causing resource starvation which is the result of a sudden logging requests burst. For which reason, a logging rate limiter can be seen as a critical part of a robust program.
+
+I hope you have found this post useful, if so, you may want to check out [other articles which also belong to the PDS series](/pds). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 
 
 # References
