@@ -43,7 +43,7 @@ For ease of discussing, let's first quote what we know about the second-system e
 
 # The explanation
 
-The term, second-system effect, itself suggests that it is an effect happens to the second system when certain conditions are satisfied. So our focus, in this post, is to find out what the effect, the second system and the conditions are.
+The term, second-system effect, itself suggests that it is an effect happens to the second system when certain conditions are satisfied. So our focuses, in this post, is to find out what the effect, the second system and the conditions are.
 
 ## The conditions
 
@@ -89,9 +89,9 @@ The point is that the influence of the first work will fade after time. So, at t
 
 The effect of the second-system is the tendency to over-design and to refine obsolete techniques. Similar to "spare and clean" doesn't mean the success of the first system, "over-design and refinement of obsolete techniques" doesn't necessarily mean the failure of the second system.
 
-Over-design, or over-engineering, happens a lot. I think most C++ programmers has asked themselves questions like: Should we make the destructor virtual in order to make the future maintainers' job easier?  Should we use 64 bits integer for this counter to be extra safe or a 32 bits integer is good enough? The absolute right answer certainly depends on the situation. But to my experience, more often, they just doesn't really matter. No one cares or even notices you choose 64 bits over 32 bits, unless it shows up as a red flag on the performance measurement. Again, my point is that over-engineering happens a lot, and sometimes it just doesn't matter.
+Over-design, or over-engineering, happens a lot. I think most C++ programmers has asked themselves questions like: Should we make the destructor virtual in order to make the future maintainers' job easier?  Should we use 64 bits integer for this counter to be extra safe or a 32 bits integer is good enough? The absolute right answer certainly depends on the situation. But to my experience, more often, they just doesn't really matter. No one cares or even notices we choose 64 bits over 32 bits, unless it shows up as a red flag on the performance measurement. Again, my point is that over-engineering happens a lot, and sometimes it just doesn't matter.
 
-The same argument also applies to the refinement of obsolete techniques. Sure, that may take some time to do it. But if you do have plenty time and have nothing better to do, refine some obsolete techniques could still be fun and harmless.
+The same argument also applies to the refinement of obsolete techniques. Sure, that may take some time to do it. But if we do have plenty time and have nothing better to do, refine some obsolete techniques could still be fun and harmless.
 
 ## The architects
 

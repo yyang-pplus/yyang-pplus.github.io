@@ -65,7 +65,7 @@ The actual achievable vCPU to pCPU ratio in a specific environment will depend o
 
 # Conclusion
 
-VM resources oversubscription is a common practice among administrators, which can make the best use of the host resources. But we want to ensure oversubscription is done in such a way that we can also maintain high performance. In today's post, we have discussed about oversubscribing different type of resources, and its dangers. We have also signified the metrics need to be monitored on a oversubscribed host.
+VM resources oversubscription is a common practice among administrators, which can make the best use of the host resources. But you want to ensure oversubscription is done in such a way that you can also maintain high performance. In today's post, we have discussed about oversubscribing different type of resources, and its dangers. We have also signified the metrics need to be monitored on a oversubscribed host.
 
 I hope you found this post useful, if so, you may also want to check out [other articles that also belong to the PPTS series](/ppts). <!-- JEKYLL_RELATIVE_URL_CHECK_SKIP_LINE -->
 

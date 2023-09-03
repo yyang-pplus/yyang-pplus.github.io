@@ -11,16 +11,24 @@ if (WARNINGS_AS_ERRORS)
     list(APPEND COMPILER_WARNING_OPTIONS -Werror)
 endif ()
 
-add_single_executable(leaky-bucket-main chrono-utils.hpp logpp.hpp rate.hpp
+# add_executable_helper
+function (add_executable_helper main_name)
+    add_single_executable(${main_name} ${ARGN})
+    add_runnable_test(${main_name})
+    set_property(TEST ${PROJECT_NAME}.${main_name}.runnable-test
+                 PROPERTY ENVIRONMENT "LIMITED=True")
+endfunction ()
+
+add_executable_helper(leaky-bucket-main chrono-utils.hpp logpp.hpp rate.hpp
                       leaky-bucket-logger.hpp test-utils.hpp)
 
-add_single_executable(sliding-log-main chrono-utils.hpp logpp.hpp rate.hpp
+add_executable_helper(sliding-log-main chrono-utils.hpp logpp.hpp rate.hpp
                       sliding-log-logger.hpp test-utils.hpp)
 
-add_single_executable(sliding-window-counter-main chrono-utils.hpp logpp.hpp rate.hpp
+add_executable_helper(sliding-window-counter-main chrono-utils.hpp logpp.hpp rate.hpp
                       sliding-window-counter-logger.hpp test-utils.hpp)
 
-add_single_executable(
+add_executable_helper(
     token-bucket-main
     chrono-utils.hpp
     logpp.hpp

@@ -41,6 +41,13 @@ The class template `basic_filebuf<>` is used by the other file stream classes to
 
 One advantage of accessing files through file streams is the automatic management of file resources using the RAII pattern.[<sup>\[4\]</sup>](#references)
 
+There are a few predefined file stream object in header `<iostream>`:
+
+| cin  | Associated with the standard input stream oriented to narrow characters                                          |
+| cout | Associated with the standard output stream oriented to narrow characters                                         |
+| clog | Usually the same as `cerr`, except it is not automatically flushed and not automatically **tie()**'d with `cout` |
+| cerr | Associated with the standard error stream oriented to narrow characters                                          |
+
 ## FS: formatted I/O
 
 | in \>\> x  | Read from an **in**put stream into **x** according to **x**'s type |
@@ -90,6 +97,12 @@ Thus, In C++, the other portable way for file access is by using the C++ version
 `std::fopen()` returns a pointer to a `std::FILE` stream object, which contains information about the file.
 C standard (referenced by C++ standard) does not specify whether `std::FILE` is a complete object type. Thus, `std::FILE` may be semantically non-copyable.[<sup>\[5\]</sup>](#references)
 
+Header `<cstdio>` contains three predefined stream objects:
+
+| stdin  | Associated with the standard input stream  |
+| stdout | Associated with the standard output stream |
+| stderr | Associated with the standard error stream  |
+
 ## FP: formatted I/O
 
 | n = std::fprintf(fp, format, ...) | Write data to output stream according to **format**                  |
@@ -101,7 +114,7 @@ Using `std::fprintf()` is unsafe in the sense that type checking is not done.[<s
 {% include src/2020-05-16-a-concise-cpp-file-access-reference/fprintf-issue.hpp %}
 ```
 
-Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf("%d", n)` is usually not what we want, rather it should be `scanf("%d", &n)` instead.[<sup>\[6\]</sup>](#references)
+Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf("%d", n)` is usually not what you want, rather it should be `scanf("%d", &n)` instead.[<sup>\[6\]</sup>](#references)
 
 ## FP: unformatted input
 
@@ -148,6 +161,12 @@ Most POSIX file I/O operations are defined in header `<unistd.h>`, except `open(
 | close(fd)                       | Close a file descriptor, so that it no longer refers to any file and may be reused; termination of a program via `exit()` or return from the `main()` closes all open files |
 
 The return value of `open()` is a file descriptor, which is a reference to an open file description. The open file description records the file offset and the file status flags.[<sup>\[7\]</sup>](#references)
+
+The following preprocessor symbols are defined in `<unistd.h>`:
+
+| STDIN_FILENO  | The default file descriptor number for the standard input stream, typically 0  |
+| STDOUT_FILENO | The default file descriptor number for the standard output stream, typically 1 |
+| STDERR_FILENO | The default file descriptor number for the standard error stream, typically 2  |
 
 ## FD: formatted I/O
 

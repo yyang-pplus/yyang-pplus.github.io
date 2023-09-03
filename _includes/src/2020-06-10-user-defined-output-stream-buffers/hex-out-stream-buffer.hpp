@@ -15,7 +15,7 @@ public:
     using int_type = std::streambuf::int_type;
     using traits_type = std::streambuf::traits_type;
 
-    HexOutBuf(const int fd = STD_OUT_FD) : m_fd(fd) {
+    HexOutBuf(const int fd = STDOUT_FILENO) : m_fd(fd) {
         static_assert(SIZE % WIDTH == 0);
 
         std::streambuf::setp(m_buffer.begin(), m_buffer.begin() + SIZE / WIDTH - 1);
@@ -26,7 +26,6 @@ public:
     }
 
 protected:
-    static constexpr int STD_OUT_FD = 1;
     static constexpr int SIZE = 1024;
     static constexpr int WIDTH = sizeof(char_type) * 2;
 
@@ -60,5 +59,5 @@ protected:
 
 private:
     std::array<char_type, SIZE> m_buffer {};
-    int m_fd = STD_OUT_FD;
+    int m_fd = STDOUT_FILENO;
 };

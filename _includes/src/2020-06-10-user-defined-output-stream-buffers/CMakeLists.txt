@@ -11,17 +11,20 @@ if (WARNINGS_AS_ERRORS)
 endif ()
 
 add_single_executable(hex-out-stream hex-out-stream.hpp str-utils.hpp test-utils.hpp)
+add_runnable_test(hex-out-stream)
+
 add_single_executable(hex-out-stream-buffer hex-out-stream-buffer.hpp str-utils.hpp
                       test-utils.hpp)
+add_runnable_test(hex-out-stream-buffer)
+
 add_single_executable(hex-out-stream-nobuf hex-out-stream-nobuf.hpp str-utils.hpp
                       test-utils.hpp)
+add_runnable_test(hex-out-stream-nobuf)
+
 add_single_executable(hex-out-stream-nobuf-improved-fd
                       hex-out-stream-nobuf-improved.hpp str-utils.hpp test-utils.hpp)
+add_runnable_test(hex-out-stream-nobuf-improved-fd)
+
 add_single_executable(hex-out-stream-nobuf-improved-path
                       hex-out-stream-nobuf-improved.hpp str-utils.hpp test-utils.hpp)
-
-add_runnable_test(hex-out-stream)
-add_runnable_test(hex-out-stream-buffer)
-add_runnable_test(hex-out-stream-nobuf)
-add_runnable_test(hex-out-stream-nobuf-improved-fd)
 add_runnable_test(hex-out-stream-nobuf-improved-path)

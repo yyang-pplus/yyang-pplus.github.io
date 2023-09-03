@@ -54,7 +54,7 @@ Putting it all together, here is an example of the basic steps about how to set 
 {% include src/2018-12-29-LDAP-global-vs-handle-options/set-debug-level-example.hpp %}
 ```
 
-Again, here we copied the debug level enums from `<ldap_log.h>` in order to use it in our own code, and we passed `nullptr` as the first argument of `ldap_set_option()` to indicate that we want to set global options.
+Again, here I copied the debug level enums from `<ldap_log.h>` in order to use it in my own code, and I passed `nullptr` as the first argument of `ldap_set_option()` to indicate that I want to set the global options.
 
 
 # Example

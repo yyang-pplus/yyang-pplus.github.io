@@ -82,7 +82,7 @@ Furthermore, **Some preconditions, postconditions, and invariants can be express
 {% include src/2021-02-10-pds-assertions/assertion-as-precondition.hpp %}
 ```
 
-Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. We don’t need to mention it for each member function.[<sup>\[4 I.5\]</sup>](#references)
+Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. You don’t need to mention it for each member function.[<sup>\[4 I.5\]</sup>](#references)
 
 As a special case of the previous situation, `static_assert` **can also be used to check a class matches a concept:**[<sup>\[4 T.150\]</sup>](#references)
 

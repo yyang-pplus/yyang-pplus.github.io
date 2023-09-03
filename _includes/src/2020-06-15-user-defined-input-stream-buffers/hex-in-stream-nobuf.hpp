@@ -13,11 +13,10 @@ public:
     using int_type = std::streambuf::int_type;
     using traits_type = std::streambuf::traits_type;
 
-    HexInBuf(const int fd = STD_IN_FD) : m_fd(fd) {
+    HexInBuf(const int fd = STDIN_FILENO) : m_fd(fd) {
     }
 
 protected:
-    static constexpr int STD_IN_FD = 0;
     static constexpr int WIDTH = sizeof(char_type) * 2;
 
     virtual int_type underflow() override {
@@ -54,5 +53,5 @@ protected:
     }
 
 private:
-    int m_fd = STD_IN_FD;
+    int m_fd = STDIN_FILENO;
 };

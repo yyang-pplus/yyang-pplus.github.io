@@ -97,7 +97,7 @@ Of course, a single character buffer may be easy to implement, but it is not qui
 
 For this version of `HexInBuf`, one extra thing we need to take care of is saving the old data for putback when refreshing the get area with new characters. Often, we need to move the last few characters of the current buffer to the beginning of the buffer and appends the newly read characters thereafter.[<sup>\[1\]</sup>](#references)
 
-Although, not strictly required, we also override virtual function `sync()`. For input streams, its behavior is implementation defined. Typically, one implementation may empty the get area and move the current file position back by the corresponding number of bytes.[<sup>\[2\]</sup>](#references)
+Although, not strictly required, I also override virtual function `sync()`. For input streams, its behavior is implementation defined. Typically, one implementation may empty the get area and move the current file position back by the corresponding number of bytes.[<sup>\[2\]</sup>](#references)
 
 
 # Conclusion

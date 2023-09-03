@@ -102,7 +102,7 @@ Although, not strictly required, it is convenient to also define a special strea
 {% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream.hpp %}
 ```
 
-Note, in the member initializer list, a `nullptr` has to be passed to the base class at first, because at this point, the stream buffer member has not been fully initialized. Later in the body of the constructor, we can associate the fully initialized stream buffer with the stream by calling the member function `rdbuf()`.
+Note, in the member initializer list, a `nullptr` has to be passed to the base class at first, because at this point, the stream buffer member has not been fully initialized. Later in the body of the constructor, you can associate the fully initialized stream buffer with the stream by calling the member function `rdbuf()`.
 
 `setstate()` is used to set the stream error flags in the event of a failure.
 
@@ -146,9 +146,9 @@ With all this information, now we can implement our buffering stream buffer.
 
 Note the `-1` when calling `setp()` in the constructor, that is because, when `overflow()` gets called, it not only flushes the current content of the buffer, but also the given character. Thus, it is pretty convenient to leave at least one space for this character, so that, it can also be stored in the buffer and the whole buffer can then be written to the output channel with just one system call.
 
-Also note, the `write()` POSIX API used in `flushBuffer()`, returns the number of bytes written on success. It is not uncommon for `write()` to transfer fewer than the requested number of bytes, especially for socket or pipe. Normally, when a partial write happens, the caller should make another `write()` call to transfer the remaining bytes. However, here, to keep things simple, we just treat all partial writes as errors.
+Also note, the `write()` POSIX API used in `flushBuffer()`, returns the number of bytes written on success. It is not uncommon for `write()` to transfer fewer than the requested number of bytes, especially for socket or pipe. Normally, when a partial write happens, the caller should make another `write()` call to transfer the remaining bytes. However, here, to keep things simple, I just treat all partial writes as errors.
 
-We override the virtual function `sync()`, as well. For output streams, this function is responsible for flushing the buffer. For the unbuffered versions of the stream buffer, overriding this function is not necessary, because there is no buffer to be flushed. `sync()` is also called by the destructor to ensure that buffer gets flushed when the stream buffer is destroyed.[<sup>\[1\]</sup>](#references) `sync()` returns 0 on success, -1 otherwise. The base class version of this function has no effect, and returns 0.[<sup>\[3\]</sup>](#references)
+I override the virtual function `sync()`, as well. For output streams, this function is responsible for flushing the buffer. For the unbuffered versions of the stream buffer, overriding this function is not necessary, because there is no buffer to be flushed. `sync()` is also called by the destructor to ensure that buffer gets flushed when the stream buffer is destroyed.[<sup>\[1\]</sup>](#references) `sync()` returns 0 on success, -1 otherwise. The base class version of this function has no effect, and returns 0.[<sup>\[3\]</sup>](#references)
 
 Although, not implemented in our `HexOutBuf`, the virtual functions `seekoff()` and `seekpos()` may be overridden to allow manipulation of the write position if such operations are also honored by the underlying I/O devices. The base class version of these functions have no effect.
 
