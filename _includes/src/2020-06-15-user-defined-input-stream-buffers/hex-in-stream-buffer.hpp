@@ -14,7 +14,7 @@ public:
     using int_type = std::streambuf::int_type;
     using traits_type = std::streambuf::traits_type;
 
-    HexInBuf(const int fd = STD_IN_FD) : m_fd(fd) {
+    HexInBuf(const int fd = STDIN_FILENO) : m_fd(fd) {
         setg(m_buffer.begin(), m_buffer.begin(), m_buffer.begin());
     }
 
@@ -23,7 +23,6 @@ public:
     }
 
 protected:
-    static constexpr int STD_IN_FD = 0;
     static constexpr int WIDTH = sizeof(char_type) * 2;
     static constexpr int SIZE = 512;
     static constexpr int MAX_PUTBACK = 8;
@@ -63,5 +62,5 @@ protected:
 
 private:
     std::array<char_type, SIZE * WIDTH> m_buffer;
-    int m_fd = STD_IN_FD;
+    int m_fd = STDIN_FILENO;
 };

@@ -36,7 +36,7 @@ When doing logging for a program, it is more common to use a logging framework, 
 
 # Log category
 
-Beside log severity levels, some logging frameworks also support classify log entries into different categories. Log category can usually be used to turn off logging for an entire subsystem. If we image log levels as a way to classify log entries horizontally, then log categories can be seen as a way to divide log entries vertically. One common situation with log level is that, when you try to lower the minimum severity level to allow more items to get logged, and, suddenly, the log is flooded with so much irrelevant information that makes it hard to browse. With log category, however, you can just enable logging of the concerned subsystems, thus limiting the amount of information gets recorded into the log. For this reason, log levels is often combined with log categories to make the best use of both.
+Beside log severity levels, some logging frameworks also support classify log entries into different categories. Log category can usually be used to turn off logging for an entire subsystem. If you image log levels as a way to classify log entries horizontally, then log categories can be seen as a way to divide log entries vertically. One common situation with log level is that, when you try to lower the minimum severity level to allow more items to get logged, and, suddenly, the log is flooded with so much irrelevant information that makes it hard to browse. With log category, however, you can just enable logging of the concerned subsystems, thus limiting the amount of information gets recorded into the log. For this reason, log levels is often combined with log categories to make the best use of both.
 
 
 # Rate limiters
@@ -45,7 +45,7 @@ Beside log severity levels, some logging frameworks also support classify log en
 
 ## The logging framework
 
-To keep things simple, we will not use any real logging frameworks available in the market, instead, we will use an imaginary logging library called `logpp`, which has the following interfaces:
+To keep things simple, I will not use any real logging frameworks available in the market, instead, I will use an imaginary logging library called `logpp`, which has the following interfaces:
 
 ```cpp
 {% include src/2021-03-11-pds-logging-rate-limiter/logpp.hpp %}

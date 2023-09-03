@@ -81,7 +81,7 @@ You should get similar outputs on your machine, if not, I recommend you follow t
 
 # Solution
 
-The solution is actually pretty simple, we just use the same **authentication DN** for root or sudo users of the OS in the place of where rootDN usually is.
+The solution is actually pretty simple, just use the same **authentication DN** for root or sudo users of the OS in the place of where rootDN usually is.
 
 ```bash
 $ sudo ldapmodify -Y EXTERNAL -H ldapi:// -Q <<EOF
@@ -104,13 +104,13 @@ This solution works, because the `olcRootDN` directive need not refer to an entr
 
 # Test
 
-When we run our test command again, we should now get something like this:
+When you run the test command again, you should now get something like this:
 
 ```bash
 adding new entry "dc=yyang-pplus,dc=github,dc=io"
 ```
 
-Which means our solution works as expected. Just to double-check, let's query the entry we have just added:
+Which means our solution works as expected. Just to double-check, you can query the entry you have just added:
 
 ```bash
 $ ldapsearch -H ldap:// -x -b "dc=yyang-pplus,dc=github,dc=io" -LLL

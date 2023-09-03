@@ -18,7 +18,7 @@ tags:
   - "the-second-system-effect"
 ---
 
-The second-system effect is a well-known buzz word in the world of software engineering. As many years after it was first described by Frederick Brooks in his classic [The Mythical Man-Month](#the-reference), people are still talking about it. As we can see from my previous posts, the definition of the second-system effect is rather stricter than people think. Then one question raises naturally. Is it even practical to identify this effect from real world software projects? Even further, is it a real thing?
+The second-system effect is a well-known buzz word in the world of software engineering. As many years after it was first described by Frederick Brooks in his classic [The Mythical Man-Month](#the-reference), people are still talking about it. As you can see from my previous posts, the definition of the second-system effect is rather stricter than people think. Then one question raises naturally. Is it even practical to identify this effect from real world software projects? Even further, is it a real thing?
 
 Let's find out. Shall we?
 

@@ -8,7 +8,7 @@ config_cxx_compiler_and_linker(17)
 set(COMPILER_WARNING_OPTIONS -Wall -Wextra -pedantic-errors)
 
 add_single_executable(
-    pds-compiler-warnings
+    pds-compiler-warnings-main
     conditional-unused-but-set-parameter-fixed.hpp
     implicit-fallthrough-fixed.hpp
     switch.hpp
@@ -18,4 +18,4 @@ add_single_executable(
     unused-result.hpp
     unused-variable-fixed.hpp
     unused-variable.hpp)
-add_runnable_test(pds-compiler-warnings)
+add_runnable_test(pds-compiler-warnings-main)
