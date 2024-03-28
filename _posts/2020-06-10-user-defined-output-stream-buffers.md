@@ -16,7 +16,7 @@ tags:
   - "streambuf"
 ---
 
-You are probably already familiar with using `iostream` to perform I/O operations in C++. However, are you familiar with the backbone of the stream, which is the stream buffers. `streambuf` class is definitely a sophisticated class in the C++ standard library, if not the most sophisticated one. As it said, the complexity of the interfaces reflects tradition, the need for I/O performance, and the variety of human expectations.[<sup>\[2\]</sup>](#references) Nevertheless, a solid understanding of the stream buffer's operations is required for implementing your own stream buffers. In today's post, I am going to slice the `streambuf` into bite-size pieces and show you how to implement a user-defined output stream buffer.
+You are probably already familiar with using `iostream` to perform I/O operations in C++. However, are you familiar with the backbone of the stream, which is the stream buffers. `streambuf` class is definitely a sophisticated class in the C++ standard library, if not the most sophisticated one. As it said, the complexity of the interfaces reflects tradition, the need for I/O performance, and the variety of human expectations.[<sup>\[2:§38.4\]</sup>](#references) Nevertheless, a solid understanding of the stream buffer's operations is required for implementing your own stream buffers. In today's post, I am going to slice the `streambuf` into bite-size pieces and show you how to implement a user-defined output stream buffer.
 
 This post is largely inspired by a section of the similar title in [The C++ Standard Library](#references) by Nicolai Josuttis. Great book. Highly recommended.
 
@@ -28,7 +28,7 @@ template<class CharT, class Traits = std::char_traits<CharT>>
 class basic_streambuf;
 ```
 
-Found in `<streambuf>`, the template class `basic_streambuf<>` defines the interface for stream buffers. A **stream buffer** is an abstract layer between an I/O stream and the final data source or destination. Different `streambuf` subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2\]</sup>](#references) The buffer used to write characters is also called **put area**; the buffer for input is also called **get area**. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
+Found in `<streambuf>`, the template class `basic_streambuf<>` defines the interface for stream buffers. A **stream buffer** is an abstract layer between an I/O stream and the final data source or destination. Different `streambuf` subclass implement different buffering strategies. Typically, an output stream buffer stores characters gathered from an output stream in a buffer until it **flush**es those characters to their real destination. An input stream buffer is similar, expect that the characters flow the other way.[<sup>\[2:§38.6\]</sup>](#references) The buffer used to write characters is also called **put area**; the buffer for input is also called **get area**. The key to understand stream buffer's operations is in knowing how those functions manipulate the get area or the put area.
 
 
 # Unbuffered output stream buffer
@@ -96,7 +96,7 @@ A sample application to show a stream buffer which does not own its I/O channel:
 
 # Output stream
 
-Although, not strictly required, it is convenient to also define a special stream class that mainly forwards the constructor arguments to the corresponding stream buffer. The following example demonstrates that.[<sup>\[1\]</sup>](#references)
+Although, not strictly required, it is convenient to also define a special stream class that mainly forwards the constructor arguments to the corresponding stream buffer. The following example demonstrates that.[<sup>\[1:§15.13.3\]</sup>](#references)
 
 ```cpp
 {% include src/2020-06-10-user-defined-output-stream-buffers/hex-out-stream.hpp %}
@@ -116,7 +116,7 @@ That is pretty much all you need to know about the unbuffered output stream buff
 
 # Buffered output stream buffer
 
-The put area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1\]</sup>](#references)
+The put area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1:§15.13.3\]</sup>](#references)
 
 1. `pbase()`: ("**p**ut **base**") points at the beginning of the output buffer.
 1. `pptr()`: ("**p**ut **p**oin**t**e**r**") points at the position that is the next candidate for writing.
@@ -126,11 +126,11 @@ Those pointers can be initialized by calling the member function `setp(begin, en
 
 `pbump(offset)` can be used to reposition `pptr()` by `offset` characters relative to its current position. The `offset` may be positive or negative.
 
-The **p** suffix of above mentioned functions is needed because we can create an `iostream` derived from both `istream` and `ostream`, and such a stream needs to keep track of both a get position and a put position.[<sup>\[2\]</sup>](#references)
+The **p** suffix of above mentioned functions is needed because we can create an `iostream` derived from both `istream` and `ostream`, and such a stream needs to keep track of both a get position and a put position.[<sup>\[2:§38.6.2\]</sup>](#references)
 
-An `ostream` can send one character to its associated output stream buffer by calling its member function `sputc(c)`. If `pptr() != epptr()`, that character is copied to `*pptr()`, then `pptr()` is incremented. Otherwise, if `pptr() == epptr()`, `overflow()` is called.[<sup>\[1\]</sup>](#references)
+An `ostream` can send one character to its associated output stream buffer by calling its member function `sputc(c)`. If `pptr() != epptr()`, that character is copied to `*pptr()`, then `pptr()` is incremented. Otherwise, if `pptr() == epptr()`, `overflow()` is called.[<sup>\[1:§15.13.3\]</sup>](#references)
 
-An `ostream` can send multiple characters to the output stream buffer at once by using the member function `sputn(s, n)`, which simply calls the virtual function `xsputn(s, n)` of the most derived class. The base class version of the function calls `sputc()` for each character. Often, overriding `xsputn()` is only necessary if writing multiple characters can be implemented more efficiently than writing characters one at a time.[<sup>\[1\]</sup>](#references) For example, in some implementations, `std::ofstream::write()` simply passes the pointer to the suitable system call without intermediate buffering,[<sup>\[3\]</sup>](#references) something equivalent to this:
+An `ostream` can send multiple characters to the output stream buffer at once by using the member function `sputn(s, n)`, which simply calls the virtual function `xsputn(s, n)` of the most derived class. The base class version of the function calls `sputc()` for each character. Often, overriding `xsputn()` is only necessary if writing multiple characters can be implemented more efficiently than writing characters one at a time.[<sup>\[1:§15.13.3\]</sup>](#references) For example, in some implementations, `std::ofstream::write()` simply passes the pointer to the suitable system call without intermediate buffering,[<sup>\[3\]</sup>](#references) something equivalent to this:
 
 ```cpp
 {% include src/2020-06-10-user-defined-output-stream-buffers/filebuf-xsputn.hpp %}
@@ -148,7 +148,7 @@ Note the `-1` when calling `setp()` in the constructor, that is because, when `o
 
 Also note, the `write()` POSIX API used in `flushBuffer()`, returns the number of bytes written on success. It is not uncommon for `write()` to transfer fewer than the requested number of bytes, especially for socket or pipe. Normally, when a partial write happens, the caller should make another `write()` call to transfer the remaining bytes. However, here, to keep things simple, I just treat all partial writes as errors.
 
-I override the virtual function `sync()`, as well. For output streams, this function is responsible for flushing the buffer. For the unbuffered versions of the stream buffer, overriding this function is not necessary, because there is no buffer to be flushed. `sync()` is also called by the destructor to ensure that buffer gets flushed when the stream buffer is destroyed.[<sup>\[1\]</sup>](#references) `sync()` returns 0 on success, -1 otherwise. The base class version of this function has no effect, and returns 0.[<sup>\[3\]</sup>](#references)
+I override the virtual function `sync()`, as well. For output streams, this function is responsible for flushing the buffer. For the unbuffered versions of the stream buffer, overriding this function is not necessary, because there is no buffer to be flushed. `sync()` is also called by the destructor to ensure that buffer gets flushed when the stream buffer is destroyed.[<sup>\[1:§15.13.3\]</sup>](#references) `sync()` returns 0 on success, -1 otherwise. The base class version of this function has no effect, and returns 0.[<sup>\[3\]</sup>](#references)
 
 Although, not implemented in our `HexOutBuf`, the virtual functions `seekoff()` and `seekpos()` may be overridden to allow manipulation of the write position if such operations are also honored by the underlying I/O devices. The base class version of these functions have no effect.
 
@@ -162,6 +162,6 @@ Unfortunately, output stream buffers are only half of the story. Guess what's th
 
 # References
 
-1. [The C++ Standard Library (#ad)](https://www.amazon.com) by Nicolai Josuttis
+1. [The C++ Standard Library, Second Edition (#ad)](https://www.amazon.com) by Nicolai Josuttis
 1. [The C++ Programming Language, 4th Edition (#ad)](https://www.amazon.com) by Bjarne Stroustrup
 1. [std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf)

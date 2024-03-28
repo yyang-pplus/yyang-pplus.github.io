@@ -36,7 +36,7 @@ As my personal experience, my first project was totally a failure. I was working
 
 # The obvious solution
 
-Again, my point is that a "spare and clean" design doesn't mean the success of the project, it even doesn't means everything for a design itself. By everything I mean all the things that characterize a good design. If it is, then there exists an obvious solution to the second-system effect. Before I talk about my solution, let's first review Dr. Brooks' solution, mentioned in his article[<sup>\[1\]</sup>](#the-reference).
+Again, my point is that a "spare and clean" design doesn't mean the success of the project, it even doesn't means everything for a design itself. By everything I mean all the things that characterize a good design. If it is, then there exists an obvious solution to the second-system effect. Before I talk about my solution, let's first review Dr. Brooks' solution, mentioned in his article[<sup>\[1:§5\]</sup>](#the-reference).
 
 > How does the project manger avoid the second-system effect? By insisting on a senior architect who has at least two system under his belt.
 
@@ -57,11 +57,11 @@ The second-system effect doesn't exist for the outsiders, who don't have interna
 
 The second system effect is emphasized on the experience of the majority of architects involved in the design of the second system. The problem is how can the outsiders know how much experience the majority architects do have. Sure, it is not entirely impossible, but still it is hard.
 
-One interesting example comes from the experience when I read the second-system effect article. In the article, Dr. Brooks give a few IBM projects as examples of second systems. To be honest, I have no idea what those projects are and I have to trust his words completely. Like the Stretch example in the article[<sup>\[1\]</sup>](#the-reference):
+One interesting example comes from the experience when I read the second-system effect article. In the article, Dr. Brooks give a few IBM projects as examples of second systems. To be honest, I have no idea what those projects are and I have to trust his words completely. Like the Stretch example in the article[<sup>\[1:§5\]</sup>](#the-reference):
 
 > Consider as a stronger case the architecture, implementation, and even the realization of the Stretch computer, an outlet for the pent-up inventive desires of many people, and a second system for most of them.
 
-That looks reasonable, but something a little bit confusing follows almost immediately[<sup>\[1\]</sup>](#the-reference).
+That looks reasonable, but something a little bit confusing follows almost immediately[<sup>\[1:§5\]</sup>](#the-reference).
 
 > Operating System/360 was the second system for most of its designers. Groups of its designers came from building the 1410-7010 disk operating system, the Stretch operating system, the Project Mercury real-time system, and IBSYS for the 7090. Hardly anyone had experience with two previous operating system.
 
@@ -79,11 +79,11 @@ Besides, do you really know the other members of your team? Especially, do you r
 
 # The illusion
 
-It is interesting that a similar phenomenon of the second-system effect also exist in other disciplines. As it mentioned in [How Not to Be Wrong<sup>\[3\]</sup>](#the-reference):
+It is interesting that a similar phenomenon of the second-system effect also exist in other disciplines. As it mentioned in [How Not to Be Wrong<sup>\[3:§14\]</sup>](#the-reference):
 
 > Why is the second novel by a breakout debut writer, or the second album by an explosively popular band, so seldom as good as the first?
 
-And the answer follows immediately in the book[<sup>\[3\]</sup>](#the-reference):
+And the answer follows immediately in the book[<sup>\[3:§14\]</sup>](#the-reference):
 
 > It's because artistic success is an amalgam of talent and fortune, like everything else in life, and thus subject to regression to the mean.
 

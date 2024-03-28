@@ -40,7 +40,7 @@ The function `snextc()` can also be used to read one character. This function fi
 
 The function `sgetn()` can be used for reading multiple characters at once. This function simply calls the virtual function `xsgetn(s, count)` of the most derived class. The default implementation of `xsgetn()` reads characters as if by repeated calls to `sbumpc()`.[<sup>\[2\]</sup>](#references) Like the function `xsputn()` for output stream buffer, overriding `xsgetn()` is only necessary if reading multiple characters can be implemented more efficiently than reading characters one at a time.
 
-As with input stream buffer, characters can also be put back into the read buffer by using the functions `sputbackc(c)` and `sungetc()`. Both functions decrement the read pointer, if possible. The difference is that `sputbackc()` gets the character to be put back as its argument. If putback position was not available, they return what virtual function `pbackfail()` returns. By overriding this function, you can implement a mechanism to restore the old read position even in this case. The default base class version of this function does nothing and returns `traits_type::eof()` in all situations.[<sup>\[1\]</sup>](#references)[<sup>\[2\]</sup>](#references) Our version of `pbackfail()` also ensures that the given character was indeed the character read.
+As with input stream buffer, characters can also be put back into the read buffer by using the functions `sputbackc(c)` and `sungetc()`. Both functions decrement the read pointer, if possible. The difference is that `sputbackc()` gets the character to be put back as its argument. If putback position was not available, they return what virtual function `pbackfail()` returns. By overriding this function, you can implement a mechanism to restore the old read position even in this case. The default base class version of this function does nothing and returns `traits_type::eof()` in all situations.[<sup>\[1:§15.13.3\]</sup>](#references)[<sup>\[2\]</sup>](#references) Our version of `pbackfail()` also ensures that the given character was indeed the character read.
 
 Here is an example of using this stream buffer:
 
@@ -64,13 +64,13 @@ $ ./hex-in-stream-nobuf <<< '303a09455e69'
 
 Because of how an input stream buffer works, an unbuffered version may not be the simplest way to implement a user-defined input stream buffer, rather the simplest way would be an input stream buffer that only maintains a single character buffer. I will show you how. However, before we dive into the implementation details, we need to understand how the get area works with the operations.
 
-The get area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1\]</sup>](#references)[<sup>\[2\]</sup>](#references)
+The get area is defined by three pointers that can be accessed by the following three member functions:[<sup>\[1:§15.13.3\]</sup>](#references)[<sup>\[2\]</sup>](#references)
 
 1. `eback()`: ("**e**nd put**back**") points at the beginning of the get area, or, as the name suggests, the end of the putback area.
 1. `gptr()`: ("**g**et **p**oin**t**e**r**") points to the current character in the get area.
 1. `egptr()`: ("**e**nd **g**et **p**oin**t**e**r**") points to one past the end of the get area.
 
-Function `setg(eback, gptr, egptr)` sets the values of those three pointers. Characters in range `[eback(), gptr())` are those can be put back. Characters in range `[gptr(), egptr())` have been transported from the underlying input device, but are still waiting for processing.[<sup>\[1\]</sup>](#references)
+Function `setg(eback, gptr, egptr)` sets the values of those three pointers. Characters in range `[eback(), gptr())` are those can be put back. Characters in range `[gptr(), egptr())` have been transported from the underlying input device, but are still waiting for processing.[<sup>\[1:§15.13.3\]</sup>](#references)
 
 `gbump(offset)` can be used to reposition `gptr()` by `offset` characters relative to its current position. Although, not clearly stated in the documentation, a negative `offset` may be given to decrement the read pointer `gptr()`.
 
@@ -95,7 +95,7 @@ Of course, a single character buffer may be easy to implement, but it is not qui
 {% include src/2020-06-15-user-defined-input-stream-buffers/hex-in-stream-buffer.hpp %}
 ```
 
-For this version of `HexInBuf`, one extra thing we need to take care of is saving the old data for putback when refreshing the get area with new characters. Often, we need to move the last few characters of the current buffer to the beginning of the buffer and appends the newly read characters thereafter.[<sup>\[1\]</sup>](#references)
+For this version of `HexInBuf`, one extra thing we need to take care of is saving the old data for putback when refreshing the get area with new characters. Often, we need to move the last few characters of the current buffer to the beginning of the buffer and appends the newly read characters thereafter.[<sup>\[1:§15.13.3\]</sup>](#references)
 
 Although, not strictly required, I also override virtual function `sync()`. For input streams, its behavior is implementation defined. Typically, one implementation may empty the get area and move the current file position back by the corresponding number of bytes.[<sup>\[2\]</sup>](#references)
 
@@ -107,5 +107,5 @@ As I have already shown in today's post, implementing user-defined input stream 
 
 # References
 
-1. [The C++ Standard Library (#ad)](https://www.amazon.com) by Nicolai Josuttis
+1. [The C++ Standard Library, Second Edition (#ad)](https://www.amazon.com) by Nicolai Josuttis
 1. [std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf)

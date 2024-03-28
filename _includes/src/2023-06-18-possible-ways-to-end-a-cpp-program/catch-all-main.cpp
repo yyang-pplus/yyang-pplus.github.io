@@ -10,7 +10,7 @@ struct ExitException : public std::exception {
 
 
 int main() try {
-    // do something
+    // main body
 } catch (const ExitException &e) {
     return e.error_code;
 } catch (const std::exception &) {

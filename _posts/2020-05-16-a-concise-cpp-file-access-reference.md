@@ -39,7 +39,7 @@ The class template `basic_filebuf<>` is used by the other file stream classes to
 | fs.open(f, mode)     | Open the **f**ile with given **mode**                                    |
 | fs.close()           | Close the associated file                                                |
 
-One advantage of accessing files through file streams is the automatic management of file resources using the RAII pattern.[<sup>\[4\]</sup>](#references)
+One advantage of accessing files through file streams is the automatic management of file resources using the RAII pattern.[<sup>\[4:§15.9.1\]</sup>](#references)
 
 There are a few predefined file stream object in header `<iostream>`:
 
@@ -53,9 +53,9 @@ There are a few predefined file stream object in header `<iostream>`:
 | in \>\> x  | Read from an **in**put stream into **x** according to **x**'s type |
 | out \<\< x | Insert **x** into the **out**put stream according to **x**'s type  |
 
-The I/O operators mechanism is the key improvement over C's IO mechanism, as it is type sensitive, inherently type-safe, and extensible.[<sup>\[2\]</sup>](#references)
+The I/O operators mechanism is the key improvement over C's IO mechanism, as it is type sensitive, inherently type-safe, and extensible.[<sup>\[2:§38.4.1.1\]</sup>](#references)
 
-As you will see shortly, the formatted I/O operators are simpler to use and less error-prone than the unformatted ones. So it is recommended that you should prefer formatted operators if possible.[<sup>\[2\]</sup>](#references)
+As you will see shortly, the formatted I/O operators are simpler to use and less error-prone than the unformatted ones. So it is recommended that you should prefer formatted operators if possible.[<sup>\[2:§38.4.1.2\]</sup>](#references)
 
 ## FS: unformatted input
 
@@ -78,14 +78,14 @@ As you will see shortly, the formatted I/O operators are simpler to use and less
 
 By default, `fstream` is buffered. You can flush the output buffer explicitly by calling `flush()`, or by using the output manipulator `std::endl`, which inserts a newline character into the output sequence as well.
 
-An output stream is automatically flushed when it is destroyed, when a **tie()**d `istream` needs input, and when the implementation find it advantageous.[<sup>\[2\]</sup>](#references) For example, on most Unix system, the output buffer is automatically flushed when writing a newline character into an output stream that is a terminal.[<sup>\[3\]</sup>](#references)
+An output stream is automatically flushed when it is destroyed, when a **tie()**d `istream` needs input, and when the implementation find it advantageous.[<sup>\[2:§38.4.5.2\]</sup>](#references) For example, on most Unix system, the output buffer is automatically flushed when writing a newline character into an output stream that is a terminal.[<sup>\[3\]</sup>](#references)
 
 To turn off buffering for a file stream completely, one can do so by using the output manipulator `std::unitbuf`. This flag is set for `std::cerr` by default. Another way to make a file stream unbuffered is calling the `out.rdbuf()->pubsetbuf(nullptr, 0)` of `filebuf` class directly, which is the public version of `setbuf()`. Just note that it has to be called before any I/O has taken place in order for it to take effect.[<sup>\[3\]</sup>](#references)
 
 
 # C-style I/O
 
-The standard library for the C language is with minor modifications incorporated into the C++ standard library. The C standard library provides quite a few functions that have proven useful over the years in a wide variety of contexts - especially for relatively low-level programming.[<sup>\[2\]</sup>](#references) The C-style I/O functions are among them.
+The standard library for the C language is with minor modifications incorporated into the C++ standard library. The C standard library provides quite a few functions that have proven useful over the years in a wide variety of contexts - especially for relatively low-level programming.[<sup>\[2:§43.1\]</sup>](#references) The C-style I/O functions are among them.
 
 Thus, In C++, the other portable way for file access is by using the C++ version of the C Standard Input and Output Library, which is mainly defined in header `<cstdio>`.
 
@@ -108,13 +108,13 @@ Header `<cstdio>` contains three predefined stream objects:
 | n = std::fprintf(fp, format, ...) | Write data to output stream according to **format**                  |
 | n = std::fscanf(fp, format, ...)  | Read data from input stream and interpret it according to **format** |
 
-Using `std::fprintf()` is unsafe in the sense that type checking is not done.[<sup>\[2\]</sup>](#references) Such as:
+Using `std::fprintf()` is unsafe in the sense that type checking is not done.[<sup>\[2:§43.3\]</sup>](#references) Such as:
 
 ```cpp
 {% include src/2020-05-16-a-concise-cpp-file-access-reference/fprintf-issue.hpp %}
 ```
 
-Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf("%d", n)` is usually not what you want, rather it should be `scanf("%d", &n)` instead.[<sup>\[6\]</sup>](#references)
+Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf("%d", n)` is usually not what you want, rather it should be `scanf("%d", &n)` instead.[<sup>\[6:§7.4\]</sup>](#references)
 
 ## FP: unformatted input
 
@@ -125,7 +125,7 @@ Also note, the arguments to `std::scanf()` must be pointers. For example, `scanf
 
 Similar to `std::fputc()` and `std::putc()`, in C++, calling `std::fgetc()` and `std::getc()` always have the same effect.
 
-Never use `std::fgets()` or its rough equivalent `std::scanf("%s", s)`! For years, they were the favorites of virus writers: By providing an input that overflows the input buffer, a program can be corrupted and a computer potentially taken over by an attacker.[<sup>\[2\]</sup>](#references)
+Never use `std::fgets()` or its rough equivalent `std::scanf("%s", s)`! For years, they were the favorites of virus writers: By providing an input that overflows the input buffer, a program can be corrupted and a computer potentially taken over by an attacker.[<sup>\[2:§43.3\]</sup>](#references)
 
 ## FP: unformatted output
 
@@ -145,7 +145,7 @@ Calling `std::setbuf(fp, nullptr)`, which passes a `nullptr` as the `buffer` arg
 
 ## FP: C11
 
-The C11 version of the C standard library offers a whole alternate set of stdio input functions that take an extra argument to defend against overflow, such as, gets_s(s, n), fscanf_s() and so on.[<sup>\[2\]</sup>](#references) Since, those functions are not supported in C++ yet, I will just skip them.
+The C11 version of the C standard library offers a whole alternate set of stdio input functions that take an extra argument to defend against overflow, such as, gets_s(s, n), fscanf_s() and so on.[<sup>\[2:§43.3\]</sup>](#references) Since, those functions are not supported in C++ yet, I will just skip them.
 
 
 # POSIX file APIs
@@ -197,7 +197,7 @@ In today's post, we have talked about how to perform file I/O operations in C++ 
 1. [Input/output library](https://en.cppreference.com/w/cpp/io)
 1. [The C++ Programming Language, 4th Edition (#ad)](https://www.amazon.com) by Bjarne Stroustrup
 1. [The GNU C++ Library: Chapter 13. Input and Output: Stream Buffers](https://gcc.gnu.org/onlinedocs/libstdc++/manual/streambufs.html)
-1. [The C++ Standard Library (#ad)](https://www.amazon.com) by Nicolai Josuttis
+1. [The C++ Standard Library, Second Edition (#ad)](https://www.amazon.com) by Nicolai Josuttis
 1. [C-style file input/output](https://en.cppreference.com/w/cpp/io/c)
-1. [The C Programming Language (#ad)](https://www.amazon.com) by Brian Kernighan and Dennis Ritchie
+1. [The C Programming Language, Second Edition (#ad)](https://www.amazon.com) by Brian Kernighan and Dennis Ritchie
 1. [Linux manual pages: Section 2](https://man7.org/linux/man-pages/dir_all_by_section.html#man2)

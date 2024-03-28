@@ -55,14 +55,14 @@ Unlike `static_assert`, `assert` has no standardized interface to add an additio
 
 Note, in the previous example, there is an extra pair of parentheses in the second `assert` statement, which uses a comma operator. That is because `assert` is a function-like macro, commas anywhere in condition that are not protected by parentheses are interpreted as macro argument separators. Such commas are often found in template argument lists and list-initialization.[<sup>\[3\]</sup>](#references) Also, attention should be payed to the order of the operands in the comma expression, since the result of a build-in comma operator always has the same type and value as the second operand. In our case, the condition we want to assert for should always come after the message string.
 
-In general, compile-time checking should be preferred over run-time checking. Since, apparently, compile-time checking has no performance impact, and you certainly don't need to write error handlers for errors caught at compile time.[<sup>\[4 P.5\]</sup>](#references)
+In general, compile-time checking should be preferred over run-time checking. Since, apparently, compile-time checking has no performance impact, and you certainly don't need to write error handlers for errors caught at compile time.[<sup>\[4:§P.5\]</sup>](#references)
 
 
 # When to use assertions
 
 Assertions are mainly used during development and testing to catch errors early on. Here are a few places where assertions could be useful.
 
-**Assertions can be used as a better form of comments to state your assumptions concerning a program's behavior,** where it is applicable. A common issue with comments is that comments are not updated as consistently as code. A wrong comment is worse than no comment, because it will lower one's confidence on the code itself, as it says, if the comment and the code disagree, both are likely to be wrong.[<sup>\[4 NL.2\]</sup>](#references) On the other hand, assumptions expressed in assertions can rarely be wrong, once a program has been tested thoroughly. One of such examples may look like this:
+**Assertions can be used as a better form of comments to state your assumptions concerning a program's behavior,** where it is applicable. A common issue with comments is that comments are not updated as consistently as code. A wrong comment is worse than no comment, because it will lower one's confidence on the code itself, as it says, if the comment and the code disagree, both are likely to be wrong.[<sup>\[4:§NL.2\]</sup>](#references) On the other hand, assumptions expressed in assertions can rarely be wrong, once a program has been tested thoroughly. One of such examples may look like this:
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assertion-as-comment.hpp %}
@@ -82,9 +82,9 @@ Furthermore, **Some preconditions, postconditions, and invariants can be express
 {% include src/2021-02-10-pds-assertions/assertion-as-precondition.hpp %}
 ```
 
-Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. You don’t need to mention it for each member function.[<sup>\[4 I.5\]</sup>](#references)
+Also note, most member functions have as a precondition that some class invariant holds. That invariant is established by a constructor and must be reestablished upon exit by every member function called from outside the class. You don’t need to mention it for each member function.[<sup>\[4:§I.5\]</sup>](#references)
 
-As a special case of the previous situation, `static_assert` **can also be used to check a class matches a concept:**[<sup>\[4 T.150\]</sup>](#references)
+As a special case of the previous situation, `static_assert` **can also be used to check a class matches a concept:**[<sup>\[4:§T.150\]</sup>](#references)
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/assert-on-concept.hpp %}
@@ -115,13 +115,13 @@ If that is the case, how should we express precondtions while still having a pro
 {% include src/2021-02-10-pds-assertions/if-as-precondition.hpp %}
 ```
 
-However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4 I.6\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **guidelines support library**([GSL](https://github.com/Microsoft/GSL)) for expressing preconditions.
+However, one potential problem with precondtions stated in if-statements is that this can make them hard to be distinguished from ordinary code.[<sup>\[4:§I.6\]</sup>](#references) So, a more preferred way is to use `Expects()` macro from **guidelines support library**([GSL](https://github.com/Microsoft/GSL)) for expressing preconditions.
 
 ```cpp
 {% include src/2021-02-10-pds-assertions/expects-as-precondition.hpp %}
 ```
 
-Ideally, preconditions and postconditions should be part of the interface rather than part of the implementation, but we don’t yet have the language facilities to do that.[<sup>\[4 I.6\]</sup>](#references)
+Ideally, preconditions and postconditions should be part of the interface rather than part of the implementation, but we don’t yet have the language facilities to do that.[<sup>\[4:§I.6\]</sup>](#references)
 
 ## Not being side effects free
 
