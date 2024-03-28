@@ -99,7 +99,7 @@ modifying entry "olcDatabase={2}bdb,cn=config"
 
 `olcRootDN: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth` is the authentication DN for the localhost's superuser. Please check [my previous post]({{page.previous.url}}) for how to query this information from the openLDAP servers. Also `olcRootPW` has to be deleted as well, because it can only be set when root DN is under suffix.
 
-This solution works, because the `olcRootDN` directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the `olcRootDN` is always allowed full rights (i.e., auth, search, compare, read, and write) on everything and anything within the DIT.[<sup>\[2\]</sup>](#references)
+This solution works, because the `olcRootDN` directive need not refer to an entry in the database or even in the directory, and it may refer to a **SASL identity**. Also, regardless of what access control policy is defined, the `olcRootDN` is always allowed full rights (i.e., auth, search, compare, read, and write) on everything and anything within the DIT.[<sup>\[2:§8.1\]</sup>](#references)
 
 
 # Test
@@ -136,4 +136,4 @@ The only catch is that simple authentication for root DN will no longer works, s
 # References
 
 1. [Introduction to ldapwhoami and LDAP Authtication Mechanisms]({{page.previous.url}})
-1. [OpenLDAP 2.4 Administrator’s Guide: Access Control](https://www.openldap.org/doc/admin24/access-control.html).
+1. [OpenLDAP Software 2.4 Administrator's Guide](https://www.openldap.org/doc/admin24/index.html)

@@ -26,7 +26,7 @@ This is my first post of the second-system effect series. I'd highly recommend y
 
 # The quote
 
-For ease of discussing, let's first quote what we know about the second-system effect from [The Mythical Man-Month<sup>\[1\]</sup>](#the-reference):
+For ease of discussing, let's first quote what we know about the second-system effect from [The Mythical Man-Month<sup>\[1:§5\]</sup>](#the-reference):
 
 > An architect’s first work is apt to be spare and clean. He knows he doesn’t know what he’s doing, so he does it carefully and with great restraint.
 >
@@ -49,7 +49,7 @@ The term, second-system effect, itself suggests that it is an effect happens to 
 
 ### The spare and clean first work
 
-Just as the ancient Chinese proverb told us[<sup>\[2\]</sup>](#the-reference):
+Just as the ancient Chinese proverb told us[<sup>\[2:§64\]</sup>](#the-reference):
 
 > A journey of a thousand miles begins with a single step.
 

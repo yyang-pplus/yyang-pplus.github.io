@@ -16,7 +16,7 @@ tags:
   - "software"
 ---
 
-Compiler warnings are messages produced by a compiler who is trying to warn you about potential issues in your code. Although, warnings don't interrupt the compilation process, they should not just be ignored, as warnings may provide valuable insight and advice to keep your programs away from certain bugs. Paying attention to compiler warnings and keeping a low number of warnings is a commonly used preemptive technique to prevent bugs in the earlier phase of software development life circle. As it is said, it is easier and cheaper to fix bugs in earlier stages rather than later ones.
+Compiler warnings are messages produced by a compiler who is trying to warn you about potential issues in your code. Although, warnings don't interrupt the compilation process, they should not just be ignored, as warnings may provide valuable insight and advice to keep your programs away from certain bugs. Paying attention to compiler warnings and keeping a low number of warnings is a commonly used preemptive technique to prevent bugs in the earlier phase of software development life circle. As it is said, it is much easier and cheaper to fix bugs in earlier stages than later ones.
 
 
 # Enable warnings
@@ -75,13 +75,13 @@ Warnings are warnings for reasons, which is because they may produce false posit
 
 Most likely, the above function was intended to return the sum of the given two parameters, instead of the double of only the first parameter.
 
-However, there are cases where unused parameters cannot be avoid, such as functions that have to conform to certain predefined interfaces. In that case, the recommended way to suppress this kind of warnings is to make unused parameters unnamed.[<sup>\[7 F.9\]</sup>](#references)
+However, there are cases where unused parameters cannot be avoid, such as functions that have to conform to certain predefined interfaces. In that case, the recommended way to suppress this kind of warnings is to make unused parameters unnamed.[<sup>\[7:§F.9\]</sup>](#references)
 
 ```cpp
 {% include src/2021-01-20-pds-compiler-warnings/unused-parameter-fixed.hpp %}
 ```
 
-Additionally, if parameters are conditionally unused, declare them with the `[[maybe_unused]]` attribute. For example:[<sup>\[7 F.9\]</sup>](#references)
+Additionally, if parameters are conditionally unused, declare them with the `[[maybe_unused]]` attribute. For example:[<sup>\[7:§F.9\]</sup>](#references)
 
 ```cpp
 {% include src/2021-01-20-pds-compiler-warnings/conditional-unused-but-set-parameter-fixed.hpp %}
@@ -119,7 +119,7 @@ Like the unused variable warnings, `-Wunused-function` could be helpful from tim
 {% include src/2021-01-20-pds-compiler-warnings/unused-result.hpp %}
 ```
 
-The `[[nodiscard]]` here is trying to encourage the callers to remember to test the returned error code, as the `connect()` may fail. Usually, there is a good reason why the author of the function used `[[nodiscard]]` in the first place, so think twice before you discard such a result. If you still think it’s appropriate and your code reviewer agrees, use `std::ignore =` to turn off the warning. This way is simple, portable, and easy to grep.[<sup>\[7 ES.48\]</sup>](#references)
+The `[[nodiscard]]` here is trying to encourage the callers to remember to test the returned error code, as the `connect()` may fail. Usually, there is a good reason why the author of the function used `[[nodiscard]]` in the first place, so think twice before you discard such a result. If you still think it’s appropriate and your code reviewer agrees, use `std::ignore =` to turn off the warning. This way is simple, portable, and easy to grep.[<sup>\[7:§ES.48\]</sup>](#references)
 
 ```cpp
 #include <tuple>

@@ -24,9 +24,9 @@ Logging is an important and integral part of software development. However, just
 
 As a developer, if you have been working on a fairly complex software, the chances are, you probably already known what logging is in programming, and how a carefully constructed log can help you to pinpoint an issue much faster, especially in production. In short, **logging** is the process of recording an application's key actions and their context. Later on, the logged information can help the engineers to mentally reconstruct the states of the application at certain points. A Log can be an important source of information, and sometimes the only source, when diagnosing a problem. As it said, the clues most useful in figuring out something that went wrong often lie in the events immediately prior.
 
-There is no doubt that logging is a useful tool, but, as experienced developers already known, too many log entries can do more harms than no logs at all. For one, logs clustered with irrelevant information can be difficult to browse. For another, logging can consume too much resources, such as, CPU, disk I/O or space, network bandwidth, and so forth, in a short period of time, thus affect the overall performance of the system significantly.
+There is no doubt that logging is a valuable tool for debugging when used judiciously, whereas when used unwisely logging may also cause serious issues. Here are some considerations one should keep in mind when working with logging. First, just like any other code in a program, logging statements need to be maintained. Furthermore, logging statements tend to become outdated more frequently than functional code, due to the lack of testing. A wrong logging message is worse than no logging, as it may waste a developer's time for hunting the wrong target. Second, logging may inadvertently expose sensitive information, such as passwords or personal data, if not handled carefully. Third, another common issue one may have with logging is actually having too much logging. For one, logs clustered with irrelevant information can be difficult to browse. For another, logging can consume too much resources, such as, CPU, disk I/O or space, network bandwidth, and so forth, in a short period of time, thus affect the overall performance of the system significantly. This kind of issue is especially noticeable in sophisticated long-running programs or performance-critical applications.
 
-Now we know what kind of problem we are facing; let us talk about how we can resolve it.
+In the rest part of this post, we will focus our discussions on programmatic mechanisms to deal with too many log entries.
 
 
 # Log severity levels
@@ -152,7 +152,7 @@ One possible implementation of the sliding window log algorithm is:
 
 ## Sliding window counter
 
-The sliding window counter algorithm is a variant of the fixed window counter algorithm. It can produce a more smooth flow of log messages when comparing to the fixed window counter algorithm by taking the counter of previous window into account. The sliding window counter algorithm works as follows:[<sup>\[5\]</sup>](#references)
+The sliding window counter algorithm is a variant of the fixed window counter algorithm. It can produce a more smooth flow of log messages when comparing to the fixed window counter algorithm by taking the counter of previous window into account. The sliding window counter algorithm works as follows:[<sup>\[5:§4\]</sup>](#references)
 
 * Divide the time into fix-sized windows and each window has a counter to count the number of log entries within the time window.
 * Each conforming log request increments the counter by one.
@@ -195,4 +195,4 @@ I hope you have found this post useful, if so, you may want to check out [other 
 1. [Leaky bucket](https://en.wikipedia.org/wiki/Leaky_bucket)
 1. [C++11: std::threads managed by a designated class](https://rafalcieslak.wordpress.com/2014/05/16/c11-stdthreads-managed-by-a-designated-class/) by Rafał Cieślak
 1. [Rate Limiter — Sliding Window Log](https://medium.com/@avocadi/rate-limiter-sliding-window-log-44acf1b411b9)
-1. [System Design Interview - An insider's guide (#ad)](https://www.amazon.com/) by Alex Xu
+1. [System Design Interview - An insider's guide, Volume 1 (#ad)](https://www.amazon.com/) by Alex Xu

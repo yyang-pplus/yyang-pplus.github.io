@@ -15,7 +15,7 @@ deb https://dev.monetdb.org/downloads/deb/ $SUITE monetdb
 deb-src https://dev.monetdb.org/downloads/deb/ $SUITE monetdb
 EOF
 
-wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add -
+sudo wget --output-document=/etc/apt/trusted.gpg.d/monetdb.gpg https://dev.monetdb.org/downloads/MonetDB-GPG-KEY.gpg
 
 sudo apt update
 
@@ -25,11 +25,11 @@ temp_dir="/tmp/$(date +%s)"
 mkdir $temp_dir
 
 pushd $temp_dir
-SELECTED_PACKAGES=(monetdb5-server monetdb5-sql monetdb-client)
+SELECTED_PACKAGES=(libmonetdb-client12 libmonetdb-stream13 libmonetdb20 monetdb-client monetdb5-server monetdb5-sql)
 for a_package in ${SELECTED_PACKAGES[@]}; do
     PACKAGE_NAME="${a_package}_${VERSION}_amd64.deb"
     wget https://www.monetdb.org/downloads/deb/archive/$SUITE/$PACKAGE_NAME
-    sudo apt --yes install "./$PACKAGE_NAME"
+    sudo apt --yes --allow-downgrades install "./$PACKAGE_NAME"
 done
 popd
 

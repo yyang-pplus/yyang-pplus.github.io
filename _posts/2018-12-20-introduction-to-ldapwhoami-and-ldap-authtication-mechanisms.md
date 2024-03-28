@@ -64,7 +64,7 @@ $ ldapwhoami -H ldap:// -x -D cn=admin,dc=yyang-pplus,dc=github,dc=io -W
 dn:cn=admin,dc=yyang-pplus,dc=github,dc=io
 ```
 
-The `-D` option is used to specify the bind DN. Binding to an entry often gives you additional privileges that are not available through an anonymous bind. Binding to the rootDN always gives you full access to the entire **data information trees (DIT)**, since rootDN is not subject to access control or administrative limit restrictions for operations within the database. As a consequence, it's useless (and results in a performance penalty) to explicitly list the rootDN among the clauses. Also, rootDN need not refer to an entry in the database or even in the directory, and it may refer to a SASL identity. [<sup>\[1\]</sup>](#references)[<sup>\[5\]</sup>](#references)[<sup>\[6\]</sup>](#references) For an example of what this really means, feel free to check my other LDAP post: [{{page.next.title}}]({{page.next.url}}).
+The `-D` option is used to specify the bind DN. Binding to an entry often gives you additional privileges that are not available through an anonymous bind. Binding to the rootDN always gives you full access to the entire **data information trees (DIT)**, since rootDN is not subject to access control or administrative limit restrictions for operations within the database. As a consequence, it's useless (and results in a performance penalty) to explicitly list the rootDN among the clauses. Also, rootDN need not refer to an entry in the database or even in the directory, and it may refer to a SASL identity. [<sup>\[1\]</sup>](#references)[<sup>\[5:§6.2.3.4\]</sup>](#references)[<sup>\[5:§8.1\]</sup>](#references) For an example of what this really means, feel free to check my other LDAP post: [{{page.next.title}}]({{page.next.url}}).
 
 For the SASL authentication methods, the output is a bit more interesting, it provides more information on how the authentication mechanism is being seen.[<sup>\[1\]</sup>](#references)
 
@@ -108,6 +108,5 @@ In this article we barely scratched the surface of the LDAP authentication mecha
 1. [How To Manage and Use LDAP Servers with OpenLDAP Utilities](https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities) by Justin Ellingwood.
 1. [How To Configure OpenLDAP and Perform Administrative LDAP Tasks](https://www.digitalocean.com/community/tutorials/how-to-configure-openldap-and-perform-administrative-ldap-tasks) by Justin Ellingwood.
 1. [Understanding the LDAP Protocol, Data Hierarchy, and Entry Components](https://www.digitalocean.com/community/tutorials/understanding-the-ldap-protocol-data-hierarchy-and-entry-components) by Justin Ellingwood.
-1. [Understanding and Deploying LDAP Directory Services (#ad)](https://www.amazon.com) by Gordon S. Good and Mark Smith.
-1. [OpenLDAP 2.4 Administrator's Guide: The slapd Configuration File](https://www.openldap.org/doc/admin24/slapdconfig.html)
-1. [OpenLDAP 2.4 Administrator's Guide: Access Control](https://www.openldap.org/doc/admin24/access-control.html)
+1. [Understanding and Deploying LDAP Directory Services, Second Edition (#ad)](https://www.amazon.com) by Gordon S. Good and Mark Smith.
+1. [OpenLDAP Software 2.4 Administrator's Guide](https://www.openldap.org/doc/admin24/index.html)
