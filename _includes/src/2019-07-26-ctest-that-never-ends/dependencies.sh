@@ -25,6 +25,7 @@ temp_dir="/tmp/$(date +%s)"
 mkdir $temp_dir
 
 pushd $temp_dir
+# The order of packages matters
 SELECTED_PACKAGES=(libmonetdb-client12 libmonetdb-stream13 libmonetdb20 monetdb-client monetdb5-server monetdb5-sql)
 for a_package in ${SELECTED_PACKAGES[@]}; do
     PACKAGE_NAME="${a_package}_${VERSION}_amd64.deb"
