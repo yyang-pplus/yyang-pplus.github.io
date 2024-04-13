@@ -55,7 +55,7 @@ $ file core.894
 core.894: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/usr/bin/containerd'
 ```
 
-After GDB is invoked, and when you get a prompt, you can print a backtrace of the entire stack by using the `backtrace` GDB command, or its aliases `bt`, `where`, or `info stack`. The `backtrace` command supports many options, one of the most useful options, especially during a non-interactive debug session to collect as much information as you can, is `full` or `-full`, which let the `backtrace` command prints the values of the local variables as well. For more information about other options, please refer to the GDB manual, or use the `help backtrace` GDB command.
+After GDB has been invoked, and when you get a prompt, you can print a backtrace of the entire stack by using the `backtrace` GDB command, or its aliases `bt`, `where`, or `info stack`. The `backtrace` command supports many options, one of the most useful options, especially during a non-interactive debug session to collect as much information as you can, is `full` or `-full`, which let the `backtrace` command prints the values of the local variables as well. For more information about other options, please refer to the GDB manual, or use the `help backtrace` GDB command.[<sup>\[3:§8.2\]</sup>](#references)
 
 In a multi-threaded program, GDB by default shows the backtrace only for the current thread. To display the backtrace for all the threads, use the following GDB command:[<sup>\[3:§8.2\]</sup>](#references)
 
@@ -65,7 +65,7 @@ In a multi-threaded program, GDB by default shows the backtrace only for the cur
 
 Here, `(gdb)` at the beginning of the above line means that the command following it should be run at the GDB prompt.
 
-Put it all together, below is an example of a one-liner shell command to print the backtrace for all the threads of `containerd`.
+Put it all together, below is an example one-liner shell command to print the backtrace for all the threads of `containerd`.
 
 ```bash
 sudo gdb --batch -ex 'thread apply all backtrace full' $(which containerd) $(pidof containerd)
@@ -75,7 +75,7 @@ This command runs GDB in batch mode. Batch mode disables pagination, sets unlimi
 
 ## pstack
 
-Another debugger tool of my favorites is `pstack`, when I only need to print a backtrace of a running process. For example, if you want to peek at what is going on inside `containerd`, you can simply do it with the following shell command:
+Another debugger tool of my favorites is `pstack`, when I only need to print the backtrace of a running process. For example, if you want to peek at what is going on inside `containerd`, you can simply do it with the following shell command:
 
 ```bash
 sudo pstack $(pgrep containerd)
@@ -107,9 +107,9 @@ Program terminated with signal SIGSEGV, Segmentation fault.
 
 The first thing to analyze a backtrace is identifying the error message associated with it. In our case, that is the first line of the above output, which basically tells us the program crashed due to a segmentation fault. This can give us a high level idea of what issue we are facing and sometimes a valuable hint to the root cause. This step can be extended to any application level error messages those are related to the backtrace as well.
 
-With the relevant error message in mind, now we can look at the actual backtrace. A backtrace is typically presented as lines of function calls, or stack frames to be more technical. Each line in the backtrace represents a function call, starting with the most recent function call that led to the error, following by its caller, and going back to the entry point of the program. Each line in the backtrace usually shows the function names, source code file names, line numbers, and sometimes additional context such as arguments to the function or program counters.[<sup>\[3:§8.2\]</sup>](#references) This information helps us to pinpoint the exact location in the source code where each function was called from and in what order. This is particularly important if there exists multiple code paths that could lead to the same location in the source, as it can save us a lot of time by avoid looking at the code that are irrelevant to the issue. In our example above, it has four function calls that are currently active in the program, which are numbered from 0 to 3. It starts with `half` as the most recent function call, followed by `stepThree` as its caller, and going back to the `main` function.
+With the relevant error message in mind, now we can look at the actual backtrace. A backtrace is typically presented as lines of function calls, or stack frames to be more technical. Each line in the backtrace represents a function call, starting with the most recent function call that led to the error, following by its caller, and going back to the entry point of the program. Each line in the backtrace usually shows the function names, source code file names, line numbers, and sometimes additional context such as arguments to the function or program counters.[<sup>\[3:§8.2\]</sup>](#references) This information helps us to pinpoint the exact location in the source code where each function was called from and in what order. This is particularly important if there exists multiple code paths that could lead to the same location in the source, as it can save us a lot of time by avoid looking at the code that are irrelevant to the issue. In our example above, it has four function calls that are currently active in the program, which are numbered from 0 to 3. It starts with `half` as the most recent function call, followed by `stepThree` as its caller, and going all the way back to the `main` function.
 
-When analyzing a backtrace, I usually start from the top (zero frame) of the backtrace, as the top typically represents the function where the failure occurred, although this is not necessarily where the failure caused. The top in our example has `half` as the function name, `dereference-null-pointer.cpp` as the source file name, followed by `2` as the line number. The specific source file name and line number indicate the exact position in the code where the error occurred. That is the following line in our example:
+When analyzing a backtrace, I usually start from the top (zero frame) of the backtrace, as the top typically represents the function where the failure occurred, although this is not necessarily where the failure caused.[<sup>\[1\]</sup>](#references) The top in our example has `half` as the function name, `dereference-null-pointer.cpp` as the source file name, followed by `2` as the line number. The specific source file name and line number indicate the exact position in the code where the error occurred. That is the following line in our example:
 
 ```cpp
 *pointer /= 2;
@@ -125,12 +125,12 @@ half(three);
 
 As we can see, `stepThree()` passed `three` as the argument to `half()`. After checking the associated code, we find that `three` came from the same function and it was never pointed to a meaningful address. That is the root cause we are looking for.
 
-Of course, issues we are going to face in the real world will not be that straight forward as the example we just showed, but the underlying concepts are essentially the same.
+Of course, issues we are going to face in the real world will unlikely be that straight forward as the example we just showed, but the underlying concepts are essentially the same.
 
 
 # Conclusion
 
-When troubleshooting an issue of a program, developers are often desperate to know what is going on inside the program when the error happened. The Backtrace is one of the best tools that can answer this kind of questions. Thus, being familiar with backtraces is essential for improving one's debugging skills.
+When troubleshooting an issue of a program, developers often wonder what is going on inside the program when the error happened. The Backtrace is one of the best tools that can answer this kind of questions. Thus, being familiar with backtraces is essential for improving one's debugging skills.
 
 In today's post, we have discussed about what a backtrace is, and its role in debugging. We have also showed how to get the right backtraces with the help of external debuggers, and how to analyze the retrieved backtraces to find out the root causes of the issues more effectively.
 
