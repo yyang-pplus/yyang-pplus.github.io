@@ -125,7 +125,7 @@ half(three);
 
 As we can see, `stepThree()` passed `three` as the argument to `half()`. After checking the associated code, we find that `three` came from the same function and it was never pointed to a meaningful address. That is the root cause we are looking for.
 
-Of course, issues we are going to face in the real world will unlikely be that straight forward as the example we just showed, but the underlying concepts are essentially the same.
+Of course, issues we are going to face in the real world will unlikely be that straightforward as the example we just showed, but the underlying concepts are essentially the same.
 
 
 # Conclusion
