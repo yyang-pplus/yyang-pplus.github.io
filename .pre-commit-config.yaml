@@ -1,27 +1,27 @@
-default_stages: [commit]
+default_stages: [pre-commit]
 repos:
   - repo: https://github.com/yyang-pplus/config-sh.git
-    rev: 0c0851ad388710471ea7df986846055abec55e84
+    rev: 08cc682db6be04a0b3bdeffa1a2ddd98083a3772
     hooks:
       - id: astyle-c-in
       - id: shfmt
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v16.0.1
+    rev: v22.1.5
     hooks:
       - id: clang-format
 
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 26.5.1
     hooks:
       - id: black
         language_version: python3
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v6.0.0
     hooks:
       - id: check-executables-have-shebangs
-        stages: [commit]
+        stages: [pre-commit]
       - id: check-json
       - id: check-merge-conflict
       - id: check-symlinks
@@ -29,7 +29,7 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: trailing-whitespace
-        stages: [commit]
+        stages: [pre-commit]
 
       # Python only
       - id: debug-statements
@@ -41,22 +41,22 @@ repos:
       - id: cmake-lint
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.2.0
+    rev: v2.1.0
     hooks:
       - id: mypy
 
   - repo: https://github.com/klieret/jekyll-relative-url-check
-    rev: v2.0.1
+    rev: v2.0.2
     hooks:
       - id: jekyll-relative-url-check-html
       - id: jekyll-relative-url-check-markdown
 
   - repo: https://github.com/markdownlint/markdownlint.git
-    rev: v0.12.0
+    rev: v0.13.0
     hooks:
       - id: markdownlint
 
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.30.0
+    rev: v1.38.0
     hooks:
       - id: yamllint
