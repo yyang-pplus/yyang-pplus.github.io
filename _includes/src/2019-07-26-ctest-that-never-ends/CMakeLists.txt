@@ -3,7 +3,7 @@ project(
     VERSION 0.0.1
     LANGUAGES NONE)
 
-find_package(Python3 COMPONENTS Interpreter)
+# find_package(Python3 COMPONENTS Interpreter)
 
 if (Python3_FOUND)
     # set(SHOW_ISSUE true)
