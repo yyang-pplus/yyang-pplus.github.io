@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 #
 # This script setup develop environment by installing required libraries
 #
@@ -13,6 +15,8 @@ source $THIS_DIR/utils.sh
 PROJECT_ROOT_DIR=$(GetProjectRootDir)
 
 QuietRun pushd "$PROJECT_ROOT_DIR"
+gem install --user-install bundler
+bundle config set --local path vendor/bundle
 bundle install
 QuietRun popd
 
@@ -21,5 +25,7 @@ INSTALLER_FILE=$PROJECT_ROOT_DIR/../config-sh/scripts/install_all_hooks.sh
 if [ -f "$INSTALLER_FILE" ]; then
     $INSTALLER_FILE
 else
+    sudo apt-get --yes install pipx
+    pipx install pre-commit
     pre-commit install
 fi
