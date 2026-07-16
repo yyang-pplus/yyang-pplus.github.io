@@ -31,7 +31,7 @@ Recently, I run into an issue with OpenLDAP client library's `ldap_set_option()`
 
 This pair of routines are used to get/set various options for a LDAP handle or global options. Passing a NULL LDAP handle as the first argument `ld` will set/retrieve global options.[<sup>\[1\]</sup>](#references)
 
-The second argument `option` is the actual LDAP option enum that one's interested in. There are tons of available options, so I'm not going to cover all of them here. In fact, they are probably system-dependent anyway. Our main concern in this post is `LDAP_OPT_DEBUG_LEVEL` only. People who are curious about the other options may want to check the man page, by typing `man ldap_set_option`.
+The second parameter `option` is the actual LDAP option enum that one's interested in. There are tons of available options, so I'm not going to cover all of them here. In fact, they are probably system-dependent anyway. Our main concern in this post is `LDAP_OPT_DEBUG_LEVEL` only. People who are curious about the other options may want to check the man page, by typing `man ldap_set_option`.
 
 Based on the man page:[<sup>\[1\]</sup>](#references)
 
